@@ -1,4 +1,4 @@
 /node_modules/
 /public/build/
-
+/src/backend/books_exportsAPI/books_exports.db
 .DS_Store
