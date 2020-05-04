@@ -25,7 +25,7 @@
 	onMount(get_all_health);
 	async function get_all_health() {
 		console.log("Fetching get_all_health...");
-		const res = await fetch("/api/v1/public_health");
+		const res = await fetch("/api/v1/health_public");
 		if (res.ok) {
 			console.log("OK:");
 			const json = await res.json();
