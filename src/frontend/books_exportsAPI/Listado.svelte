@@ -55,8 +55,15 @@
 		if (new_books_exports.country == ""
 			|| new_books_exports.country == null
 			|| new_books_exports.year == ""
-			|| new_books_exports.year == null) {
-			alert("Es obligatorio el campo País y año");
+			|| new_books_exports.year == null
+			|| new_books_exports.exp_book == ""
+			|| new_books_exports.exp_book == null
+			|| new_books_exports.exp_editorial == ""
+			|| new_books_exports.exp_editorial == null
+			|| new_books_exports.exp_graphic_sector == ""
+			|| new_books_exports.exp_graphic_sector == null) {
+			alert("Es obligatorio completar todos los recursos");
+			console.log("ERROR!");
 		} else {
 			const res = await fetch("/api/v1/books-exports", {
 				method: "POST",
@@ -66,6 +73,7 @@
 				}
 			}).then(function (res) {
 				get_all_exports();
+				alert("Exportación insertada con éxito");
 			});
 		};
 	}
@@ -76,6 +84,7 @@
 			method: "DELETE"
 		}).then(function (res) {
 			get_all_exports();
+			alert("Exportación borrada con éxito");
 		});
 	}
 
@@ -85,6 +94,7 @@
 			method: "DELETE"
 		}).then(function (res) {
 			get_all_exports();
+			alert("Todas las exportaciones borradas con éxito");
 		});
 	}
 	async function searchYears(country){
@@ -172,9 +182,9 @@
 			<tr>
 				<td><Input placeholder="Ex. argentina" bind:value = "{new_books_exports.country}" /></td>
 				<td><Input type="number" required placeholder="Ej. 2020" bind:value = "{new_books_exports.year}" /></td>
-				<td><Input type="number" placeholder="0" step="1" min="0" bind:value = "{new_books_exports['exp_book']}" /></td>
-				<td><Input type="number" placeholder="0" step="1" min="0" bind:value = "{new_books_exports['exp_editorial']}" /></td>
-				<td><Input type="number" placeholder="0" step="1" min="0" bind:value = "{new_books_exports['exp_graphic_sector']}" /></td>
+				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_books_exports['exp_book']}" /></td>
+				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_books_exports['exp_editorial']}" /></td>
+				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_books_exports['exp_graphic_sector']}" /></td>
 				<td><Button outline color= "primary" on:click= {insert_exportation}>Insertar</Button></td>
 			</tr>
 
