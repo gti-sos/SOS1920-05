@@ -29,7 +29,7 @@
             updated_exp_book = books_exports["exp_book"];
             updated_exp_editorial = books_exports["exp_editorial"];
             updated_exp_graphic_sector = books_exports["exp_graphic_sector"];
-            console.log("Received contact.");
+            console.log("Received.");
         } else {
             console.log("ERROR!");
         }

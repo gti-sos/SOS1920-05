@@ -9,27 +9,27 @@
 		pop
     } from "svelte-spa-router";
     
-	let books_exports = [];
-	let new_books_exports = {
+	let health_public = [];
+	let new_health_public = {
 		"country": "",
 		"year": "",
-		"exp_book": 0,
-		"exp_editorial": 0,
-		"exp_graphic_sector": 0
+		"total_spending": "",
+		"public_spending": "",
+		"public_spending_pib": ""
 	};
 	/* Select variables */
 	let countries = [];
 	let years = [];
 	let current_country= "-";
 	let current_year= "-";
-	onMount(get_all_exports);
-	async function get_all_exports() {
-		console.log("Fetching get_all_exports...");
-		const res = await fetch("/api/v1/books-exports");
+	onMount(get_all_health);
+	async function get_all_health() {
+		console.log("Fetching get_all_health...");
+		const res = await fetch("/api/v1/public_health");
 		if (res.ok) {
 			console.log("OK:");
 			const json = await res.json();
-			books_exports = json;
+			health_public = json;
 			 
 			/* getting countries */
 			countries = json.map((d) => {
@@ -41,56 +41,56 @@
 				return d.year;
 			});
 			years = Array.from(new Set(years));
-			console.log("Received " + books_exports.length);
+			console.log("Received " + health_public.length);
 		}
 		else {
 			console.log("ERROR!");
 		}
 	}
-	async function insert_all_exports() {
-		console.log("Inserting all exports...");
-		if (new_books_exports.country == ""
-			|| new_books_exports.country == null
-			|| new_books_exports.year == ""
-			|| new_books_exports.year == null) {
+	async function insert_all_health() {
+		console.log("Inserting all public health ...");
+		if (new_health_public.country == ""
+			|| new_health_public.country == null
+			|| new_health_public.year == ""
+			|| new_health_public.year == null) {
 			alert("Es obligatorio el campo País y año");
 		} else {
-			const res = await fetch("/api/v1/books-exports", {
+			const res = await fetch("/api/v1/health_public", {
 				method: "POST",
-				body: JSON.stringify(new_books_exports),
+				body: JSON.stringify(new_health_public),
 				headers: {
 					"Content-Type": "application/json"
 				}
 			}).then(function (res) {
-				get_all_exports();
+				get_all_health();
 			});
 		};
 	}
-	async function delete_one_export(country, year) {
-		console.log("Deleting one export...");
-		const res = await fetch("/api/v1/books-exports" + "/" + country + "/" + year, {
+	async function delete_one_health(country, year) {
+		console.log("Deleting one public health...");
+		const res = await fetch("/api/v1/health_public" + "/" + country + "/" + year, {
 			method: "DELETE"
 		}).then(function (res) {
-			get_all_exports();
+			get_all_health();
 		});
 	}
-	async function delete_all_exports() {
-		console.log("Deleting all exports...");
-		const res = await fetch("/api/v1/books-exports", {
+	async function delete_all_health() {
+		console.log("Deleting all public healths...");
+		const res = await fetch("/api/v1/health_public", {
 			method: "DELETE"
 		}).then(function (res) {
-			get_all_exports();
+			get_all_health();
 		});
 	}
 	async function searchYears(country){
         console.log("Searching years in country...");
-		const res = await fetch("/api/v1/books-exports/" + country)
+		const res = await fetch("/api/v1/health_public/" + country)
 		
 		if (res.ok){
             const json = await res.json();
-			books_exports = json;
+			health_public = json;
 			
-			books_exports.map((d)=>{
+			health_public.map((d)=>{
 			return d.year;
 			});
 			console.log("Update years")
@@ -102,7 +102,7 @@
 	async function search(country, year){
         console.log("Searching data: " + country + "and " + year);
 		/* Checking if it fields is empty */
-		var url = "/api/v1/books-exports";
+		var url = "/api/v1/health_public";
 		if(country != "-" && year != "-") {
 			url = url + "?country=" + country+ "&year=" + year;
 		}else if(country != "-" && year == "-"){
@@ -115,9 +115,9 @@
         if (res.ok){
             console.log("OK:");
             const json = await res.json();
-            books_exports = json;
+            health_public = json;
             
-            console.log("Found " + books_exports.length);
+            console.log("Found " + health_public.length);
         }else{
             console.log("ERROR!");
         }
@@ -128,9 +128,9 @@
 
 <main>
 
-	{#await books_exports}
-		Loading books_exports...
-	{:then books_exports_}
+	{#await health_public}
+		Loading health_public...
+	{:then health_public_}
 	<FormGroup> 
         <Label for="selectCountry">Búsqueda por país </Label>
         <Input type="select" name="selectCountry" id="selectCountry" bind:value="{current_country}">
@@ -159,37 +159,37 @@
 				<tr>
 					<th>País</th>
 					<th>Año</th>
-					<th>Exportaciones de libros</th>
-					<th>Exportaciones de editoriales</th>
-                    <th>Exportaciones del sector grafico</th>
+					<th>Gasto total</th>
+					<th>Gasto público</th>
+                    <th>Gasto público (PIB)</th>
 					<th> Acciones </th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td><Input placeholder="Ej. España" bind:value = "{new_books_exports.country}" /></td>
-					<td><Input required placeholder="Ej. 2020" bind:value = "{new_books_exports.year}" /></td>
-					<td><Input required type="number" step="0.01" min="0" bind:value = "{new_books_exports['exp_book']}" /></td>
-					<td><Input type="number" placeholder="0.0" step="0.01" min="0" bind:value = "{new_books_exports['exp_editorial']}" /></td>
-					<td><Input type="number" placeholder="0.0" step="0.01" min="0" bind:value = "{new_books_exports['exp_graphic_sector']}" /></td>
-					<td><Button outline color= "primary" on:click= {insert_all_exports}>Insertar</Button></td>
+					<td><Input placeholder="Ej. España" bind:value = "{new_health_public.country}" /></td>
+					<td><Input required placeholder="Ej. 2020" bind:value = "{new_health_public.year}" /></td>
+					<td><Input required type="number" step="0.01" min="0" bind:value = "{new_health_public['total_spending']}" /></td>
+					<td><Input type="number" placeholder="0.0" step="0.01" min="0" bind:value = "{new_health_public['public_spending']}" /></td>
+					<td><Input type="number" placeholder="0.0" step="0.01" min="0" bind:value = "{new_health_public['public_spending_pib']}" /></td>
+					<td><Button outline color= "primary" on:click= {insert_all_health}>Insertar</Button></td>
 				</tr>
 
-				{#each books_exports_ as books_exports}
+				{#each health_public_ as health_public}
 					<tr>
 
 					
 						<td>
-							<a href="#/books-exports/{books_exports.country}/{books_exports.year}"> 
-							{books_exports.country}
+							<a href="#/health_public/{health_public.country}/{health_public.year}"> 
+							{health_public.country}
 						</a>
 						</td>
-						<td>{books_exports.year}</td>
+						<td>{health_public.year}</td>
 					
-						<td>{books_exports['exp_book']}</td>
-						<td>{books_exports['exp_editorial']}</td>
-						<td>{books_exports['exp_graphic_sector']}</td>
-						<td><Button outline color= "danger" on:click = "{delete_one_export(books_exports.country,books_exports.year)}">Borrar</Button></td>
+						<td>{health_public['total_spending']}</td>
+						<td>{health_public['public_spending']}</td>
+						<td>{health_public['public_spending_pib']}</td>
+						<td><Button outline color= "danger" on:click = "{delete_one_health(health_public.country,health_public.year)}">Borrar</Button></td>
 					</tr>
 				{/each}
 				<tr>
@@ -203,6 +203,6 @@
 		</Table>
 	{/await}
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
-	<Button outline color= "danger" on:click = {delete_all_exports}>Borrar todo</Button>
+	<Button outline color= "danger" on:click = {delete_all_health}>Borrar todo</Button>
 
 </main>
