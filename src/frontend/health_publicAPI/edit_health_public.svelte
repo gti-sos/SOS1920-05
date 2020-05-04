@@ -9,63 +9,63 @@
     import Button from "sveltestrap/src/Button.svelte";
 
     export let params = {};
-    let books_exports = {};
+    let health_public = {};
     let updated_country = "";
     let updated_year = 0.0;
-    let updated_exp_book = 0.0;
-    let updated_exp_editorial = 0.0;
-    let updated_exp_graphic_sector = 0.0;
+    let updated_total_spending = 0.0;
+    let updated_public_spending = 0.0;
+    let updated_public_spending_pib = 0.0;
 
-    onMount(get_books_exports);
-    async function get_books_exports() {
-        console.log("Fetching books_exports...");
-        const res = await fetch("/api/v1/books-exports/" + params.country + "/" + params.year);
+    onMount(get_health_public);
+    async function get_health_public() {
+        console.log("Fetching public health...");
+        const res = await fetch("/api/v1/health_public/" + params.country + "/" + params.year);
         if (res.ok) {
             console.log("Ok:");
             const json = await res.json();
-            books_exports = json;
-            updated_country = books_exports.country;
-            updated_year = books_exports.year;
-            updated_exp_book = books_exports["exp_book"];
-            updated_exp_editorial = books_exports["exp_editorial"];
-            updated_exp_graphic_sector = books_exports["exp_graphic_sector"];
-            console.log("Received contact.");
+            health_public = json;
+            updated_country = health_public.country;
+            updated_year = health_public.year;
+            updated_total_spending = health_public["total_spending"];
+            updated_public_spending = health_public["public_spending"];
+            updated_public_spending_pib = health_public["public_spending_pib"];
+            console.log("Received.");
         } else {
             console.log("ERROR!");
         }
     }
-    async function update_books_exports() {
-        console.log("Updating books_exports...");
-        const res = await fetch("/api/v1/books-exports/" + params.country + "/" + params.year, {
+    async function update_health_public() {
+        console.log("Updating public health...");
+        const res = await fetch("/api/v1/health_public/" + params.country + "/" + params.year, {
             method: "PUT",
             body: JSON.stringify({
                 country: params.country,
                 year: parseInt(params.year),
-                "exp_book": updated_exp_book,
-                "exp_editorial": updated_exp_editorial,
-                "exp_graphic_sector": updated_exp_graphic_sector
+                "total_spending": updated_total_spending,
+                "public_spending": updated_public_spending,
+                "public_spending_pib": updated_public_spending_pib
             }),
             headers: {
                 "Content-Type": "application/json"
             }
         }).then(function (res) {
-            get_books_exports();
+            get_health_public();
         });
     }
 </script>
 <main>
     <h3>Editar datos: <strong>{params.country}</strong> <strong>{params.year}</strong> </h3>
-    {#await books_exports}
-        Loading books_exports...
-    {:then books_exports}
+    {#await health_public}
+        Loading public health...
+    {:then health_public}
         <Table bordered>
             <thead>
 				<tr>
 					<th>País</th>
 					<th>Año</th>
-					<th>Exportaciones de libros</th>
-					<th>Exportaciones de editoriales</th>
-                    <th>Exportaciones del sector grafico</th>
+					<th>Gasto total</th>
+					<th>Gasto público</th>
+                    <th>Gasto público (PIB)</th>
                     <th> Acciones </th>
 				</tr>
 			</thead>
@@ -73,10 +73,10 @@
                 <tr>
                     <td>{updated_country}</td>
                     <td>{updated_year}</td>
-                    <td><input type="number" bind:value="{updated_exp_book}"></td>
-                    <td><input type="number" placeholder="0.0" step="0.01" min="0"  bind:value="{updated_exp_editorial}"></td>
-                    <td><input type="number" placeholder="0.0" step="0.01" min="0"  bind:value="{updated_exp_graphic_sector}"></td>
-                    <td> <Button outline  color="primary" on:click={update_books_exports}>Actualizar</Button> </td>
+                    <td><input type="number" bind:value="{updated_total_spending}"></td>
+                    <td><input type="number" placeholder="0.0" step="0.01" min="0"  bind:value="{updated_public_spending}"></td>
+                    <td><input type="number" placeholder="0.0" step="0.01" min="0"  bind:value="{updated_public_spending_pib}"></td>
+                    <td> <Button outline  color="primary" on:click={update_health_public}>Actualizar</Button> </td>
                 </tr>
         </tbody>
         </Table>
