@@ -1,25 +1,6 @@
-<<<<<<< HEAD
 {"country":"mexico","year":2015,"exp_book":61382,"exp_editorial":59956,"exp_graphic_sector":1427,"_id":"0LGMu2jcvPbxvNzy"}
 {"country":"uk","year":2016,"exp_book":57298,"exp_editorial":21017,"exp_graphic_sector":36280,"_id":"Grn5doXoqcbfaoWm"}
 {"country":"france","year":2015,"exp_book":151040,"exp_editorial":58660,"exp_graphic_sector":92380,"_id":"NBaKwFCWnPj6ijaf"}
 {"country":"portugal","year":2017,"exp_book":46477,"exp_editorial":19952,"exp_graphic_sector":26254,"_id":"YcSOcGQUt0pbuCju"}
-{"country":"italy","year":2016,"exp_book":29329,"exp_editorial":26000,"exp_graphic_sector":3329,"_id":"r0p4yZmYrAiCunPR"}
 {"country":"adasda","year":3,"exp_book":4,"exp_editorial":4,"exp_graphic_sector":4,"_id":"fNdUTIT9jwo6GZTJ"}
-=======
-{"country":"argeartyu","year":22,"exp_book":22,"exp_editorial":22,"exp_graphic_sector":22,"_id":"7opg1O09vR8Nwuo9"}
-{"country":"italy","year":2016,"exp_book":29329,"exp_editorial":26000,"exp_graphic_sector":3329,"_id":"8C6Cl6MOEyspm0zJ"}
-{"country":"argeartyuuja","year":22,"exp_book":22,"exp_editorial":22,"exp_graphic_sector":22,"_id":"9jqd33lkrjQrcv41"}
-{"country":"argeartyuuj","year":22,"exp_book":22,"exp_editorial":22,"exp_graphic_sector":22,"_id":"JI357JAnLDibrqYh"}
-{"country":"argeart","year":22,"exp_book":22,"exp_editorial":22,"exp_graphic_sector":22,"_id":"SDwD34miu2YWNVlU"}
-{"country":"argear","year":22,"exp_book":22,"exp_editorial":22,"exp_graphic_sector":22,"_id":"Vh1AQ46kGWH4DtaZ"}
-{"country":"portugal","year":2017,"exp_book":46477,"exp_editorial":19952,"exp_graphic_sector":26254,"_id":"Ykg7Y31O8fjlMO8l"}
-{"country":"argea","year":22,"exp_book":22,"exp_editorial":22,"exp_graphic_sector":22,"_id":"Z3W2McOEZVaFSG2i"}
-{"country":"argeartyuujaf","year":22,"exp_book":22,"exp_editorial":22,"exp_graphic_sector":22,"_id":"duzcuKZzNZ7TNIP7"}
-{"country":"france","year":2015,"exp_book":151040,"exp_editorial":58660,"exp_graphic_sector":92380,"_id":"gMDKRGqkp5zN17Yu"}
-{"country":"argeartyuu","year":22,"exp_book":22,"exp_editorial":22,"exp_graphic_sector":22,"_id":"jDQpS6nVnkYziKEW"}
-{"country":"arge","year":22,"exp_book":22,"exp_editorial":22,"exp_graphic_sector":22,"_id":"jvMcHcDtl8CwGrSm"}
-{"country":"e","year":22,"exp_book":22,"exp_editorial":22,"exp_graphic_sector":22,"_id":"pgPsD6MNMxEaHmpd"}
-{"country":"mexico","year":2015,"exp_book":61382,"exp_editorial":59956,"exp_graphic_sector":1427,"_id":"tOBzo3Qw5PUs02FM"}
-{"country":"uk","year":2016,"exp_book":57298,"exp_editorial":21017,"exp_graphic_sector":36280,"_id":"yc0FovU2lBLq3DMf"}
-{"country":"argeartyuujafa","year":22,"exp_book":22,"exp_editorial":22,"exp_graphic_sector":22,"_id":"zNM0WOZgXBvzVN4U"}
->>>>>>> 1c495b94a2ae1f6576c65074df0f242603f15125
+{"country":"italy","year":2016,"exp_book":29329,"exp_editorial":26000,"exp_graphic_sector":3329,"_id":"r0p4yZmYrAiCunPR"}
