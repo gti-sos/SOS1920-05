@@ -184,7 +184,7 @@
 					<td><Input required type="number" step="0.01" min="0" bind:value = "{new_health_public['total_spending']}" /></td>
 					<td><Input type="number" placeholder="0.0" step="0.01" min="0" bind:value = "{new_health_public['public_spending']}" /></td>
 					<td><Input type="number" placeholder="0.0" step="0.01" min="0" bind:value = "{new_health_public['public_spending_pib']}" /></td>
-					<td><Button outline color= "primary" on:click= {insert_all_health}>Insertar</Button></td>
+					<td><Button outline color= "primary" on:click= {insert_health}>Insertar</Button></td>
 				</tr>
 
 				{#each health_public_ as health_public}
