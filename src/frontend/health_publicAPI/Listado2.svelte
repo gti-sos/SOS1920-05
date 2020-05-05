@@ -22,10 +22,12 @@
 	let years = [];
 	let current_country= "-";
 	let current_year= "-";
+
 	onMount(get_all_health);
+	
 	async function get_all_health() {
 		console.log("Fetching get_all_health...");
-		const res = await fetch("/api/v1/public_health");
+		const res = await fetch("/api/v1/health_public");
 		if (res.ok) {
 			console.log("OK:");
 			const json = await res.json();
@@ -47,13 +49,20 @@
 			console.log("ERROR!");
 		}
 	}
-	async function insert_all_health() {
-		console.log("Inserting all public health ...");
+	async function insert_health() {
+		console.log("Inserting public health ...");
 		if (new_health_public.country == ""
 			|| new_health_public.country == null
 			|| new_health_public.year == ""
-			|| new_health_public.year == null) {
-			alert("Es obligatorio el campo País y año");
+			|| new_health_public.year == null
+			|| new_health_public.total_spending == ""
+			|| new_health_public.total_spending == null
+			|| new_health_public.public_spending == ""
+			|| new_health_public.public_spending == null
+			|| new_health_public.public_spending_pib === ""
+			|| new_health_public.public_spending_pib == null) {
+			alert("Es obligatorio rellenar todos los campos");
+			console.log("ERROR");
 		} else {
 			const res = await fetch("/api/v1/health_public", {
 				method: "POST",
@@ -63,6 +72,7 @@
 				}
 			}).then(function (res) {
 				get_all_health();
+				alert("Datos insertados con éxito");
 			});
 		};
 	}
@@ -72,6 +82,7 @@
 			method: "DELETE"
 		}).then(function (res) {
 			get_all_health();
+			alert("Datos borrados correctamente");
 		});
 	}
 	async function delete_all_health() {
@@ -80,6 +91,7 @@
 			method: "DELETE"
 		}).then(function (res) {
 			get_all_health();
+			alert("Todos los datos borrados con éxito");
 		});
 	}
 	async function searchYears(country){
@@ -153,7 +165,7 @@
 		</FormGroup>
 
 		<Button outline color="secondary" on:click="{search(current_country, current_year)}">Buscar</Button>
-		
+		<p></p>
 		<Table bordered>
 			<thead>
 				<tr>
@@ -172,7 +184,7 @@
 					<td><Input required type="number" step="0.01" min="0" bind:value = "{new_health_public['total_spending']}" /></td>
 					<td><Input type="number" placeholder="0.0" step="0.01" min="0" bind:value = "{new_health_public['public_spending']}" /></td>
 					<td><Input type="number" placeholder="0.0" step="0.01" min="0" bind:value = "{new_health_public['public_spending_pib']}" /></td>
-					<td><Button outline color= "primary" on:click= {insert_all_health}>Insertar</Button></td>
+					<td><Button outline color= "primary" on:click= {insert_health}>Insertar</Button></td>
 				</tr>
 
 				{#each health_public_ as health_public}
