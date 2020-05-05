@@ -79,8 +79,12 @@
 					"Content-Type": "application/json"
 				}
 			}).then(function (res) {
+				if(res.status==409){
+					alert("Exportación ya existentes");
+				}else{
 				get_all_exports(offset);
 				alert("Exportación insertada con éxito");
+				}
 			});
 		};
 	}

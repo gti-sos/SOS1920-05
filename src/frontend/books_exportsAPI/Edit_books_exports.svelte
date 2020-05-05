@@ -11,10 +11,10 @@
     export let params = {};
     let books_exports = {};
     let updated_country = "";
-    let updated_year = 0.0;
-    let updated_exp_book = 0.0;
-    let updated_exp_editorial = 0.0;
-    let updated_exp_graphic_sector = 0.0;
+    let updated_year = "";
+    let updated_exp_book = "";
+    let updated_exp_editorial = "";
+    let updated_exp_graphic_sector = "";
 
     onMount(get_books_exports);
 
@@ -38,6 +38,19 @@
     }
     async function update_books_exports() {
         console.log("Updating books_exports...");
+        if (updated_country == ""
+			|| updated_country == null
+			|| updated_year == ""
+			|| updated_year == null
+			|| updated_exp_book == ""
+			|| updated_exp_book == null
+			|| updated_exp_editorial == ""
+			|| updated_exp_editorial == null
+			|| updated_exp_graphic_sector == ""
+			|| updated_exp_graphic_sector == null) {
+			alert("Es obligatorio completar todos los recursos");
+			console.log("ERROR!");
+		} else {
         const res = await fetch("/api/v1/books-exports/" + params.country + "/" + params.year, {
             method: "PUT",
             body: JSON.stringify({
@@ -58,12 +71,12 @@
                 alert("Introduce correctamente los datos");
             }
         })
-        }
+        }}
 </script>
 <main>
     <h3>Editar datos: <strong>{params.country}</strong> <strong>{params.year}</strong> </h3>
     {#await books_exports}
-        Loading books_exports..
+        Loading books_exports...
     {:then books_exports}
         <Table bordered>
             <thead>
