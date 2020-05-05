@@ -63,7 +63,7 @@
 <main>
     <h3>Editar datos: <strong>{params.country}</strong> <strong>{params.year}</strong> </h3>
     {#await books_exports}
-        Loading books_exports...
+        Loading books_exports..
     {:then books_exports}
         <Table bordered>
             <thead>
