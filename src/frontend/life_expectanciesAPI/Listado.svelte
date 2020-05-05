@@ -219,7 +219,7 @@
 				<td><Button outline color= "primary" on:click= {insert_life}>Insertar</Button></td>
 			</tr>
 
-			{#each life_expectancies_ as life_expectancies}
+			{#each life_expectancies as life_expectancies}
 				<tr>
 
 				
