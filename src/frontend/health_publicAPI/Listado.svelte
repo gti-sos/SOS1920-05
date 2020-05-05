@@ -195,7 +195,7 @@
 				<th>Año</th>
 				<th>Exportaciones de libros</th>
 				<th>Exportaciones de editoriales</th>
-				<th>Exportaciones del sector gráfico</th>
+				<th>Exportaciones del sector</th>
 				<th> Acciones </th>
 			</tr>
 		</thead>
