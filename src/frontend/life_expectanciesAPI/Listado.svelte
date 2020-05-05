@@ -31,10 +31,10 @@
 	let MensajeError = false;
 	let MensajeCorrecto = false;
 
-	onMount(get_all_life_expectancies);
+	onMount(getLife_expectancies);
 
-	async function get_all_life_expectancies(offset) {
-		console.log("Fetching get_all_life_expectancies...");
+	async function getLife_expectancies(offset) {
+		console.log("Fetching getLife_expectancies...");
 		const res = await fetch("/api/v1/life_expectancies?limit="+limit + "&offset="+ offset);
 		if (res.ok) {
 			console.log("OK:");
@@ -101,7 +101,7 @@
 			method: "DELETE"
 		}).then(function (res) {
 			get_all_life_expectancies(offset);
-			alert("Todas las lives borradas con éxito");
+			alert("Todas los datos borrados con éxito");
 		});
 	}
 	async function searchYears(country){
@@ -144,6 +144,16 @@
             console.log("ERROR!");
         }
 	}
+
+	async function loadInitialData() {
+		
+		console.log("Loading life_expectancies...");
+		const res = await fetch("/api/v1/life_expectancies/loadInitialData").then(function (res) {
+			getLife_expectancies(offset);
+		});;
+		successMsg = "Se han cargado los datos iniciales correctamente.";
+		errorMsg = false;
+	};
 	async function siguientePagina() {
 		const res = await fetch("/api/v1/life_expectancies/");
 		const json = await res.json();
@@ -244,6 +254,8 @@
 		
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
 	<Button outline color= "danger" on:click = {delete_all_life_expectancies}>Borrar todo</Button>
+	<Button outline color="primary" on:click="{loadInitialData}">Cargar datos iniciales</Button>
+
 </main>
 
 <style>

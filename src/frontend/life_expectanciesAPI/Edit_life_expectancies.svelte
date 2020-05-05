@@ -21,7 +21,7 @@
     async function get_life_expectancies() {
         console.log("Fetching life_expectancies...");
         const res = await fetch("/api/v1/life_expectancies/" + params.country + "/" + params.year);
-        
+        console.log(res);
         if (res.ok) {
             console.log("Ok:");
             const json = await res.json();
