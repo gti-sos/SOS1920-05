@@ -6,7 +6,7 @@
         pop
     } from "svelte-spa-router";
     import Table from "sveltestrap/src/Table.svelte";
-    import Button from "sveltestrap/src/Button.svelte";
+    import Button from "sveltestrap/src/Button.svelte" ;
 
     export let params = {};
     let health_public = {};

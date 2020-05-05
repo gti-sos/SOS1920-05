@@ -3,6 +3,7 @@
 {"country":"portugal","year":2017,"total_spending":66.32,"public_spending":13.4,"public_spending_pib":5.95,"_id":"WFaLc9yxOIgjXPmq"}
 {"country":"uk","year":2016,"total_spending":79.48,"public_spending":18.88,"public_spending_pib":7.71,"_id":"qnrMOpK2eNFCEW0v"}
 {"country":"italy","year":2016,"total_spending":74.63,"public_spending":13.47,"public_spending_pib":6.63,"_id":"tRMjjqvIQBgkd0rn"}
+<<<<<<< HEAD
 {"country":"España","year":"aa","total_spending":1,"public_spending":1,"public_spending_pib":1,"_id":"ZymCUOUXm3scoqAw"}
 {"country":"jikkj","year":"0jinhlinlk","total_spending":11,"public_spending":11,"public_spending_pib":11,"_id":"sgp3z1t3cY74vfWr"}
 {"$$deleted":true,"_id":"AibU4Ae9VHVQZPQa"}
@@ -27,3 +28,5 @@
 {"country":"portugal","year":2017,"total_spending":66.32,"public_spending":13.4,"public_spending_pib":5.95,"_id":"nGFxGeGNTxUMWCdz"}
 {"country":"uk","year":2016,"total_spending":79.48,"public_spending":18.88,"public_spending_pib":7.71,"_id":"ykLXzJJ6dMkQ9dRh"}
 {"country":"mexico","year":2015,"total_spending":52.17,"public_spending":10.86,"public_spending_pib":3,"_id":"fBDMQbUGOzhB6U3y"}
+=======
+>>>>>>> 1c495b94a2ae1f6576c65074df0f242603f15125

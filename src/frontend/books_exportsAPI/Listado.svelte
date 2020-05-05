@@ -5,6 +5,9 @@
 	import Input from "sveltestrap/src/Input.svelte";
 	import Label from "sveltestrap/src/Label.svelte";
 	import FormGroup from "sveltestrap/src/FormGroup.svelte";
+	import Pagination from "sveltestrap/src/Pagination.svelte";
+	import PaginationItem from "sveltestrap/src/PaginationItem.svelte";
+	import PaginationLink from "sveltestrap/src/PaginationLink.svelte"
 	import {
 		pop
     } from "svelte-spa-router";
@@ -12,10 +15,10 @@
 	let books_exports = [];
 	let new_books_exports = {
 		"country": "",
-		"year": "",
-		"exp_book": "",
-		"exp_editorial": "",
-		"exp_graphic_sector":""
+		"year": 0,
+		"exp_book": 0,
+		"exp_editorial": 0,
+		"exp_graphic_sector":0
 	};
 
 	/* Select variables */
@@ -23,12 +26,16 @@
 	let years = [];
 	let current_country= "-";
 	let current_year= "-";
+	let offset = 0;
+	let limit = 10;
+	let pageActual = 1;
+	let moreData = true; 
 
 	onMount(get_all_exports);
 
 	async function get_all_exports() {
 		console.log("Fetching get_all_exports...");
-		const res = await fetch("/api/v1/books-exports");
+		const res = await fetch("/api/v1/books-exports?offset=" + limit * offset + "&limit=" + limit);
 		if (res.ok) {
 			console.log("OK:");
 			const json = await res.json();
@@ -137,6 +144,12 @@
             console.log("ERROR!");
         }
     }
+
+	function addOffset (increment) {
+		offset += increment;
+		pageActual += increment;
+		getRoutes();
+	}
 </script>
 
 
@@ -215,6 +228,32 @@
 		</tbody>
 	</Table>
 	{/await}
+	<Pagination style="float:right;" ariaLabel="Cambiar de página">
+
+		<PaginationItem class="{pageActual === 1 ? 'disabled' : ''}">
+			<PaginationLink previous href="#/books_exportsAPI" on:click="{() => addOffset(-1)}" />
+		  </PaginationItem>
+		
+		  {#if pageActual != 1}
+				<PaginationItem>
+					<PaginationLink href="#/books_exportsAPI" on:click="{() => addOffset(-1)}" >{pageActual - 1}</PaginationLink>
+				</PaginationItem>
+				{/if}
+				<PaginationItem active>
+					<PaginationLink href="#/books_exportsAPI" >{pageActual}</PaginationLink>
+				</PaginationItem>
+		
+				{#if moreData}
+				<PaginationItem >
+					<PaginationLink href="#/books_exportsAPI" on:click="{() => addOffset(1)}">{pageActual + 1}</PaginationLink>
+				</PaginationItem>
+				{/if}
+				<PaginationItem class="{moreData ? '' : 'disabled'}">
+					<PaginationLink next href="#/books_exportsAPI" on:click="{() => addOffset(1)}"/>
+				  </PaginationItem>  
+		</Pagination>
+		
+		
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
 	<Button outline color= "danger" on:click = {delete_all_exports}>Borrar todo</Button>
 </main>
