@@ -6,7 +6,7 @@
 	import life_expectancies from './life_expectanciesAPI/App.svelte';
 	import edit_books_exports from './books_exportsAPI/Edit_books_exports.svelte';
 	import edit_health_public from './health_publicAPI/Edit_health_public.svelte';
-	import edit_life_expectancies from './life_expectanciesAPI/Edit_books_exports.svelte';
+	import edit_life_expectancies from './life_expectanciesAPI/Edit_life_expectancies.svelte';
 	import NotFound from './NotFound.svelte';
 
 	const routes =  {
