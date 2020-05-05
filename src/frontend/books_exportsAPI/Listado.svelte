@@ -28,14 +28,14 @@
 	let current_year= "-";
 	let offset = 0;
 	let limit = 10;
-	let pageActual = 1;
-	let moreData = true; 
+	let MensajeError = false;
+	let MensajeCorrecto = false;
 
 	onMount(get_all_exports);
 
-	async function get_all_exports() {
+	async function get_all_exports(offset) {
 		console.log("Fetching get_all_exports...");
-		const res = await fetch("/api/v1/books-exports?offset=" + limit * offset + "&limit=" + limit);
+		const res = await fetch("/api/v1/books-exports?limit="+limit + "&offset="+ offset);
 		if (res.ok) {
 			console.log("OK:");
 			const json = await res.json();
@@ -79,7 +79,7 @@
 					"Content-Type": "application/json"
 				}
 			}).then(function (res) {
-				get_all_exports();
+				get_all_exports(offset);
 				alert("Exportación insertada con éxito");
 			});
 		};
@@ -90,7 +90,7 @@
 		const res = await fetch("/api/v1/books-exports" + "/" + country + "/" + year, {
 			method: "DELETE"
 		}).then(function (res) {
-			get_all_exports();
+			get_all_exports(offset);
 			alert("Exportación borrada con éxito");
 		});
 	}
@@ -100,7 +100,7 @@
 		const res = await fetch("/api/v1/books-exports", {
 			method: "DELETE"
 		}).then(function (res) {
-			get_all_exports();
+			get_all_exports(offset);
 			alert("Todas las exportaciones borradas con éxito");
 		});
 	}
@@ -143,13 +143,21 @@
         }else{
             console.log("ERROR!");
         }
-    }
-
-	function addOffset (increment) {
-		offset += increment;
-		pageActual += increment;
-		getRoutes();
 	}
+	async function siguientePagina() {
+		const res = await fetch("/api/v1/books-exports/");
+		const json = await res.json();
+		if(offset < json.length - 10 ){
+			offset = offset + 10;
+			get_all_exports(offset);
+		}
+	};
+	async function anteriorPagina() {
+		if (offset - 10 >= 0){
+			offset = offset - 10;
+			get_all_exports(offset);
+		}
+	};
 </script>
 
 
@@ -228,30 +236,10 @@
 		</tbody>
 	</Table>
 	{/await}
-	<Pagination style="float:right;" ariaLabel="Cambiar de página">
-
-		<PaginationItem class="{pageActual === 1 ? 'disabled' : ''}">
-			<PaginationLink previous href="#/books_exportsAPI" on:click="{() => addOffset(-1)}" />
-		  </PaginationItem>
-		
-		  {#if pageActual != 1}
-				<PaginationItem>
-					<PaginationLink href="#/books_exportsAPI" on:click="{() => addOffset(-1)}" >{pageActual - 1}</PaginationLink>
-				</PaginationItem>
-				{/if}
-				<PaginationItem active>
-					<PaginationLink href="#/books_exportsAPI" >{pageActual}</PaginationLink>
-				</PaginationItem>
-		
-				{#if moreData}
-				<PaginationItem >
-					<PaginationLink href="#/books_exportsAPI" on:click="{() => addOffset(1)}">{pageActual + 1}</PaginationLink>
-				</PaginationItem>
-				{/if}
-				<PaginationItem class="{moreData ? '' : 'disabled'}">
-					<PaginationLink next href="#/books_exportsAPI" on:click="{() => addOffset(1)}"/>
-				  </PaginationItem>  
-		</Pagination>
+	<p align="right">
+		<Button outline color="secondary" on:click="{anteriorPagina}">Anterior página</Button>
+		<Button outline color="secondary" on:click="{siguientePagina}">Siguiente página</Button>
+	</p>
 		
 		
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
