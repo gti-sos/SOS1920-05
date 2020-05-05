@@ -12,13 +12,13 @@
 		pop
     } from "svelte-spa-router";
     
-	let books_exports = [];
-	let new_books_exports = {
+	let life_expectancies = [];
+	let new_life_expectancies = {
 		"country": "",
 		"year": 0,
-		"exp_book": 0,
-		"exp_editorial": 0,
-		"exp_graphic_sector":0
+		"women_life_expectancies": 0,
+		"men_life_expectancies": 0,
+		"average_life_expectancies":0
 	};
 
 	/* Select variables */
@@ -31,15 +31,15 @@
 	let MensajeError = false;
 	let MensajeCorrecto = false;
 
-	onMount(get_all_exports);
+	onMount(get_all_life_expectancies);
 
-	async function get_all_exports(offset) {
-		console.log("Fetching get_all_exports...");
-		const res = await fetch("/api/v1/books-exports?limit="+limit + "&offset="+ offset);
+	async function get_all_life_expectancies(offset) {
+		console.log("Fetching get_all_life_expectancies...");
+		const res = await fetch("/api/v1/life_expectancies?limit="+limit + "&offset="+ offset);
 		if (res.ok) {
 			console.log("OK:");
 			const json = await res.json();
-			books_exports = json;
+			life_expectancies = json;
 
 			countries = json.map((d) => {
 				return d.country;
@@ -50,69 +50,69 @@
 				return d.year;
 			});
 			years = Array.from(new Set(years));
-			console.log("Received " + books_exports.length);
+			console.log("Received " + life_expectancies.length);
 		}
 		else {
 			console.log("ERROR!");
 		}
 	}
 
-	async function insert_exportation() {
-		console.log("Inserting exportion...");
-		if (new_books_exports.country == ""
-			|| new_books_exports.country == null
-			|| new_books_exports.year == ""
-			|| new_books_exports.year == null
-			|| new_books_exports.exp_book == ""
-			|| new_books_exports.exp_book == null
-			|| new_books_exports.exp_editorial == ""
-			|| new_books_exports.exp_editorial == null
-			|| new_books_exports.exp_graphic_sector == ""
-			|| new_books_exports.exp_graphic_sector == null) {
+	async function insert_life() {
+		console.log("Inserting life...");
+		if (new_life_expectancies.country == ""
+			|| new_life_expectancies.country == null
+			|| new_life_expectancies.year == ""
+			|| new_life_expectancies.year == null
+			|| new_life_expectancies.women_life_expectancies == ""
+			|| new_life_expectancies.women_life_expectancies == null
+			|| new_life_expectancies.men_life_expectancies == ""
+			|| new_life_expectancies.men_life_expectancies == null
+			|| new_life_expectancies.average_life_expectancies == ""
+			|| new_life_expectancies.average_life_expectancies == null) {
 			alert("Es obligatorio completar todos los recursos");
 			console.log("ERROR!");
 		} else {
-			const res = await fetch("/api/v1/books-exports", {
+			const res = await fetch("/api/v1/life_expectancies", {
 				method: "POST",
-				body: JSON.stringify(new_books_exports),
+				body: JSON.stringify(new_life_expectancies),
 				headers: {
 					"Content-Type": "application/json"
 				}
 			}).then(function (res) {
-				get_all_exports(offset);
-				alert("Exportación insertada con éxito");
+				get_all_life_expectancies(offset);
+				alert("life insertada con éxito");
 			});
 		};
 	}
 
-	async function delete_exportation(country, year) {
-		console.log("Deleting exportation...");
-		const res = await fetch("/api/v1/books-exports" + "/" + country + "/" + year, {
+	async function delete_life(country, year) {
+		console.log("Deleting life...");
+		const res = await fetch("/api/v1/life_expectancies" + "/" + country + "/" + year, {
 			method: "DELETE"
 		}).then(function (res) {
-			get_all_exports(offset);
-			alert("Exportación borrada con éxito");
+			get_all_life_expectancies(offset);
+			alert("Life borrada con éxito");
 		});
 	}
 
-	async function delete_all_exports() {
-		console.log("Deleting all exports...");
-		const res = await fetch("/api/v1/books-exports", {
+	async function delete_all_life_expectancies() {
+		console.log("Deleting all lives...");
+		const res = await fetch("/api/v1/life_expectancies", {
 			method: "DELETE"
 		}).then(function (res) {
-			get_all_exports(offset);
-			alert("Todas las exportaciones borradas con éxito");
+			get_all_life_expectancies(offset);
+			alert("Todas las lives borradas con éxito");
 		});
 	}
 	async function searchYears(country){
         console.log("Searching years in country...");
-		const res = await fetch("/api/v1/books-exports/" + country)
+		const res = await fetch("/api/v1/life_expectancies/" + country)
 		
 		if (res.ok){
             const json = await res.json();
-			books_exports = json;
+			life_expectancies = json;
 			
-			books_exports.map((d)=>{
+			life_expectancies.map((d)=>{
 			return d.year;
 			});
 			console.log("Update years")
@@ -124,7 +124,7 @@
 	async function search(country, year){
         console.log("Searching data: " + country + "and " + year);
 		/* Checking if it fields is empty */
-		var url = "/api/v1/books-exports";
+		var url = "/api/v1/life_expectancies";
 		if(country != "-" && year != "-") {
 			url = url + "?country=" + country+ "&year=" + year;
 		}else if(country != "-" && year == "-"){
@@ -137,25 +137,25 @@
         if (res.ok){
             console.log("OK:");
             const json = await res.json();
-            books_exports = json;
+            life_expectancies = json;
             
-            console.log("Found " + books_exports.length);
+            console.log("Found " + life_expectancies.length);
         }else{
             console.log("ERROR!");
         }
 	}
 	async function siguientePagina() {
-		const res = await fetch("/api/v1/books-exports/");
+		const res = await fetch("/api/v1/life_expectancies/");
 		const json = await res.json();
 		if(offset < json.length - 10 ){
 			offset = offset + 10;
-			get_all_exports(offset);
+			get_all_life_expectancies(offset);
 		}
 	};
 	async function anteriorPagina() {
 		if (offset - 10 >= 0){
 			offset = offset - 10;
-			get_all_exports(offset);
+			get_all_life_expectancies(offset);
 		}
 	};
 </script>
@@ -163,9 +163,9 @@
 
 
 <main>
-	{#await books_exports}
-		Loading books_exports...
-	{:then books_exports_}
+	{#await life_expectancies}
+		Loading life_expectancies...
+	{:then life_expectancies_}
 	<FormGroup> 
         <Label for="selectCountry">Búsqueda por país </Label>
         <Input type="select" name="selectCountry" id="selectCountry" bind:value="{current_country}">
@@ -193,37 +193,37 @@
 			<tr>
 				<th>País</th>
 				<th>Año</th>
-				<th>Exportaciones de libros</th>
-				<th>Exportaciones de editoriales</th>
-				<th>Exportaciones del sector gráfico</th>
+				<th>Esperanza de vida de mujeres</th>
+				<th>Esperanza de vida de hombres</th>
+				<th>Promedio de esperanza de vida</th>
 				<th> Acciones </th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td><Input placeholder="Ex. argentina" bind:value = "{new_books_exports.country}" /></td>
-				<td><Input type="number" required placeholder="Ej. 2020" bind:value = "{new_books_exports.year}" /></td>
-				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_books_exports['exp_book']}" /></td>
-				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_books_exports['exp_editorial']}" /></td>
-				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_books_exports['exp_graphic_sector']}" /></td>
-				<td><Button outline color= "primary" on:click= {insert_exportation}>Insertar</Button></td>
+				<td><Input placeholder="Ex. japon" bind:value = "{new_life_expectancies.country}" /></td>
+				<td><Input type="number" required placeholder="Ej. 2020" bind:value = "{new_life_expectancies.year}" /></td>
+				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['women_life_expectancies']}" /></td>
+				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['men_life_expectancies']}" /></td>
+				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['average_life_expectancies']}" /></td>
+				<td><Button outline color= "primary" on:click= {insert_life}>Insertar</Button></td>
 			</tr>
 
-			{#each books_exports_ as books_exports}
+			{#each life_expectancies_ as life_expectancies}
 				<tr>
 
 				
 					<td>
-						<a href="#/books-exports/{books_exports.country}/{books_exports.year}"> 
-						{books_exports.country}
+						<a href="#/life_expectancies/{life_expectancies.country}/{life_expectancies.year}"> 
+						{life_expectancies.country}
 					</a>
 					</td>
-					<td>{books_exports.year}</td>
+					<td>{life_expectancies.year}</td>
 				
-					<td>{books_exports['exp_book']}</td>
-					<td>{books_exports['exp_editorial']}</td>
-					<td>{books_exports['exp_graphic_sector']}</td>
-					<td><Button outline color= "danger" on:click = "{delete_exportation(books_exports.country,books_exports.year)}">Borrar</Button></td>
+					<td>{life_expectancies['women_life_expectancies']}</td>
+					<td>{life_expectancies['men_life_expectancies']}</td>
+					<td>{life_expectancies['average_life_expectancies']}</td>
+					<td><Button outline color= "danger" on:click = "{delete_life(life_expectancies.country,life_expectancies.year)}">Borrar</Button></td>
 				</tr>
 			{/each}
 			<tr>
@@ -243,7 +243,7 @@
 		
 		
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
-	<Button outline color= "danger" on:click = {delete_all_exports}>Borrar todo</Button>
+	<Button outline color= "danger" on:click = {delete_all_life_expectancies}>Borrar todo</Button>
 </main>
 
 <style>
