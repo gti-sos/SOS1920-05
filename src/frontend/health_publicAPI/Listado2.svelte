@@ -180,10 +180,10 @@
 			<tbody>
 				<tr>
 					<td><Input placeholder="Ej. España" bind:value = "{new_health_public.country}" /></td>
-					<td><Input required placeholder="Ej. 2020" bind:value = "{new_health_public.year}" /></td>
-					<td><Input required type="number" step="0.01" min="0" bind:value = "{new_health_public['total_spending']}" /></td>
-					<td><Input type="number" placeholder="0.0" step="0.01" min="0" bind:value = "{new_health_public['public_spending']}" /></td>
-					<td><Input type="number" placeholder="0.0" step="0.01" min="0" bind:value = "{new_health_public['public_spending_pib']}" /></td>
+					<td><Input type="number" required placeholder="Ej. 2020" bind:value = "{new_health_public.year}" /></td>
+					<td><Input type="number" required placeholder="0.0" step="0.01" min="0" bind:value = "{new_health_public['total_spending']}" /></td>
+					<td><Input type="number" required placeholder="0.0" step="0.01" min="0" bind:value = "{new_health_public['public_spending']}" /></td>
+					<td><Input type="number" required placeholder="0.0" step="0.01" min="0" bind:value = "{new_health_public['public_spending_pib']}" /></td>
 					<td><Button outline color= "primary" on:click= {insert_health}>Insertar</Button></td>
 				</tr>
 
