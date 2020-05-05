@@ -1,5 +1,5 @@
 /node_modules/
 /public/build/
 /src/backend/books_exportsAPI/books_exports.db
-/src/backend/books_exportsAPI/health_public.db
+/src/backend/health_publicAPI/health_public.db
 .DS_Store
