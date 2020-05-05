@@ -9,7 +9,7 @@
 	import edit_life_expectancies from './life_expectanciesAPI/edit_life_expectancies.svelte';
 	import NotFound from './NotFound.svelte';
 
-	const routes = {
+	const routes =  {
 		"/": Home,
 		"/books_exportsAPI": books_exports,
 		"/health_publicAPI": health_public,
