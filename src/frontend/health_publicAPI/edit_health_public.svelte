@@ -17,6 +17,7 @@
     let updated_public_spending_pib = 0.0;
 
     onMount(get_health_public);
+    
     async function get_health_public() {
         console.log("Fetching public health...");
         const res = await fetch("/api/v1/health_public/" + params.country + "/" + params.year);

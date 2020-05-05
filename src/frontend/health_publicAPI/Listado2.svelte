@@ -62,6 +62,7 @@
 			|| new_health_public.public_spending_pib === ""
 			|| new_health_public.public_spending_pib == null) {
 			alert("Es obligatorio rellenar todos los campos");
+			console.log("ERROR");
 		} else {
 			const res = await fetch("/api/v1/health_public", {
 				method: "POST",
@@ -164,7 +165,7 @@
 		</FormGroup>
 
 		<Button outline color="secondary" on:click="{search(current_country, current_year)}">Buscar</Button>
-		
+		<p></p>
 		<Table bordered>
 			<thead>
 				<tr>
