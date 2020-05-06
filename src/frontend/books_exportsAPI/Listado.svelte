@@ -6,8 +6,6 @@
 	import Label from "sveltestrap/src/Label.svelte";
 	import FormGroup from "sveltestrap/src/FormGroup.svelte";
 	import Pagination from "sveltestrap/src/Pagination.svelte";
-	import PaginationItem from "sveltestrap/src/PaginationItem.svelte";
-	import PaginationLink from "sveltestrap/src/PaginationLink.svelte"
 	import {
 		pop
     } from "svelte-spa-router";
@@ -50,7 +48,7 @@
 				return d.year;
 			});
 			years = Array.from(new Set(years));
-			console.log("Received " + books_exports.length);
+			console.log("Recibido " + books_exports.length);
 		}
 		else {
 			console.log("ERROR!");
@@ -90,7 +88,7 @@
 	}
 
 	async function delete_exportation(country, year) {
-		console.log("Deleting exportation...");
+		console.log("Borrando exportacion...");
 		const res = await fetch("/api/v1/books-exports" + "/" + country + "/" + year, {
 			method: "DELETE"
 		}).then(function (res) {
@@ -100,7 +98,7 @@
 	}
 
 	async function delete_all_exports() {
-		console.log("Deleting all exports...");
+		console.log("Borrando todas las exportaciones...");
 		const res = await fetch("/api/v1/books-exports", {
 			method: "DELETE"
 		}).then(function (res) {
@@ -109,7 +107,7 @@
 		});
 	}
 	async function searchYears(country){
-        console.log("Searching years in country...");
+        console.log("Buscando por año...");
 		const res = await fetch("/api/v1/books-exports/" + country)
 		
 		if (res.ok){
@@ -119,16 +117,17 @@
 			books_exports.map((d)=>{
 			return d.year;
 			});
-			console.log("Update years")
+			console.log("Años actualizados")
 		}else {
 			console.log("ERROR!")
 		}
 	}
 	
 	async function search(country, year){
-        console.log("Searching data: " + country + "and " + year);
-		/* Checking if it fields is empty */
+        console.log("Buscando: " + country + "y " + year);
+		
 		var url = "/api/v1/books-exports";
+
 		if(country != "-" && year != "-") {
 			url = url + "?country=" + country+ "&year=" + year;
 		}else if(country != "-" && year == "-"){
@@ -148,16 +147,16 @@
             console.log("ERROR!");
         }
 	}
-	async function siguientePagina() {
+	async function PaginaSiguiente() {
 		const res = await fetch("/api/v1/books-exports/");
-		const json = await res.json();
-		if(offset < json.length - 10 ){
+		const recursos = await res.json();
+		if(offset < recursos.length - 10 ){
 			offset = offset + 10;
 			get_all_exports(offset);
 		}
 	};
-	async function anteriorPagina() {
-		if (offset - 10 >= 0){
+	async function PaginaAnterior() {
+		if ( 0 <= offset - 10){
 			offset = offset - 10;
 			get_all_exports(offset);
 		}
@@ -205,7 +204,7 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><Input placeholder="Ex. argentina" bind:value = "{new_books_exports.country}" /></td>
+				<td><Input placeholder="Ej. argentina" bind:value = "{new_books_exports.country}" /></td>
 				<td><Input type="number" required placeholder="Ej. 2020" bind:value = "{new_books_exports.year}" /></td>
 				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_books_exports['exp_book']}" /></td>
 				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_books_exports['exp_editorial']}" /></td>
@@ -223,7 +222,6 @@
 					</a>
 					</td>
 					<td>{books_exports.year}</td>
-				
 					<td>{books_exports['exp_book']}</td>
 					<td>{books_exports['exp_editorial']}</td>
 					<td>{books_exports['exp_graphic_sector']}</td>
@@ -241,8 +239,8 @@
 	</Table>
 	{/await}
 	<p align="right">
-		<Button outline color="secondary" on:click="{anteriorPagina}">Anterior página</Button>
-		<Button outline color="secondary" on:click="{siguientePagina}">Siguiente página</Button>
+		<Button outline color="secondary" on:click="{PaginaAnterior}"> <b><strong><h4> &lt;</h4></strong></b></Button>
+		<Button outline color="secondary" on:click="{PaginaSiguiente}"><b><strong><h4> &gt;</h4> </strong></b></Button>
 	</p>
 		
 		
