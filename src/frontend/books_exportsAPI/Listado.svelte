@@ -24,6 +24,8 @@
 	let years = [];
 	let current_country= "-";
 	let current_year= "-";
+	let from= "-";
+	let to= "-";
 	let offset = 0;
 	let limit = 10;
 	let MensajeError = false;
@@ -152,7 +154,36 @@
 			get_all_exports(offset);
         }
 	}
-	async function PaginaSiguiente() {
+	
+	async function searchRange(from, to){
+        console.log("Buscando: " + from + "hasta" + to);
+		
+		var url = "/api/v1/books-exports";
+
+		if(from != "-" && to != "-") {
+			url = url + "?from=" + from+ "&to=" + to;
+		}else if(from != "-" && to == "-"){
+			url = url + "?from=" + from;
+		} else if(from == "-" && to != "-"){
+			url = url + "?to=" + to;
+		} 
+		
+		const res = await fetch(url);
+        if (res.ok && from != "-" && to != "-"){
+            console.log("OK:");
+            const json = await res.json();
+            books_exports = json;
+            alert("Busqueda encontrada");
+            console.log("Found " + books_exports.length);
+        }else{
+			alert("Introduzca el rango");
+			console.log("ERROR!");
+			get_all_exports(offset);
+        }
+	}
+
+
+	async function nextPage() {
 		const res = await fetch("/api/v1/books-exports/");
 		const recursos = await res.json();
 		if(offset < recursos.length - 10 ){
@@ -160,7 +191,7 @@
 			get_all_exports(offset);
 		}
 	};
-	async function PaginaAnterior() {
+	async function previousPage() {
 		if ( 0 <= offset - 10){
 			offset = offset - 10;
 			get_all_exports(offset);
@@ -174,27 +205,65 @@
 	{#await books_exports}
 		Loading books_exports...
 	{:then books_exports_}
-	<FormGroup> 
-        <Label for="selectCountry">Búsqueda por país </Label>
-        <Input type="select" name="selectCountry" id="selectCountry" bind:value="{current_country}">
-            {#each countries as country}
-            <option>{country}</option>
-			{/each}
-			<option>-</option>
-        </Input>
-    </FormGroup>
+	<Table>
+		<tr>
+			<td>
+		<FormGroup> 
+			
+			<b><Label for="selectCountry">Búsqueda por país </Label></b>
+				<Input type="select" name="selectCountry" id="selectCountry" bind:value="{current_country}">
+				{#each countries as country}
+				<option>{country}</option>
+				{/each}
+				<option>-</option>
+				</Input>
+			
+		
+		</FormGroup>
+		</td>
+		<td>
+		<FormGroup>
+				<b><Label for="selectYear">Búsqueda por año</Label></b>
+				
+					<Input type="select" name="selectYear" id="selectYear" bind:value = "{current_year}">
+					{#each years as year}
+					<option>{year}</option>
+					{/each}
+					<option>-</option>
+					</Input>
+		</FormGroup>
+		</td>
+		</tr>
+		<Button outline color="secondary" on:click="{search(current_country, current_year)}">Buscar</Button>
+		<p></p>
+		<h6>Búsqueda por rango de años</h6>
+		<tr>
+		<td>
+		<FormGroup>
+			<Label for="selectFrom">Desde</Label>
+			<Input type="select" name="selectFrom" id="selectFrom" bind:value = "{from}">
+				{#each years as year}
+				<option>{year}</option>
+				{/each}
+				<option>-</option>
+			</Input>
+		</FormGroup>
+		</td>
+		<td>	
+		<FormGroup>
+			<Label for="selectTo">Hasta</Label>
+			<Input type="select" name="selectTo" id="selectTo" bind:value = "{to}">
+				{#each years as year}
+				<option>{year}</option>
+				{/each}
+				<option>-</option>
+			</Input>
+		</FormGroup>
+	</td>	
+</tr>
+		<Button outline color="secondary" on:click="{searchRange(from, to)}">Buscar</Button>
 	
-	<FormGroup>
-		<Label for="selectYear">Búsqueda por año</Label>
-		<Input type="select" name="selectYear" id="selectYear" bind:value = "{current_year}">
-			{#each years as year}
-			<option>{year}</option>
-			{/each}
-			<option>-</option>
-		</Input>
-	</FormGroup>
-
-	<Button outline color="secondary" on:click="{search(current_country, current_year)}">Buscar</Button>
+	</Table>
 	<p></p>
 	<Table bordered>
 		<thead>
@@ -244,8 +313,8 @@
 	</Table>
 	{/await}
 	<p align="right">
-		<Button outline color="secondary" on:click="{PaginaAnterior}"> <b><strong><h4> &lt;</h4></strong></b></Button>
-		<Button outline color="secondary" on:click="{PaginaSiguiente}"><b><strong><h4> &gt;</h4> </strong></b></Button>
+		<Button outline color="secondary" on:click="{previousPage}"> <b><strong><h4> &lt;</h4></strong></b></Button>
+		<Button outline color="secondary" on:click="{nextPage}"><b><strong><h4> &gt;</h4> </strong></b></Button>
 	</p>
 		
 		
