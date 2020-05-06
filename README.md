@@ -17,5 +17,5 @@
     - [https://sos1920-05.herokuapp.com/api/v1/life_expectancies](https://sos1920-05.herokuapp.com/api/v1/life_expectancies) (developed by [Mathias Abban Ehentam](https://github.com/Kingmathy))
 -  **Frontends**:
     - [https://sos1920-05.herokuapp.com/#/books_exportsAPI](https://sos1920-05.herokuapp.com/#/books_exportsAPI) (developed by [Diego Ruiz Perez](https://github.com/dieruiper))
-    - [https://sos1920-05.herokuapp.com/api/v1/health_public](https://sos1920-05.herokuapp.com/api/v1/health_public) (developed by [Mario Jimenez Santos](https://github.com/J5Mario))
-    - [https://sos1920-05.herokuapp.com/api/v1/life_expectancies](https://sos1920-05.herokuapp.com/api/v1/life_expectancies) (developed by [Mathias Abban Ehentam](https://github.com/Kingmathy))
+    - [https://sos1920-05.herokuapp.com/#/health_publicAPI](https://sos1920-05.herokuapp.com/#/health_publicAPI) (developed by [Mario Jimenez Santos](https://github.com/J5Mario))
+    - [https://sos1920-05.herokuapp.com/#/life_expectanciesAPI](https://sos1920-05.herokuapp.com/#/life_expectanciesAPI) (developed by [Mathias Abban Ehentam](https://github.com/Kingmathy))
