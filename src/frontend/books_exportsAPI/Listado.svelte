@@ -117,9 +117,12 @@
 			books_exports.map((d)=>{
 			return d.year;
 			});
+			alert("Busqueda encontrada");
 			console.log("Años actualizados")
 		}else {
+			alert("No existe");
 			console.log("ERROR!")
+			get_all_exports(offset);
 		}
 	}
 	
@@ -141,10 +144,12 @@
             console.log("OK:");
             const json = await res.json();
             books_exports = json;
-            
+            alert("Busqueda encontrada");
             console.log("Found " + books_exports.length);
         }else{
-            console.log("ERROR!");
+			alert("No existe");
+			console.log("ERROR!");
+			get_all_exports(offset);
         }
 	}
 	async function PaginaSiguiente() {
