@@ -2,7 +2,7 @@
 
 - **Team**
   - [Diego Ruiz Perez](https://github.com/dieruiper)
-  - [Mario jimenez Santos](https://github.com/J5Mario)
+  - [Mario Jimenez Santos](https://github.com/J5Mario)
   - [Mathias Abban Ehentam](https://github.com/Kingmathy)
 - **Project description**: Our information sources are oriented to analyze statistics about books exports, public health spending and life expectancies in some countries.
 - **Repository**: [gti-sos/SOS1920-05](https://github.com/gti-sos/SOS1920-05)
