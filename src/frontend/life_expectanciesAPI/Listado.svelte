@@ -99,13 +99,13 @@
 		});
 	}
 
-	async function delete_all_life_expectancies() {
+	async function delete_lives() {
 		console.log("Deleting all lives...");
 		const res = await fetch("/api/v1/life_expectancies", {
 			method: "DELETE"
 		}).then(function (res) {
-			get_all_life_expectancies(offset);
-			alert("Todas los datos borrados con éxito");
+			getLife_expectancies(offset);
+			alert("Todos los datos borrados con éxito");
 		});
 	}
 	async function searchYears(country){
