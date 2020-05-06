@@ -71,7 +71,7 @@
                 alert("Introduce correctamente los datos");
             }
         })
-        }
+        }}
 </script>
 <main>
     <h3>Editar datos: <strong>{params.country}</strong> <strong>{params.year}</strong> </h3>
