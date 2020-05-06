@@ -253,7 +253,7 @@
 	<p align="right">
 		<Button outline color="secondary" on:click="{anteriorPagina}">Anterior página</Button>
 		<Button outline color="secondary" on:click="{siguientePagina}">Siguiente página</Button>
-		<Button outline color="primary" on:click="{loadInitialDataVehicles}">Cargar datos iniciales</Button>
+		
 	</p>
 		
 		

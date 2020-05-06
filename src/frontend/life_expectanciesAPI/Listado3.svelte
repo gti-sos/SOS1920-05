@@ -148,6 +148,15 @@
             console.log("ERROR!");
         }
 	}
+	async function loadInitialData() {
+		
+		console.log("Loading life_expectancies...");
+		const res = await fetch("/api/v1/life_expectancies/loadInitialData").then(function (res) {
+			getLife_expectancies(offset);
+		});;
+		successMsg = "Se han cargado los datos iniciales correctamente.";
+		errorMsg = false;
+	};
 	async function siguientePagina() {
 		const res = await fetch("/api/v1/life_expectancies/");
 		const json = await res.json();
@@ -205,11 +214,11 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><Input placeholder="Ex. argentina" bind:value = "{new_life_expectancies.country}" /></td>
-				<td><Input type="number" required placeholder="Ej. 2020" bind:value = "{new_life_expectancies.year}" /></td>
-				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['women_life_expectancy']}" /></td>
-				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['men_life_expectancy']}" /></td>
-				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['average_life_expectancy']}" /></td>
+				<td><Input placeholder="Ex. japon" bind:value = "{new_life_expectancies.country}" /></td>
+				<td><Input type="number" required placeholder="Ej. 2000" bind:value = "{new_life_expectancies.year}" /></td>
+				<td><Input type="number" required placeholder="70" step="61"  bind:value = "{new_life_expectancies['women_life_expectancy']}" /></td>
+				<td><Input type="number" required placeholder="70" step="61"  bind:value = "{new_life_expectancies['men_life_expectancy']}" /></td>
+				<td><Input type="number" required placeholder="70" step="61"  bind:value = "{new_life_expectancies['average_life_expectancy']}" /></td>
 				<td><Button outline color= "primary" on:click= {insert_expectancy}>Insertar</Button></td>
 			</tr>
 
@@ -248,6 +257,7 @@
 		
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
 	<Button outline color= "danger" on:click = {delete_all_expectancies}>Borrar todo</Button>
+	<Button outline color="primary" on:click="{loadInitialData}">Cargar datos iniciales</Button>
 </main>
 
 <style>
