@@ -183,7 +183,7 @@
 	<FormGroup> 
         <Label for="selectCountry">Búsqueda por país </Label>
         <Input type="select" name="selectCountry" id="selectCountry" bind:value="{current_country}">
-            {#each countries as country}
+            {#each country as country}
             <option>{country}</option>
 			{/each}
 			<option>-</option>
@@ -193,7 +193,7 @@
 	<FormGroup>
 		<Label for="selectYear">Búsqueda por año</Label>
 		<Input type="select" name="selectYear" id="selectYear" bind:value = "{current_year}">
-			{#each years as year}
+			{#each year as year}
 			<option>{year}</option>
 			{/each}
 			<option>-</option>
