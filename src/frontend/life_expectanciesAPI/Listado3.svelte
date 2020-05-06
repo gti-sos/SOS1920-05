@@ -152,7 +152,7 @@
 		
 		console.log("Loading life_expectancies...");
 		const res = await fetch("/api/v1/life_expectancies/loadInitialData").then(function (res) {
-			getLife_expectancies(offset);
+			get_all_expectancies(offset);
 		});;
 		successMsg = "Se han cargado los datos iniciales correctamente.";
 		errorMsg = false;
