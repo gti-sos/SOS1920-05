@@ -16,9 +16,9 @@
 	let new_life_expectancies = {
 		"country": "",
 		"year": 0,
-		"women_life_expectancies": 0,
-		"men_life_expectancies": 0,
-		"average_life_expectancies":0
+		"women_life_expectancy": 0,
+		"men_life_expectancy": 0,
+		"average_life_expectancy":0
 	};
 
 	/* Select variables */
@@ -31,10 +31,10 @@
 	let MensajeError = false;
 	let MensajeCorrecto = false;
 
-	onMount(getLife_expectancies);
+	onMount(get_all_expectancies);
 
-	async function getLife_expectancies(offset) {
-		console.log("Fetching getLife_expectancies...");
+	async function get_all_expectancies(offset) {
+		console.log("Fetching all expectancies...");
 		const res = await fetch("/api/v1/life_expectancies?limit="+limit + "&offset="+ offset);
 		if (res.ok) {
 			console.log("OK:");
@@ -57,18 +57,18 @@
 		}
 	}
 
-	async function insert_life() {
-		console.log("Inserting life...");
+	async function insert_expectancy() {
+		console.log("Inserting expectancy...");
 		if (new_life_expectancies.country == ""
 			|| new_life_expectancies.country == null
 			|| new_life_expectancies.year == ""
 			|| new_life_expectancies.year == null
-			|| new_life_expectancies.women_life_expectancies == ""
-			|| new_life_expectancies.women_life_expectancies == null
-			|| new_life_expectancies.men_life_expectancies == ""
-			|| new_life_expectancies.men_life_expectancies == null
-			|| new_life_expectancies.average_life_expectancies == ""
-			|| new_life_expectancies.average_life_expectancies == null) {
+			|| new_life_expectancies.women_life_expectancy == ""
+			|| new_life_expectancies.women_life_expectancy == null
+			|| new_life_expectancies.men_life_expectancy == ""
+			|| new_life_expectancies.men_life_expectancy == null
+			|| new_life_expectancies.average_life_expectancy == ""
+			|| new_life_expectancies.average_life_expectancy == null) {
 			alert("Es obligatorio completar todos los recursos");
 			console.log("ERROR!");
 		} else {
@@ -80,32 +80,32 @@
 				}
 			}).then(function (res) {
 				if(res.status==409){
-					alert("Ya existenten");
+					alert("Recurso ya existente");
 				}else{
-				getLife_expectancies(offset);
-				alert("Inserción con éxito");
+				get_all_expectancies(offset);
+				alert("Recurso insertado con éxito");
 				}
 			});
 		};
 	}
 
-	async function delete_life(country, year) {
-		console.log("Deleting life...");
+	async function delete_expectancy(country, year) {
+		console.log("Deleting expectancy...");
 		const res = await fetch("/api/v1/life_expectancies" + "/" + country + "/" + year, {
 			method: "DELETE"
 		}).then(function (res) {
-			getLife_expectancies(offset);
-			alert("Life borrada con éxito");
+			get_all_expectancies(offset);
+			alert("recurso borrado con éxito");
 		});
 	}
 
-	async function delete_lives() {
-		console.log("Deleting all lives...");
+	async function delete_all_expectancies() {
+		console.log("Deleting all expectancies...");
 		const res = await fetch("/api/v1/life_expectancies", {
 			method: "DELETE"
 		}).then(function (res) {
-			getLife_expectancies(offset);
-			alert("Todos los datos borrados con éxito");
+			get_all_expectancies(offset);
+			alert("Todas los recursos borrados con éxito");
 		});
 	}
 	async function searchYears(country){
@@ -148,28 +148,18 @@
             console.log("ERROR!");
         }
 	}
-
-	async function loadInitialData() {
-		
-		console.log("Loading life_expectancies...");
-		const res = await fetch("/api/v1/life_expectancies/loadInitialData").then(function (res) {
-			getLife_expectancies(offset);
-		});;
-		successMsg = "Se han cargado los datos iniciales correctamente.";
-		errorMsg = false;
-	};
 	async function siguientePagina() {
 		const res = await fetch("/api/v1/life_expectancies/");
 		const json = await res.json();
 		if(offset < json.length - 10 ){
 			offset = offset + 10;
-			get_all_life_expectancies(offset);
+			get_all_expectancies(offset);
 		}
 	};
 	async function anteriorPagina() {
 		if (offset - 10 >= 0){
 			offset = offset - 10;
-			get_all_life_expectancies(offset);
+			get_all_expectancies(offset);
 		}
 	};
 </script>
@@ -183,7 +173,7 @@
 	<FormGroup> 
         <Label for="selectCountry">Búsqueda por país </Label>
         <Input type="select" name="selectCountry" id="selectCountry" bind:value="{current_country}">
-            {#each country as country}
+            {#each countries as country}
             <option>{country}</option>
 			{/each}
 			<option>-</option>
@@ -193,7 +183,7 @@
 	<FormGroup>
 		<Label for="selectYear">Búsqueda por año</Label>
 		<Input type="select" name="selectYear" id="selectYear" bind:value = "{current_year}">
-			{#each year as year}
+			{#each years as year}
 			<option>{year}</option>
 			{/each}
 			<option>-</option>
@@ -207,23 +197,23 @@
 			<tr>
 				<th>País</th>
 				<th>Año</th>
-				<th>Esperanza de vida de mujeres</th>
-				<th>Esperanza de vida de hombres</th>
-				<th>Promedio de esperanza de vida</th>
+				<th>Esperanza de vida en Mujeres</th>
+				<th>Esperanza de vida en Hombres</th>
+				<th>Esperanza de vida Media</th>
 				<th> Acciones </th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td><Input placeholder="Ex. japon" bind:value = "{new_life_expectancies.country}" /></td>
+				<td><Input placeholder="Ex. argentina" bind:value = "{new_life_expectancies.country}" /></td>
 				<td><Input type="number" required placeholder="Ej. 2020" bind:value = "{new_life_expectancies.year}" /></td>
-				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['women_life_expectancies']}" /></td>
-				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['men_life_expectancies']}" /></td>
-				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['average_life_expectancies']}" /></td>
-				<td><Button outline color= "primary" on:click= {insert_life}>Insertar</Button></td>
+				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['women_life_expectancy']}" /></td>
+				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['men_life_expectancy']}" /></td>
+				<td><Input type="number" required placeholder="0" step="1"  bind:value = "{new_life_expectancies['average_life_expectancy']}" /></td>
+				<td><Button outline color= "primary" on:click= {insert_expectancy}>Insertar</Button></td>
 			</tr>
 
-			{#each life_expectancies as life_expectancies}
+			{#each life_expectancies_ as life_expectancies}
 				<tr>
 
 				
@@ -234,10 +224,10 @@
 					</td>
 					<td>{life_expectancies.year}</td>
 				
-					<td>{life_expectancies['women_life_expectancies']}</td>
-					<td>{life_expectancies['men_life_expectancies']}</td>
-					<td>{life_expectancies['average_life_expectancies']}</td>
-					<td><Button outline color= "danger" on:click = "{delete_life(life_expectancies.country,life_expectancies.year)}">Borrar</Button></td>
+					<td>{life_expectancies['women_life_expectancy']}</td>
+					<td>{life_expectancies['men_life_expectancy']}</td>
+					<td>{life_expectancies['average_life_expectancy']}</td>
+					<td><Button outline color= "danger" on:click = "{delete_expectancy(life_expectancies.country,life_expectancies.year)}">Borrar</Button></td>
 				</tr>
 			{/each}
 			<tr>
@@ -257,9 +247,7 @@
 		
 		
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
-	<Button outline color= "danger" on:click = {delete_all_life_expectancies}>Borrar todo</Button>
-	<Button outline color="primary" on:click="{loadInitialData}">Cargar datos iniciales</Button>
-
+	<Button outline color= "danger" on:click = {delete_all_expectancies}>Borrar todo</Button>
 </main>
 
 <style>
