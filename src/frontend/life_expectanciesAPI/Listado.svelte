@@ -79,8 +79,12 @@
 					"Content-Type": "application/json"
 				}
 			}).then(function (res) {
-				get_all_life_expectancies(offset);
-				alert("life insertada con éxito");
+				if(res.status==409){
+					alert("Ya existenten");
+				}else{
+				getLife_expectancies(offset);
+				alert("Inserción con éxito");
+				}
 			});
 		};
 	}
@@ -90,7 +94,7 @@
 		const res = await fetch("/api/v1/life_expectancies" + "/" + country + "/" + year, {
 			method: "DELETE"
 		}).then(function (res) {
-			get_all_life_expectancies(offset);
+			getLife_expectancies(offset);
 			alert("Life borrada con éxito");
 		});
 	}

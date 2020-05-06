@@ -10,11 +10,11 @@
 
     export let params = {};
     let life_expectancies = {};
-    let updated_country = "";
-    let updated_year = 0.0;
-    let updated_women_life_expectancies = 0.0;
-    let updated_men_life_expectancies = 0.0;
-    let updated_average_life_expectancies = 0.0;
+    let updated_country;
+    let updated_year;
+    let updated_women_life_expectancies;
+    let updated_men_life_expectancies;
+    let updated_average_life_expectancies;
 
     onMount(get_life_expectancies);
 
@@ -28,24 +28,37 @@
             life_expectancies = json;
             updated_country = life_expectancies.country;
             updated_year = life_expectancies.year;
-            updated_women_life_expectancies = life_expectancies["women_life_expectancies"];
-            updated_men_life_expectancies = life_expectancies["men_life_expectancies"];
-            updated_average_life_expectancies = life_expectancies["average_life_expectancies"];
-            console.log("Received lives.");
+            updated_women_life_expectancies = life_expectancies.women_life_expectancies;
+            updated_men_life_expectancies = life_expectancies.men_life_expectancies;
+            updated_average_life_expectancies = life_expectancies.average_life_expectancies;
+            console.log("Received");
         } else {
             console.log("ERROR!");
         }
     }
     async function update_life_expectancies() {
         console.log("Updating life_expectancies...");
+        if (updated_country == ""
+			|| updated_country == null
+			|| updated_year == ""
+			|| updated_year == null
+			|| updated_women_life_expectancies == ""
+			|| updated_women_life_expectancies == null
+			|| updated_men_life_expectancies == ""
+			|| updated_men_life_expectancies == null
+			|| updated_average_life_expectancies == ""
+			|| updated_average_life_expectancies == null) {
+			alert("Es obligatorio completar todos los recursos");
+			console.log("ERROR!");
+		} else {
         const res = await fetch("/api/v1/life_expectancies/" + params.country + "/" + params.year, {
             method: "PUT",
             body: JSON.stringify({
                 country: params.country,
                 year: parseInt(params.year),
-                "women_life_expectancies": updated_women_life_expectancies,
-                "men_life_expectancies": updated_men_life_expectancies,
-                "average_life_expectancies": updated_average_life_expectancies
+                women_life_expectancies: updated_women_life_expectancies,
+                men_life_expectancies: updated_men_life_expectancies,
+                average_life_expectancies: updated_average_life_expectancies
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -53,7 +66,7 @@
         }).then(function (res) {
             get_life_expectancies();
             if(res.ok){
-                alert("life actualizada con éxito");
+                alert("Actualizada con éxito");
             }else{
                 alert("Introduce correctamente los datos");
             }
@@ -80,9 +93,9 @@
                 <tr>
                     <td>{updated_country}</td>
                     <td>{updated_year}</td>
-                    <td><input required type="number" step="1" min="0" bind:value="{updated_women_life_expectancies}"></td>
-                    <td><input required type="number" step="1" min="0" bind:value="{updated_men_life_expectancies}"></td>
-                    <td><input required type="number" step="1" min="0" bind:value="{updated_average_life_expectancies}"></td>
+                    <td><input bind:value="{updated_women_life_expectancies}"></td>
+                    <td><input bind:value="{updated_men_life_expectancies}"></td>
+                    <td><input bind:value="{updated_average_life_expectancies}"></td>
                     <td> <Button outline  color="primary" on:click={update_life_expectancies}>Actualizar</Button> </td>
                 </tr>
         </tbody>
