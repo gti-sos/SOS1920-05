@@ -1,4 +1,5 @@
 /node_modules/
 /public/build/
 src/backend/life_expectanciesAPI/life_expectancies.db
-
+src/backend/books_exportsAPI/books_exports.db
+src/backend/health_publicAPI/health_public.db

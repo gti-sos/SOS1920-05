@@ -23,8 +23,8 @@
 	/* Select variables */
 	let countries = [];
 	let years = [];
-	let current_country= "-";
-	let current_year= "-";
+	let current_country= "Elige país existente";
+	let current_year= "Elige año existente";
 	let from= "-";
 	let to= "-";
 	let offset = 0;
@@ -120,9 +120,12 @@
 			life_expectancies.map((d)=>{
 			return d.year;
 			});
-			console.log("Update years")
+			alert("Busqueda encontrada");
+			console.log("Encontrado con éxito")
 		}else {
-			console.log("ERROR!")
+			alert(" Busqueda inexistente")
+            console.log("ERROR!");
+			get_all_expectancies(offset);
 		}
 	}
 	
@@ -143,10 +146,14 @@
             console.log("OK:");
             const json = await res.json();
             life_expectancies = json;
-            
-            console.log("Found " + life_expectancies.length);
+
+            life_expectancies.map((d)=>{
+			return d.year;
+			});
+			alert("Busqueda encontrada");
+            console.log("Encontrado " + life_expectancies.length);
         }else{
-			alert("inexistente")
+			alert(" Busqueda inexistente")
             console.log("ERROR!");
 			get_all_expectancies(offset);
         }
@@ -169,11 +176,11 @@ async function searchRange(from, to){
         if (res.ok && from != "-" && to != "-"){
             console.log("OK:");
             const json = await res.json();
-            books_exports = json;
+            life_expectancies = json;
             alert("Busqueda encontrada");
             console.log("Found " + life_expectancies.length);
         }else{
-			alert("Indique el rango");
+			alert("Indique un rango");
 			console.log("ERROR!");
 			get_all_expectancies(offset);
         }
@@ -215,11 +222,10 @@ async function searchRange(from, to){
 			life_expectancies = json;
 			console.log("Received " + life_expectancies.length + " life_expectancies.");
 			if (life_expectancies.length > 0){
-				MensajeCorrecto = "Se ha realizado la búsqueda.";
-				MensajeError = false;
+				alert("Se ha realizado la búsqueda.");
+				
 			}else{
-				MensajeCorrecto = false;
-				MensajeError = "La búsqueda no ha obtenido resultados.";
+				alert("La búsqueda no ha obtenido resultados.");
 			};
 			
 		} else {
@@ -339,7 +345,7 @@ async function searchRange(from, to){
 				<td><Input bind:value = "{searchLife.women_life_expectancy}" /></td>
 				<td><Input bind:value = "{searchLife.men_life_expectancy}" /></td>
 				<td><Input bind:value = "{searchLife.average_life_expectancy}" /></td>
-				<td><Button outline  color="primary" on:click={searchLife(offset)}>Busca personalizado</Button> </td>
+				<td><Button outline  color="primary" on:click={searchLife(offset)}>Búsqueda manual</Button> </td>
 		</tr>
 		<p></p>
 		<tr>
