@@ -26,6 +26,8 @@
 	let years = [];
 	let current_country= "-";
 	let current_year= "-";
+	let from= "-";
+	let to= "-";
 	let offset = 0;
 	let limit = 10;
 	let MensajeError = false;
@@ -69,7 +71,7 @@
 			|| new_life_expectancies.men_life_expectancy == null
 			|| new_life_expectancies.average_life_expectancy == ""
 			|| new_life_expectancies.average_life_expectancy == null) {
-			alert("Es obligatorio completar todos los recursos");
+			alert("Completa todos los campos");
 			console.log("ERROR!");
 		} else {
 			const res = await fetch("/api/v1/life_expectancies", {
@@ -80,10 +82,10 @@
 				}
 			}).then(function (res) {
 				if(res.status==409){
-					alert("Recurso ya existente");
+					alert("El dato ya existente");
 				}else{
 				get_all_expectancies(offset);
-				alert("Recurso insertado con éxito");
+				alert("Inserción realizado");
 				}
 			});
 		};
@@ -95,7 +97,7 @@
 			method: "DELETE"
 		}).then(function (res) {
 			get_all_expectancies(offset);
-			alert("recurso borrado con éxito");
+			alert("dato borrado con éxito");
 		});
 	}
 
@@ -105,7 +107,7 @@
 			method: "DELETE"
 		}).then(function (res) {
 			get_all_expectancies(offset);
-			alert("Todas los recursos borrados con éxito");
+			alert("Datos borrados correctamente");
 		});
 	}
 	async function searchYears(country){
@@ -145,10 +147,48 @@
             
             console.log("Found " + life_expectancies.length);
         }else{
+			alert("inexistente")
             console.log("ERROR!");
+			get_all_expectancies(offset);
         }
 	}
 
+async function searchRange(from, to){
+        console.log("Buscando: " + from + "hasta" + to);
+		
+		var url = "/api/v1/life_expectancies";
+
+		if(from != "-" && to != "-") {
+			url = url + "?from=" + from+ "&to=" + to;
+		}else if(from != "-" && to == "-"){
+			url = url + "?from=" + from;
+		} else if(from == "-" && to != "-"){
+			url = url + "?to=" + to;
+		} 
+		
+		const res = await fetch(url);
+        if (res.ok && from != "-" && to != "-"){
+            console.log("OK:");
+            const json = await res.json();
+            books_exports = json;
+            alert("Busqueda encontrada");
+            console.log("Found " + life_expectancies.length);
+        }else{
+			alert("Indique el rango");
+			console.log("ERROR!");
+			get_all_expectancies(offset);
+        }
+	}
+
+
+	async function nextPage() {
+		const res = await fetch("/api/v1/books-exports/");
+		const recursos = await res.json();
+		if(offset < recursos.length - 10 ){
+			offset = offset + 10;
+			get_all_exports(offset);
+		}
+	};
 	async function searchLife(offset) {
 		let url = "/api/v1/life_expectancies?limit=10&offset="+ offset;
 		console.log("Searching life_expectancies...");
@@ -239,7 +279,41 @@
 		</Input>
 	</FormGroup>
 
-	<Button outline color="secondary" on:click="{search(current_country, current_year)}">Buscar</Button>
+	</td>
+		<td class="align-middle" align="center">
+		<Button outline color="secondary" on:click="{search(current_country, current_year)}">Buscar</Button>
+	</td>	
+	</tr>
+		<p></p>
+		<h6>Búsqueda por rango de años</h6>
+		<tr>
+		<td>
+		<FormGroup>
+			<Label for="selectFrom">Desde</Label>
+			<Input type="select" name="selectFrom" id="selectFrom" bind:value = "{from}">
+				{#each years as year}
+				<option>{year}</option>
+				{/each}
+				<option>-</option>
+			</Input>
+		</FormGroup>
+		</td>
+		<td>	
+		<FormGroup>
+			<Label for="selectTo">Hasta</Label>
+			<Input type="select" name="selectTo" id="selectTo" bind:value = "{to}">
+				{#each years as year}
+				<option>{year}</option>
+				{/each}
+				<option>-</option>
+			</Input>
+		</FormGroup>
+	</td>	
+		<td class="align-middle" align="center">
+			<Button outline color="secondary" on:click="{searchRange(from, to)}">Buscar</Button>
+		</td>
+	</tr>
+	</Table>
 	<p></p>
 	<Table bordered>
 		<thead>
@@ -253,15 +327,23 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
+		<tr>
+				<td><Input bind:value = "{searchLife.country}" /></td>
+				<td><Input bind:value = "{searchLife.year}" /></td>
+				<td><Input bind:value = "{searchLife.women_life_expectancy}" /></td>
+				<td><Input bind:value = "{searchLife.men_life_expectancy}" /></td>
+				<td><Input bind:value = "{searchLife.average_life_expectancy}" /></td>
+				<td><Button outline  color="primary" on:click={searchLife(offset)}>Busca personalizado</Button> </td>
+			</tr>
+		{/each}
+		<tr>
 				<td><Input placeholder="Ex. japon" bind:value = "{new_life_expectancies.country}" /></td>
 				<td><Input type="number" required placeholder="Ej. 2000" bind:value = "{new_life_expectancies.year}" /></td>
 				<td><Input type="number" required placeholder="70" step="61"  bind:value = "{new_life_expectancies['women_life_expectancy']}" /></td>
 				<td><Input type="number" required placeholder="70" step="61"  bind:value = "{new_life_expectancies['men_life_expectancy']}" /></td>
 				<td><Input type="number" required placeholder="70" step="61"  bind:value = "{new_life_expectancies['average_life_expectancy']}" /></td>
-				<td><Button outline  color="primary" on:click={searchLife(offset)}>Busca personalizado</Button> </td>
 				<td><Button outline color= "primary" on:click= {insert_expectancy}>Insertar</Button></td>
-			</tr>
+		</tr>
 
 			{#each life_expectancies_ as life_expectancies}
 				<tr>
@@ -273,7 +355,6 @@
 					</a>
 					</td>
 					<td>{life_expectancies.year}</td>
-				
 					<td>{life_expectancies['women_life_expectancy']}</td>
 					<td>{life_expectancies['men_life_expectancy']}</td>
 					<td>{life_expectancies['average_life_expectancy']}</td>
