@@ -66,7 +66,7 @@
         }).then(function (res) {
             get_health_public();
             if(res.ok){
-                alert("Actualización con éxito");
+                alert("Datos actualizados");
             }else{
                 alert("Introduce correctamente los datos");
             }

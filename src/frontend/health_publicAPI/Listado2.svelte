@@ -69,7 +69,7 @@
 			|| new_health_public.public_spending == null
 			|| new_health_public.public_spending_pib == ""
 			|| new_health_public.public_spending_pib == null) {
-			alert("Es obligatorio completar todos los recursos");
+			alert("Es obligatorio completar todos los datos");
 			console.log("ERROR!");
 		} else {
 			const res = await fetch("/api/v1/health_public", {
@@ -80,10 +80,10 @@
 				}
 			}).then(function (res) {
 				if(res.status==409){
-					alert("Gasto ya existente");
+					alert("Recurso ya existente");
 				}else{
 				get_all_spending(offset);
-				alert("Gasto insertado con éxito");
+				alert("Recurso insertado con éxito");
 				}
 			});
 		};
@@ -95,7 +95,7 @@
 			method: "DELETE"
 		}).then(function (res) {
 			get_all_spending(offset);
-			alert("Gasto borrado con éxito");
+			alert("Recurso borrado con éxito");
 		});
 	}
 
@@ -105,7 +105,7 @@
 			method: "DELETE"
 		}).then(function (res) {
 			get_all_spending(offset);
-			alert("Todos los datos borrados");
+			alert("Todos los recursos borrados");
 		});
 	}
 	async function searchYears(country){
@@ -146,7 +146,7 @@
             console.log("OK:");
             const json = await res.json();
             health_public = json;
-            alert("Busqueda encontrada");
+            alert("Búsqueda encontrada");
             console.log("Found " + health_public.length);
         }else{
 			alert("No existe");
@@ -204,7 +204,7 @@
 			method: "GET"
 		}).then(function (res) {
 			get_all_spending(offset);
-			alert("Datos Reiniciados");
+			alert("Recursos Restablecidos");
 		});
 	}
 
@@ -333,7 +333,7 @@
 		
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
 	<Button outline color= "danger" on:click = {delete_all_spending}>Borrar todo</Button>
-	<Button outline color="primary" on:click="{loadInitialData}">Reiniciar datos</Button>
+	<Button outline color="primary" on:click="{loadInitialData}">Restablecer recursos</Button>
 </main>
 
 <style>
