@@ -31,10 +31,10 @@
 	let MensajeError = false;
 	let MensajeCorrecto = false;
 
-	onMount(get_all_health_public);
+	onMount(get_all_spending);
 
-	async function get_all_health_public(offset) {
-		console.log("Fetching all resources...");
+	async function get_all_spending(offset) {
+		console.log("Fetching all spendings...");
 		const res = await fetch("/api/v1/health_public?limit="+limit + "&offset="+ offset);
 		if (res.ok) {
 			console.log("OK:");
@@ -50,15 +50,15 @@
 				return d.year;
 			});
 			years = Array.from(new Set(years));
-			console.log("Received " + health_public.length);
+			console.log("Recibido " + health_public.length);
 		}
 		else {
 			console.log("ERROR!");
 		}
 	}
 
-	async function insert_health_public() {
-		console.log("Inserting resource...");
+	async function insert_spending() {
+		console.log("Inserting spending...");
 		if (new_health_public.country == ""
 			|| new_health_public.country == null
 			|| new_health_public.year == ""
@@ -80,36 +80,36 @@
 				}
 			}).then(function (res) {
 				if(res.status==409){
-					alert("Ya existe ese recurso");
+					alert("Gasto ya existente");
 				}else{
-				get_all_health_public(offset);
-				alert("Recurso insertado con éxito");
+				get_all_spending(offset);
+				alert("Gasto insertado con éxito");
 				}
 			});
 		};
 	}
 
-	async function delete_health_public(country, year) {
-		console.log("Deleting resource...");
+	async function delete_spending(country, year) {
+		console.log("Borrando gasto...");
 		const res = await fetch("/api/v1/health_public" + "/" + country + "/" + year, {
 			method: "DELETE"
 		}).then(function (res) {
-			get_all_health_public(offset);
-			alert("Recurso borrado con éxito");
+			get_all_spending(offset);
+			alert("Gasto borrado con éxito");
 		});
 	}
 
-	async function delete_all_health_public() {
-		console.log("Deleting resources...");
+	async function delete_all_spending() {
+		console.log("Borrando todas los gastos...");
 		const res = await fetch("/api/v1/health_public", {
 			method: "DELETE"
 		}).then(function (res) {
-			get_all_health_public(offset);
-			alert("Todos los recursos borrados con éxito");
+			get_all_spending(offset);
+			alert("Todas los gastos borrados con éxito");
 		});
 	}
 	async function searchYears(country){
-        console.log("Searching years in country...");
+        console.log("Buscando por año...");
 		const res = await fetch("/api/v1/health_public/" + country)
 		
 		if (res.ok){
@@ -119,12 +119,12 @@
 			health_public.map((d)=>{
 			return d.year;
 			});
-			alert("Busqueda encontrada");
+			alert("Búsqueda encontrada");
 			console.log("Años actualizados")
 		}else {
 			alert("No existe");
 			console.log("ERROR!")
-			get_all_health_public(offset);
+			get_all_spending(offset);
 		}
 	}
 	
@@ -146,15 +146,15 @@
             console.log("OK:");
             const json = await res.json();
             health_public = json;
-            alert("Búsqueda encontrada");
+            alert("Busqueda encontrada");
             console.log("Found " + health_public.length);
         }else{
-			alert("No encontrado");
-            console.log("ERROR!");
-			get_all_health_public(offset);
+			alert("No existe");
+			console.log("ERROR!");
+			get_all_spending(offset);
         }
 	}
-
+	
 	async function searchRange(from, to){
         console.log("Buscando: " + from + "hasta" + to);
 		
@@ -178,23 +178,23 @@
         }else{
 			alert("Introduzca el rango");
 			console.log("ERROR!");
-			get_all_health_public(offset);
+			get_all_spending(offset);
         }
 	}
 
 
-	async function siguientePagina() {
+	async function nextPage() {
 		const res = await fetch("/api/v1/health_public/");
-		const json = await res.json();
-		if(offset < json.length - 10 ){
+		const recursos = await res.json();
+		if(offset < recursos.length - 10 ){
 			offset = offset + 10;
-			get_all_health_public(offset);
+			get_all_spending(offset);
 		}
 	};
-	async function anteriorPagina() {
-		if (offset - 10 >= 0){
+	async function previousPage() {
+		if ( 0 <= offset - 10){
 			offset = offset - 10;
-			get_all_health_public(offset);
+			get_all_spending(offset);
 		}
 	};
 </script>
@@ -280,10 +280,10 @@
 			<tr>
 				<td><Input placeholder="Ej. argentina" bind:value = "{new_health_public.country}" /></td>
 				<td><Input type="number" required placeholder="Ej. 2020" bind:value = "{new_health_public.year}" /></td>
-				<td><Input type="number" required placeholder="0.01" step="1"  bind:value = "{new_health_public['total_spending']}" /></td>
-				<td><Input type="number" required placeholder="0.01" step="1"  bind:value = "{new_health_public['public_spending']}" /></td>
-				<td><Input type="number" required placeholder="0.01" step="1"  bind:value = "{new_health_public['public_spending_pib']}" /></td>
-				<td><Button outline color= "primary" on:click= {insert_health_public}>Añadir</Button></td>
+				<td><Input type="number" required placeholder="0" step="0.01"  bind:value = "{new_health_public['total_spending']}" /></td>
+				<td><Input type="number" required placeholder="0" step="0.01"  bind:value = "{new_health_public['public_spending']}" /></td>
+				<td><Input type="number" required placeholder="0" step="0.01"  bind:value = "{new_health_public['public_spending_pib']}" /></td>
+				<td><Button outline color= "primary" on:click= {insert_spending}>Insertar</Button></td>
 			</tr>
 
 			{#each health_public_ as health_public}
@@ -299,7 +299,7 @@
 					<td>{health_public['total_spending']}</td>
 					<td>{health_public['public_spending']}</td>
 					<td>{health_public['public_spending_pib']}</td>
-					<td><Button outline color= "danger" on:click = "{delete_health_public(health_public.country,health_public.year)}">Borrar</Button></td>
+					<td><Button outline color= "danger" on:click = "{delete_spending(health_public.country,health_public.year)}">Borrar</Button></td>
 				</tr>
 			{/each}
 			<tr>
@@ -319,7 +319,7 @@
 		
 		
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
-	<Button outline color= "danger" on:click = {delete_all_exports}>Borrar todo</Button>
+	<Button outline color= "danger" on:click = {delete_all_spending}>Borrar todo</Button>
 </main>
 
 <style>

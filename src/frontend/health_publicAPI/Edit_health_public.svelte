@@ -19,7 +19,7 @@
     onMount(get_health_public);
 
     async function get_health_public() {
-        console.log("Fetching public health...");
+        console.log("Fetching health_public...");
         const res = await fetch("/api/v1/health_public/" + params.country + "/" + params.year);
         
         if (res.ok) {
@@ -66,7 +66,7 @@
         }).then(function (res) {
             get_health_public();
             if(res.ok){
-                alert("Recurso actualizado con éxito");
+                alert("Actualización con éxito");
             }else{
                 alert("Introduce correctamente los datos");
             }
@@ -96,7 +96,7 @@
                     <td><input required type="number" step="0.01" min="0" bind:value="{updated_total_spending}"></td>
                     <td><input required type="number" step="0.01" min="0" bind:value="{updated_public_spending}"></td>
                     <td><input required type="number" step="0.01" min="0" bind:value="{updated_public_spending_pib}"></td>
-                    <td> <Button outline  color="primary" on:click={update_health_public}>Actualizar</Button> </td>
+                    <td> <Button outline  color="primary" on:click={update_health_public}>Editar</Button> </td>
                 </tr>
         </tbody>
         </Table>
