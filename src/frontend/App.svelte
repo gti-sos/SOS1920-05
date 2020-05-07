@@ -27,14 +27,10 @@
 </main>
 
 <style>
-	main {
+	h3 {
 		text-align: center;
 		padding: 1em;
-		max-width: 240px;
 		margin: 0 auto;
-	}
-
-	h3 {
 		color: #1C1A67;
 		text-transform: uppercase;
 		font-size: 4em;
