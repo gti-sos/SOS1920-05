@@ -397,7 +397,6 @@ async function searchRange(from, to){
 
 <style>
 	main {
-		background-color: #cccccc;
 		text-align: left;
 		padding: 1em;
 		margin: 0 auto;
