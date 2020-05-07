@@ -105,7 +105,7 @@
 			method: "DELETE"
 		}).then(function (res) {
 			get_all_spending(offset);
-			alert("Todas los gastos borrados con éxito");
+			alert("Todos los datos borrados");
 		});
 	}
 	async function searchYears(country){
@@ -197,7 +197,20 @@
 			get_all_spending(offset);
 		}
 	};
+
+	async function loadInitialData() {
+		console.log("Reiniciando recursos...");
+		const res = await fetch("/api/v1/health_public/loadInitialData", {
+			method: "GET"
+		}).then(function (res) {
+			get_all_spending(offset);
+			alert("Datos Reiniciados");
+		});
+	}
+
 </script>
+
+	
 
 
 
@@ -270,8 +283,8 @@
 			<tr>
 				<th>País</th>
 				<th>Año</th>
-				<th>Gasto Total</th>
-				<th>Gasto Público</th>
+				<th>Gasto Total (Millones €)</th>
+				<th>Gasto Público (Millones €)</th>
 				<th>Gasto Público (%PIB)</th>
 				<th> Acciones </th>
 			</tr>
@@ -313,13 +326,14 @@
 	</Table>
 	{/await}
 	<p align="right">
-		<Button outline color="secondary" on:click="{previousPage}"> <b><strong><h4> &lt;</h4></strong></b></Button>
-		<Button outline color="secondary" on:click="{nextPage}"><b><strong><h4> &gt;</h4> </strong></b></Button>
+		<Button outline color="secondary" on:click="{previousPage}"> <b><strong><h6> Página Anterior</h6></strong></b></Button>
+		<Button outline color="secondary" on:click="{nextPage}"><b><strong><h6> Página Siguiente</h6> </strong></b></Button>
 	</p>
 		
 		
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
 	<Button outline color= "danger" on:click = {delete_all_spending}>Borrar todo</Button>
+	<Button outline color="primary" on:click="{loadInitialData}">Reiniciar datos</Button>
 </main>
 
 <style>
