@@ -15,10 +15,10 @@
 	let life_expectancies = [];
 	let new_life_expectancies = {
 		"country": "",
-		"year": 0,
-		"women_life_expectancy": 0,
-		"men_life_expectancy": 0,
-		"average_life_expectancy":0
+		"year": 2010,
+		"women_life_expectancy": 80,
+		"men_life_expectancy": 70,
+		"average_life_expectancy":75
 	};
 
 	/* Select variables */
@@ -129,11 +129,11 @@
         console.log("Searching data: " + country + "and " + year);
 		/* Checking if it fields is empty */
 		var url = "/api/v1/life_expectancies";
-		if(country != "-" && year != "-") {
+		if(country != "Elige país existente" && year != "Elige año existente") {
 			url = url + "?country=" + country+ "&year=" + year;
-		}else if(country != "-" && year == "-"){
+		}else if(country != "Elige país existente" && year == "Elige año existente"){
 			url = url + "?country=" + country;
-		} else if(country == "-" && year != "-"){
+		} else if(country == "Elige país existente" && year != "Elige año existente"){
 			url = url + "?year=" + year;
 		} 
 		
@@ -148,14 +148,54 @@
             console.log("ERROR!");
         }
 	}
+
+	async function searchLife(offset) {
+		let url = "/api/v1/life_expectancies?limit=10&offset="+ offset;
+		console.log("Searching life_expectancies...");
+		let life = {
+			country: searchLife.country,
+			year: parseInt(searchLife.year),
+			women_life_expectancy: parseInt(searchLife.women_life_expectancy),
+			men_life_expectancy: parseInt(searchLife.men_life_expectancy),
+			average_life_expectancy: parseInt(searchLife.average_life_expectancy),
+	
+		};
+		Object.entries(life).forEach(([x,y]) => {
+			if(!isNaN(y)){
+				url = url + "&" + x + "=" + y;
+			}
+		});
+		if(!life.country == ""){
+			url = url +"&country=" + life.country;
+		};
+		console.log(url);
+		const res = await fetch(url);
+		if (res.ok) {
+			console.log("Ok:");
+			const json = await res.json();
+			life_expectancies = json;
+			console.log("Received " + life_expectancies.length + " life_expectancies.");
+			if (life_expectancies.length > 0){
+				MensajeCorrecto = "Se ha realizado la búsqueda.";
+				MensajeError = false;
+			}else{
+				MensajeCorrecto = false;
+				MensajeError = "La búsqueda no ha obtenido resultados.";
+			};
+			
+		} else {
+			console.log("ERROR!");
+		};
+	};
+
 	async function loadInitialData() {
 		
 		console.log("Loading life_expectancies...");
 		const res = await fetch("/api/v1/life_expectancies/loadInitialData").then(function (res) {
 			get_all_expectancies(offset);
 		});;
-		successMsg = "Se han cargado los datos iniciales correctamente.";
-		errorMsg = false;
+		MensajeCorrecto = "Se han cargado los datos iniciales correctamente.";
+		MensajeError = false;
 	};
 	async function siguientePagina() {
 		const res = await fetch("/api/v1/life_expectancies/");
@@ -219,6 +259,7 @@
 				<td><Input type="number" required placeholder="70" step="61"  bind:value = "{new_life_expectancies['women_life_expectancy']}" /></td>
 				<td><Input type="number" required placeholder="70" step="61"  bind:value = "{new_life_expectancies['men_life_expectancy']}" /></td>
 				<td><Input type="number" required placeholder="70" step="61"  bind:value = "{new_life_expectancies['average_life_expectancy']}" /></td>
+				<td><Button outline  color="primary" on:click={searchLife(offset)}>Busca personalizado</Button> </td>
 				<td><Button outline color= "primary" on:click= {insert_expectancy}>Insertar</Button></td>
 			</tr>
 

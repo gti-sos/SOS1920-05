@@ -1,7 +1,7 @@
 <script>
-	import Listado3 from './Listado3.svelte';
+	import ListTable from './ListTable.svelte';
 </script>
 
 <main>
-	<Listado3 />
+	<ListTable />
 </main>
