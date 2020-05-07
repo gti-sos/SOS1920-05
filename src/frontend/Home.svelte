@@ -1,5 +1,4 @@
 <main>
-background-color: #cccccc;
 	<h3>Frontends:</h3>
 	<p><a href="#/books_exportsAPI"> Exportacion libros </a></p>
 	<p><a href="#/health_publicAPI"> Salud pública </a></p>
@@ -34,6 +33,5 @@ background-color: #cccccc;
 <style>
 	main {
 		text-align: center;
-		background-color: #cccccc;
 	}
 </style>
