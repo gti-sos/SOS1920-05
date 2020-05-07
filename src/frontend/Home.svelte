@@ -31,7 +31,6 @@
 </main>
 
 <style>
-background-color: #cccccc;
 	main {
 		text-align: center;
 	}
