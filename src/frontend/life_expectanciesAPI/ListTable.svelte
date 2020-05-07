@@ -180,7 +180,7 @@ async function searchRange(from, to){
             alert("Busqueda encontrada");
             console.log("Found " + life_expectancies.length);
         }else{
-			alert("Indique un rango");
+			alert("Indique un rango válido");
 			console.log("ERROR!");
 			get_all_expectancies(offset);
         }
@@ -397,6 +397,7 @@ async function searchRange(from, to){
 
 <style>
 	main {
+		background-color: #cccccc;
 		text-align: left;
 		padding: 1em;
 		margin: 0 auto;
