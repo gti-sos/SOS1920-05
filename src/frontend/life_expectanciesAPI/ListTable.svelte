@@ -96,7 +96,7 @@
 			method: "DELETE"
 		}).then(function (res) {
 			get_all_expectancies(offset);
-			alert("dato borrado con éxito");
+			alert("Dato borrado con éxito");
 		});
 	}
 

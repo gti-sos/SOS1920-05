@@ -34,6 +34,6 @@
 
 <style>
 	main {
-		text-align: left;
+		text-align: center;
 	}
 </style>
