@@ -6,8 +6,6 @@
 	import Label from "sveltestrap/src/Label.svelte";
 	import FormGroup from "sveltestrap/src/FormGroup.svelte";
 	import Pagination from "sveltestrap/src/Pagination.svelte";
-	import PaginationItem from "sveltestrap/src/PaginationItem.svelte";
-	import PaginationLink from "sveltestrap/src/PaginationLink.svelte"
 	import {
 		pop
     } from "svelte-spa-router";
@@ -26,6 +24,8 @@
 	let years = [];
 	let current_country= "-";
 	let current_year= "-";
+	let from= "-";
+	let to= "-";
 	let offset = 0;
 	let limit = 10;
 	let MensajeError = false;
@@ -119,16 +119,20 @@
 			health_public.map((d)=>{
 			return d.year;
 			});
-			console.log("Update years")
+			alert("Busqueda encontrada");
+			console.log("Años actualizados")
 		}else {
+			alert("No existe");
 			console.log("ERROR!")
+			get_all_health_public(offset);
 		}
 	}
 	
 	async function search(country, year){
-        console.log("Searching data: " + country + "and " + year);
-		/* Checking if it fields is empty */
+        console.log("Buscando: " + country + "y " + year);
+		
 		var url = "/api/v1/health_public";
+
 		if(country != "-" && year != "-") {
 			url = url + "?country=" + country+ "&year=" + year;
 		}else if(country != "-" && year == "-"){
@@ -142,12 +146,43 @@
             console.log("OK:");
             const json = await res.json();
             health_public = json;
-            
+            alert("Búsqueda encontrada");
             console.log("Found " + health_public.length);
         }else{
+			alert("No encontrado");
             console.log("ERROR!");
+			get_all_health_public(offset);
         }
 	}
+
+	async function searchRange(from, to){
+        console.log("Buscando: " + from + "hasta" + to);
+		
+		var url = "/api/v1/health_public";
+
+		if(from != "-" && to != "-") {
+			url = url + "?from=" + from+ "&to=" + to;
+		}else if(from != "-" && to == "-"){
+			url = url + "?from=" + from;
+		} else if(from == "-" && to != "-"){
+			url = url + "?to=" + to;
+		} 
+		
+		const res = await fetch(url);
+        if (res.ok && from != "-" && to != "-"){
+            console.log("OK:");
+            const json = await res.json();
+            health_public = json;
+            alert("Búsqueda encontrada");
+            console.log("Found " + health_public.length);
+        }else{
+			alert("Introduzca el rango");
+			console.log("ERROR!");
+			get_all_health_public(offset);
+        }
+	}
+
+
 	async function siguientePagina() {
 		const res = await fetch("/api/v1/health_public/");
 		const json = await res.json();
@@ -170,27 +205,65 @@
 	{#await health_public}
 		Loading health_public...
 	{:then health_public_}
-	<FormGroup> 
-        <Label for="selectCountry">Búsqueda por país </Label>
-        <Input type="select" name="selectCountry" id="selectCountry" bind:value="{current_country}">
-            {#each countries as country}
-            <option>{country}</option>
-			{/each}
-			<option>-</option>
-        </Input>
-    </FormGroup>
+	<Table>
+		<tr>
+			<td>
+		<FormGroup> 
+			
+			<b><Label for="selectCountry">Búsqueda por país </Label></b>
+				<Input type="select" name="selectCountry" id="selectCountry" bind:value="{current_country}">
+				{#each countries as country}
+				<option>{country}</option>
+				{/each}
+				<option>-</option>
+				</Input>
+			
+		
+		</FormGroup>
+		</td>
+		<td>
+		<FormGroup>
+				<b><Label for="selectYear">Búsqueda por año</Label></b>
+				
+					<Input type="select" name="selectYear" id="selectYear" bind:value = "{current_year}">
+					{#each years as year}
+					<option>{year}</option>
+					{/each}
+					<option>-</option>
+					</Input>
+		</FormGroup>
+		</td>
+		</tr>
+		<Button outline color="secondary" on:click="{search(current_country, current_year)}">Buscar</Button>
+		<p></p>
+		<h6>Búsqueda por rango de años</h6>
+		<tr>
+		<td>
+		<FormGroup>
+			<Label for="selectFrom">Desde</Label>
+			<Input type="select" name="selectFrom" id="selectFrom" bind:value = "{from}">
+				{#each years as year}
+				<option>{year}</option>
+				{/each}
+				<option>-</option>
+			</Input>
+		</FormGroup>
+		</td>
+		<td>	
+		<FormGroup>
+			<Label for="selectTo">Hasta</Label>
+			<Input type="select" name="selectTo" id="selectTo" bind:value = "{to}">
+				{#each years as year}
+				<option>{year}</option>
+				{/each}
+				<option>-</option>
+			</Input>
+		</FormGroup>
+	</td>	
+</tr>
+		<Button outline color="secondary" on:click="{searchRange(from, to)}">Buscar</Button>
 	
-	<FormGroup>
-		<Label for="selectYear">Búsqueda por año</Label>
-		<Input type="select" name="selectYear" id="selectYear" bind:value = "{current_year}">
-			{#each years as year}
-			<option>{year}</option>
-			{/each}
-			<option>-</option>
-		</Input>
-	</FormGroup>
-
-	<Button outline color="secondary" on:click="{search(current_country, current_year)}">Buscar</Button>
+	</Table>
 	<p></p>
 	<Table bordered>
 		<thead>
@@ -205,12 +278,12 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td><Input placeholder="Ex. argentina" bind:value = "{new_health_public.country}" /></td>
+				<td><Input placeholder="Ej. argentina" bind:value = "{new_health_public.country}" /></td>
 				<td><Input type="number" required placeholder="Ej. 2020" bind:value = "{new_health_public.year}" /></td>
-				<td><Input type="number" required placeholder="0" step="0.01"  bind:value = "{new_health_public['total_spending']}" /></td>
-				<td><Input type="number" required placeholder="0" step="0.01"  bind:value = "{new_health_public['public_spending']}" /></td>
-				<td><Input type="number" required placeholder="0" step="0.01"  bind:value = "{new_health_public['public_spending_pib']}" /></td>
-				<td><Button outline color= "primary" on:click= {insert_health_public}>Insertar</Button></td>
+				<td><Input type="number" required placeholder="0.01" step="1"  bind:value = "{new_health_public['total_spending']}" /></td>
+				<td><Input type="number" required placeholder="0.01" step="1"  bind:value = "{new_health_public['public_spending']}" /></td>
+				<td><Input type="number" required placeholder="0.01" step="1"  bind:value = "{new_health_public['public_spending_pib']}" /></td>
+				<td><Button outline color= "primary" on:click= {insert_health_public}>Añadir</Button></td>
 			</tr>
 
 			{#each health_public_ as health_public}
@@ -223,7 +296,6 @@
 					</a>
 					</td>
 					<td>{health_public.year}</td>
-				
 					<td>{health_public['total_spending']}</td>
 					<td>{health_public['public_spending']}</td>
 					<td>{health_public['public_spending_pib']}</td>
@@ -241,13 +313,13 @@
 	</Table>
 	{/await}
 	<p align="right">
-		<Button outline color="secondary" on:click="{anteriorPagina}">Anterior página</Button>
-		<Button outline color="secondary" on:click="{siguientePagina}">Siguiente página</Button>
+		<Button outline color="secondary" on:click="{previousPage}"> <b><strong><h4> &lt;</h4></strong></b></Button>
+		<Button outline color="secondary" on:click="{nextPage}"><b><strong><h4> &gt;</h4> </strong></b></Button>
 	</p>
 		
 		
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
-	<Button outline color= "danger" on:click = {delete_all_health_public}>Borrar todo</Button>
+	<Button outline color= "danger" on:click = {delete_all_exports}>Borrar todo</Button>
 </main>
 
 <style>
