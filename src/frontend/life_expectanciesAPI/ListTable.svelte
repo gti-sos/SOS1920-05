@@ -6,8 +6,7 @@
 	import Label from "sveltestrap/src/Label.svelte";
 	import FormGroup from "sveltestrap/src/FormGroup.svelte";
 	import Pagination from "sveltestrap/src/Pagination.svelte";
-	import PaginationItem from "sveltestrap/src/PaginationItem.svelte";
-	import PaginationLink from "sveltestrap/src/PaginationLink.svelte"
+
 	import {
 		pop
     } from "svelte-spa-router";
@@ -232,10 +231,13 @@ async function searchRange(from, to){
 		
 		console.log("Loading life_expectancies...");
 		const res = await fetch("/api/v1/life_expectancies/loadInitialData").then(function (res) {
+			method: "GET"
+		}).then(function (res) {
 			get_all_expectancies(offset);
-		});;
-		MensajeCorrecto = "Se han cargado los datos iniciales correctamente.";
-		MensajeError = false;
+			alert("Datos iniciados correctamente.");
+		});
+			
+		
 	};
 	async function siguientePagina() {
 		const res = await fetch("/api/v1/life_expectancies/");
@@ -259,6 +261,9 @@ async function searchRange(from, to){
 	{#await life_expectancies}
 		Loading life_expectancies...
 	{:then life_expectancies_}
+	<Table >
+		<tr>
+			<td>
 	<FormGroup> 
         <Label for="selectCountry">Búsqueda por país </Label>
         <Input type="select" name="selectCountry" id="selectCountry" bind:value="{current_country}">
@@ -268,7 +273,8 @@ async function searchRange(from, to){
 			<option>-</option>
         </Input>
     </FormGroup>
-	
+	</td>
+		<td>
 	<FormGroup>
 		<Label for="selectYear">Búsqueda por año</Label>
 		<Input type="select" name="selectYear" id="selectYear" bind:value = "{current_year}">
@@ -285,7 +291,7 @@ async function searchRange(from, to){
 	</td>	
 	</tr>
 		<p></p>
-		<h6>Búsqueda por rango de años</h6>
+		<h6>Intervalo por años</h6>
 		<tr>
 		<td>
 		<FormGroup>
@@ -334,8 +340,8 @@ async function searchRange(from, to){
 				<td><Input bind:value = "{searchLife.men_life_expectancy}" /></td>
 				<td><Input bind:value = "{searchLife.average_life_expectancy}" /></td>
 				<td><Button outline  color="primary" on:click={searchLife(offset)}>Busca personalizado</Button> </td>
-			</tr>
-		{/each}
+		</tr>
+		<p></p>
 		<tr>
 				<td><Input placeholder="Ex. japon" bind:value = "{new_life_expectancies.country}" /></td>
 				<td><Input type="number" required placeholder="Ej. 2000" bind:value = "{new_life_expectancies.year}" /></td>

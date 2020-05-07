@@ -1,4 +1,4 @@
 /node_modules/
 /public/build/
+src/backend/life_expectanciesAPI/life_expectancies.db
 
-.DS_Store
