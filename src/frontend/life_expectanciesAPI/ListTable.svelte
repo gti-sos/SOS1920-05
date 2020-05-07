@@ -222,13 +222,14 @@ async function searchRange(from, to){
 			life_expectancies = json;
 			console.log("Received " + life_expectancies.length + " life_expectancies.");
 			if (life_expectancies.length > 0){
-				alert("Se ha realizado la búsqueda.");
+				alert("Resurtado Encontrado.");
 				
 			}else{
-				alert("La búsqueda no ha obtenido resultados.");
+				alert("No hay resultado.");
 			};
 			
 		} else {
+			alert("No hay resultado.");
 			console.log("ERROR!");
 		};
 	};
