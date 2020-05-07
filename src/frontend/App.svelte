@@ -22,7 +22,7 @@
 </script>
 
 <main>
-	<h1>API Manager</h1>
+	<h3>SOS1920-05</h3>
 	<Router {routes} />
 </main>
 
@@ -34,8 +34,8 @@
 		margin: 0 auto;
 	}
 
-	h1 {
-		color: #ff3e00;
+	h3 {
+		color: #1C1A67;
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 100;

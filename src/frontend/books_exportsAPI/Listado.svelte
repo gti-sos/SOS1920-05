@@ -197,6 +197,16 @@
 			get_all_exports(offset);
 		}
 	};
+	async function loadInitialData() {
+		console.log("Reiniciando recursos...");
+		const res = await fetch("/api/v1/books-exports/loadInitialData", {
+			method: "GET"
+		}).then(function (res) {
+			get_all_exports(offset);
+			alert("Datos iniciales cargados");
+		});
+	}
+
 </script>
 
 
@@ -205,7 +215,7 @@
 	{#await books_exports}
 		Loading books_exports...
 	{:then books_exports_}
-	<Table>
+	<Table >
 		<tr>
 			<td>
 		<FormGroup> 
@@ -233,8 +243,10 @@
 					</Input>
 		</FormGroup>
 		</td>
-		</tr>
+		<td class="align-middle" align="center">
 		<Button outline color="secondary" on:click="{search(current_country, current_year)}">Buscar</Button>
+	</td>	
+	</tr>
 		<p></p>
 		<h6>Búsqueda por rango de años</h6>
 		<tr>
@@ -260,9 +272,10 @@
 			</Input>
 		</FormGroup>
 	</td>	
-</tr>
-		<Button outline color="secondary" on:click="{searchRange(from, to)}">Buscar</Button>
-	
+		<td class="align-middle" align="center">
+			<Button outline color="secondary" on:click="{searchRange(from, to)}">Buscar</Button>
+		</td>
+	</tr>
 	</Table>
 	<p></p>
 	<Table bordered>
@@ -312,7 +325,7 @@
 		</tbody>
 	</Table>
 	{/await}
-	<p align="right">
+	<p align="center">
 		<Button outline color="secondary" on:click="{previousPage}"> <b><strong><h4> &lt;</h4></strong></b></Button>
 		<Button outline color="secondary" on:click="{nextPage}"><b><strong><h4> &gt;</h4> </strong></b></Button>
 	</p>
@@ -320,6 +333,7 @@
 		
 	<Button outline color="secondary" on:click="{pop}">Atrás</Button>
 	<Button outline color= "danger" on:click = {delete_all_exports}>Borrar todo</Button>
+	<Button outline color="primary" on:click="{loadInitialData}">Datos Iniciales</Button>
 </main>
 
 <style>

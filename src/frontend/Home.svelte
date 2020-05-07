@@ -7,9 +7,9 @@
 	
 		<h3>Team</h3>
 		<ul>
-			<li><h6> <a href="https://github.com/dieruiper">Diego Ruiz Perez</a></h6></li>
-			<li><h6> <a href="https://github.com/J5Mario"> Mario Jimenez Santos</a></h6></li>
-			<li><h6> <a href="https://github.com/Kingmathy"> Mathias Abban Ehentam</a></h6></li>
+			<h6> <a href="https://github.com/dieruiper">Diego Ruiz Perez</a></h6>
+			<h6> <a href="https://github.com/J5Mario"> Mario Jimenez Santos</a></h6>
+			<h6> <a href="https://github.com/Kingmathy"> Mathias Abban Ehentam</a></h6>
 		</ul>
 	
 		<h3>Project description:</h3>
@@ -23,11 +23,11 @@
 	
 		<h3>APIs:</h3>
 		<ul>
-			<li><a href="https://sos1920-05.herokuapp.com/api/v1/books-exports">[https://sos1920-05.herokuapp.com/api/v1/books-exports]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/dieruiper">Diego Ruiz Pérez)</a></li>
+			<a href="https://sos1920-05.herokuapp.com/api/v1/books-exports">[https://sos1920-05.herokuapp.com/api/v1/books-exports]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/dieruiper">Diego Ruiz Pérez)</a>
 			
-			<li><a href="https://sos1920-05.herokuapp.com/api/v1/health_public">[https://sos1920-05.herokuapp.com/api/v1/health_public]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/J5Mario">Mario Jimenez Santos)</a></li>
+			<a href="https://sos1920-05.herokuapp.com/api/v1/health_public">[https://sos1920-05.herokuapp.com/api/v1/health_public]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/J5Mario">Mario Jimenez Santos)</a>
 			
-		   <li><a href="https://sos1920-05.herokuapp.com/api/v1/life_expectancies">[https://sos1920-05.herokuapp.com/api/v1/life_expectancies]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/Kingmathy">Mathias Abban Ehentam)</a></li>
+		   <a href="https://sos1920-05.herokuapp.com/api/v1/life_expectancies">[https://sos1920-05.herokuapp.com/api/v1/life_expectancies]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/Kingmathy">Mathias Abban Ehentam)</a>
 		</ul>	
 	</body>
 </main>
