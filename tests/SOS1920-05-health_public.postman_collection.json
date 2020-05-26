@@ -1,0 +1,481 @@
+{
+	"info": {
+		"_postman_id": "0580857d-e448-4390-bbb1-705c6dc169d9",
+		"name": "SOS1920-05-health_public",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET health_public",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5291a325-1017-41e9-987c-a5c47fba6252",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are more than 1 \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.lengthOf.above(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/health_public/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health_public",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET health_public?limit&offset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "43f6fe44-cd22-4f6e-9c13-b89b7dc3594c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are more than 1 \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.lengthOf.above(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/health_public/?limit=3&offset=1",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health_public",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "3"
+						},
+						{
+							"key": "offset",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Paginación"
+			},
+			"response": []
+		},
+		{
+			"name": "GET health_public/?atributo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6c98a800-d49d-4e12-a51b-656595412f97",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"There are more than 1 \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.lengthOf.above(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/health_public/?year=2015",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health_public",
+						""
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "mexico",
+							"disabled": true
+						},
+						{
+							"key": "year",
+							"value": "2015"
+						},
+						{
+							"key": "total_spending",
+							"value": "52.17",
+							"disabled": true
+						},
+						{
+							"key": "public_spending",
+							"value": "10.86",
+							"disabled": true
+						},
+						{
+							"key": "public_spending_pib",
+							"value": "3",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "3",
+							"disabled": true
+						},
+						{
+							"key": "offset",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Búsqueda"
+			},
+			"response": []
+		},
+		{
+			"name": "POST health_public",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "80ccd636-0f8e-4b3b-9061-bdffa9bd8a89",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"spain\",\r\n\"year\": 2020,\r\n\"total_spending\": 11.11,\r\n\"public_spending\": 22.22,\r\n\"public_spending_pib\": 33.33\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/health_public",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health_public"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET health_public/spain/2020",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf51cd2-3c56-4637-acfe-249764a71dd0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"It has property country\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('country');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/health_public/spain/2020",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health_public",
+						"spain",
+						"2020"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE health_public/spain/2020",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8117290f-585b-4d74-a360-3d437914b8da",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/health_public/spain/2020",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health_public",
+						"spain",
+						"2020"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT health_public/france/2015",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "de241c08-580b-49ed-8f5b-d9b87696e1fa",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"france\",\r\n\"year\": 2015,\r\n\"total_spending\": 99,\r\n\"public_spending\": 88,\r\n\"public_spending_pib\": 77\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/health_public/france/2015",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health_public",
+						"france",
+						"2015"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST health_public/france/2015",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "86241f4c-90f1-4681-ac66-a6c8d9e013df",
+						"exec": [
+							"pm.test(\"Status code is 405 Method Not Allowed\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/health_public/france/2015",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health_public",
+						"france",
+						"2015"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT health_public",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b2f2ad4-00e0-4484-b29b-af39b7c75b10",
+						"exec": [
+							"pm.test(\"Status code is 405 Method Not Allowed\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\"country\": \"spain\", \n\"anio\": 2020, \n\"total_spending\": 44.4, \n\"public_spending\": 55.5, \n\"public_spending_pib\": 66.6 \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/health_public/",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health_public",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE health_public",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6cd707d6-3404-4bd3-b1b6-3fded1968a18",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/health_public",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health_public"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET health_public/loadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5291a325-1017-41e9-987c-a5c47fba6252",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/v1/health_public/loadInitialData",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health_public",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
