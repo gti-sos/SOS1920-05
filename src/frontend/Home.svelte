@@ -23,11 +23,15 @@
 	
 		<h3>APIs:</h3>
 		<ul>
-			<a href="https://sos1920-05.herokuapp.com/api/v1/books-exports">[https://sos1920-05.herokuapp.com/api/v1/books-exports]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/dieruiper">Diego Ruiz Pérez)</a>
-			
-			<a href="https://sos1920-05.herokuapp.com/api/v1/health_public">[https://sos1920-05.herokuapp.com/api/v1/health_public]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/J5Mario">Mario Jimenez Santos)</a>
-			
-		   <a href="https://sos1920-05.herokuapp.com/api/v1/life_expectancies">[https://sos1920-05.herokuapp.com/api/v1/life_expectancies]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/Kingmathy">Mathias Abban Ehentam)</a>
+		<p><a href="https://sos1920-05.herokuapp.com/api/v1/books-exports">[https://sos1920-05.herokuapp.com/api/v1/books-exports]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/dieruiper">Diego Ruiz Pérez)</a></p>
+		<p><a href="https://sos1920-05.herokuapp.com/api/v1/health_public">[https://sos1920-05.herokuapp.com/api/v1/health_public]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/J5Mario">Mario Jimenez Santos)</a></p>
+	    <p><a href="https://sos1920-05.herokuapp.com/api/v1/life_expectancies">[https://sos1920-05.herokuapp.com/api/v1/life_expectancies]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/Kingmathy">Mathias Abban Ehentam)</a></p>
 		</ul>	
 	</body>
 </main>
+
+<style>
+	main {
+		text-align: center;
+	}
+</style>

@@ -31,7 +31,7 @@
             updated_women_life_expectancy = life_expectancies["women_life_expectancy"];
             updated_men_life_expectancy = life_expectancies["men_life_expectancy"];
             updated_average_life_expectancy = life_expectancies["average_life_expectancy"];
-            console.log("Received life expectancy.");
+            console.log("life expectancies recibidos.");
         } else {
             console.log("ERROR!");
         }
@@ -68,7 +68,7 @@
             if(res.ok){
                 alert("Recurso actualizado con éxito");
             }else{
-                alert("Introduce correctamente los datos");
+                alert("Introduce los datos correctamente ");
             }
         })
         }}
