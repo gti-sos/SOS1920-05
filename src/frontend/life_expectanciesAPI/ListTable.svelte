@@ -188,11 +188,11 @@ async function searchRange(from, to){
 
 
 	async function nextPage() {
-		const res = await fetch("/api/v1/books-exports/");
+		const res = await fetch("/api/v1/life_expectancies/");
 		const recursos = await res.json();
 		if(offset < recursos.length - 10 ){
 			offset = offset + 10;
-			get_all_exports(offset);
+			get_all_expectancies(offset);
 		}
 	};
 	async function searchLife(offset) {
@@ -222,7 +222,7 @@ async function searchRange(from, to){
 			life_expectancies = json;
 			console.log("Received " + life_expectancies.length + " life_expectancies.");
 			if (life_expectancies.length > 0){
-				alert("Resurtado Encontrado.");
+				alert("Resultado encontrado.");
 				
 			}else{
 				alert("No hay resultado.");
@@ -298,7 +298,7 @@ async function searchRange(from, to){
 	</td>	
 	</tr>
 		<p></p>
-		<h6>Intervalo por años</h6>
+		<h6>Intervalo por año</h6>
 		<tr>
 		<td>
 		<FormGroup>
@@ -350,7 +350,7 @@ async function searchRange(from, to){
 		</tr>
 		<p></p>
 		<tr>
-				<td><Input placeholder="Ex. japon" bind:value = "{new_life_expectancies.country}" /></td>
+				<td><Input placeholder="Ej. japon" bind:value = "{new_life_expectancies.country}" /></td>
 				<td><Input type="number" required placeholder="Ej. 2000" bind:value = "{new_life_expectancies.year}" /></td>
 				<td><Input type="number" required placeholder="70" step="61"  bind:value = "{new_life_expectancies['women_life_expectancy']}" /></td>
 				<td><Input type="number" required placeholder="70" step="61"  bind:value = "{new_life_expectancies['men_life_expectancy']}" /></td>

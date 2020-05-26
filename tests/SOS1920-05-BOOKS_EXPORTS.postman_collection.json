@@ -1,0 +1,601 @@
+{
+	"info": {
+		"_postman_id": "6c31f8a4-f71c-414d-a322-54d153a2b069",
+		"name": "SOS1920-05-BOOKS_EXPORTS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Ruta Base",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "43e1e376-0fc7-412f-8770-50b053daecc9",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There are more than 1 \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.lengthOf.above(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/",
+					"host": [
+						"https://sos1920-05.herokuapp.com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books-exports",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "offset",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "exp_graphic_sector",
+							"value": "36280",
+							"disabled": true
+						},
+						{
+							"key": "exp_book",
+							"value": "46477",
+							"disabled": true
+						},
+						{
+							"key": "exp_editorial",
+							"value": "58660",
+							"disabled": true
+						},
+						{
+							"key": "country",
+							"value": "france",
+							"disabled": true
+						},
+						{
+							"key": "year",
+							"value": "2015",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Ruta Limit & offset",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "43e1e376-0fc7-412f-8770-50b053daecc9",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There are more than 1 \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.lengthOf.above(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/?limit=2&offset=2",
+					"host": [
+						"https://sos1920-05.herokuapp.com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books-exports",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "offset",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Ruta Busqueda",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "43e1e376-0fc7-412f-8770-50b053daecc9",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There are more than 1 \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.lengthOf.above(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/?exp_graphic_sector=26254",
+					"host": [
+						"https://sos1920-05.herokuapp.com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books-exports",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "offset",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "exp_graphic_sector",
+							"value": "26254"
+						},
+						{
+							"key": "exp_book",
+							"value": "46477",
+							"disabled": true
+						},
+						{
+							"key": "exp_editorial",
+							"value": "19952",
+							"disabled": true
+						},
+						{
+							"key": "country",
+							"value": "france",
+							"disabled": true
+						},
+						{
+							"key": "year",
+							"value": "2015",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST Ruta Base",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fd871ff2-4b3c-4e25-b529-e336a0a992c7",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"suiza\",\r\n\"year\": 2016,\r\n\"exp_book\": 2282,\r\n\"exp_editorial\": 282,\r\n\"exp_graphic_sector\": 282\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/",
+					"host": [
+						"https://sos1920-05.herokuapp.com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books-exports",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b0076b0-0346-4b03-b77d-48573ff526a3",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"It has property country\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('country');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/france/2015",
+					"host": [
+						"https://sos1920-05.herokuapp.com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books-exports",
+						"france",
+						"2015"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "06a7659e-eafe-4a9e-bf02-7520bb14628e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/nuevo/2000",
+					"host": [
+						"https://sos1920-05.herokuapp.com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books-exports",
+						"nuevo",
+						"2000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT Recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8e852aaa-85f9-4261-b122-ed2ecbec96a6",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"france\",\r\n\"year\": 2015,\r\n\"exp_book\": 11,\r\n\"exp_editorial\": 11,\r\n\"exp_graphic_sector\": 11\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/france/2015",
+					"host": [
+						"https://sos1920-05.herokuapp.com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books-exports",
+						"france",
+						"2015"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST ERROR Recurso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3a67011-b9a5-455a-b820-ba939c8e4325",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"nuevo\",\r\n\"year\": 2000,\r\n\"exp_book\": 99999,\r\n\"exp_editorial\": 99999,\r\n\"exp_graphic_sector\": 9999\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/france/2015",
+					"host": [
+						"https://sos1920-05.herokuapp.com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books-exports",
+						"france",
+						"2015"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT ERROR Ruta Base",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cd88efea-0537-48ec-a6f5-6adf157ad654",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"country\": \"france\",\r\n\"year\": 2015,\r\n\"exp_book\": 11,\r\n\"exp_editorial\": 11,\r\n\"exp_graphic_sector\": 11\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/",
+					"host": [
+						"https://sos1920-05.herokuapp.com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books-exports",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE Ruta",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b27d7aba-91c7-4a7d-be4b-2ab82192557a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/",
+					"host": [
+						"https://sos1920-05.herokuapp.com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books-exports",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET LoadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c1dcc255-fa25-4b8a-b38b-84068cbd5d6b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/loadInitialData",
+					"host": [
+						"https://sos1920-05.herokuapp.com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"books-exports",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
