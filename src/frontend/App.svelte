@@ -7,6 +7,7 @@
 	import edit_books_exports from './books_exportsAPI/Edit_books_exports.svelte';
 	import edit_health_public from './health_publicAPI/Edit_health_public.svelte';
 	import edit_life_expectancies from './life_expectanciesAPI/Edit_life_expectancies.svelte';
+	import health_publicGraph from './health_publicAPI/Health_publicGraph.svelte';
 	import NotFound from './NotFound.svelte';
 
 	const routes =  {
@@ -17,6 +18,7 @@
 		"/books-exports/:country/:year": edit_books_exports,
 		"/health_public/:country/:year": edit_health_public,
 		"/life_expectancies/:country/:year": edit_life_expectancies,
+		"/health_publicGraph": Health_publicGraph,
 		"*": NotFound
 	};
 </script>
