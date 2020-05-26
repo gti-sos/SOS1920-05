@@ -1,0 +1,919 @@
+{
+	"info": {
+		"_postman_id": "c1eaa3da-e121-401a-a88f-6a8ac1fb403e",
+		"name": "SOS1920-05-life_expectancies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET life_expectancies base root",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5291a325-1017-41e9-987c-a5c47fba6252",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There are more than 1 \", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.lengthOf.above(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET life_expectancies pag Lim off",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf51cd2-3c56-4637-acfe-249764a71dd0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There are more than one data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.lengthOf.above(0);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?limit=2&offset=1",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": "offset",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET life_expectancies search",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf51cd2-3c56-4637-acfe-249764a71dd0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"There are more than one data\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.lengthOf.lengthOf(2);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?men_life_expectancy=79.20",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					],
+					"query": [
+						{
+							"key": "men_life_expectancy",
+							"value": "79.20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET life_expectancies search year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf51cd2-3c56-4637-acfe-249764a71dd0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"The found data has 2016 as year\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"2016\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?year=2016",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					],
+					"query": [
+						{
+							"key": "year",
+							"value": "2016"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET life_expectancies search country",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf51cd2-3c56-4637-acfe-249764a71dd0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"The found data has Italy as country\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Italy\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?country=italy",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "italy"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET life_expectancies search country and year",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf51cd2-3c56-4637-acfe-249764a71dd0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"The found data has UK as country\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"UK\");",
+							"});",
+							"pm.test(\"The found data has 2016 as year\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"2016\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?country=uk&year=2016",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					],
+					"query": [
+						{
+							"key": "country",
+							"value": "uk"
+						},
+						{
+							"key": "year",
+							"value": "2016"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET life_expectancies search year interval",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf51cd2-3c56-4637-acfe-249764a71dd0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"The found years are between 2014 to 2019\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    jsonData.forEach(function(data) {",
+							"        var year = data.year;",
+							"        pm.expect(year).to.be.above(2013).and.to.be.below(2020);",
+							"    });",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?fromYear=2014&toYear=2019",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					],
+					"query": [
+						{
+							"key": "fromYear",
+							"value": "2014"
+						},
+						{
+							"key": "toYear",
+							"value": "2019"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET life_expectancies search women_life_expectancy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf51cd2-3c56-4637-acfe-249764a71dd0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"The found data has 84.60 as women_life_expectancy\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"84.60\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?women_life_expectancy=84.60",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					],
+					"query": [
+						{
+							"key": "women_life_expectancy",
+							"value": "84.60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET life_expectancies search men_life_expectancy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf51cd2-3c56-4637-acfe-249764a71dd0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"The found data has 74.72 as men_life_expectancy\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"74.72\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?men_life_expectancy=74.72",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					],
+					"query": [
+						{
+							"key": "men_life_expectancy",
+							"value": "74.72"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET life_expectancies search average_life_expectancy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf51cd2-3c56-4637-acfe-249764a71dd0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"The found data has 81.60 as average_life_expectancy\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"81.60\");",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?average_life_expectancy=81.60",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					],
+					"query": [
+						{
+							"key": "average_life_expectancy",
+							"value": "81.60"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST life_expectancies root base",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "80ccd636-0f8e-4b3b-9061-bdffa9bd8a89",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\"country\": \"brazil\", \n\"year\": 2001, \n\"women-life-expectancy\": \"1\", \n\"men-life-expectancy\": \"2\", \n\"average-life-expectancy\": \"3\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectiances/",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectiances",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST life_expectancies incomplete data body",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "80ccd636-0f8e-4b3b-9061-bdffa9bd8a89",
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\"country\": \"brazil\", \n\"year\": 2001, \n\"women-life-expectancy\": \"1\", \n\"men-life-expectancy\": \"2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectiances/",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectiances",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET life_expectancies resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "abf51cd2-3c56-4637-acfe-249764a71dd0",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"It has property country\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData).to.have.property('country');",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/france/2015",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						"france",
+						"2015"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE life_expectancies resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8117290f-585b-4d74-a360-3d437914b8da",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/brazil/2001",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						"brazil",
+						"2001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE life_expectancies inexciting",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8117290f-585b-4d74-a360-3d437914b8da",
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/denmark",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						"denmark"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT life_expectancies resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "de241c08-580b-49ed-8f5b-d9b87696e1fa",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\"country\": \"france\", \n\"year\": 2015, \n\"women-life-expectancy\": \"1\", \n\"men-life-expectancy\": \"2\", \n\"average-life-expectancy\": \"3\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/france/2015",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						"france",
+						"2015"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST life_expectancies resource error",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b3a67011-b9a5-455a-b820-ba939c8e4325",
+						"exec": [
+							"pm.test(\"Status code is 405\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\"country\": \"brazil\", \n\"year\": 2001, \n\"women-life-expectancy\": \"1\", \n\"men-life-expectancy\": \"2\", \n\"average-life-expectancy\": \"3\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/france/2015",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						"france",
+						"2015"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT life_expectancies root base",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b2f2ad4-00e0-4484-b29b-af39b7c75b10",
+						"exec": [
+							"pm.test(\"Status code is 405 Method Not Allowed\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\"country\": \"france\", \n\"year\": 2015, \n\"women-life-expectancy\": \"1\", \n\"men-life-expectancy\": \"2\", \n\"average-life-expectancy\": \"3\" \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE life_expectancies root",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6cd707d6-3404-4bd3-b1b6-3fded1968a18",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET life_expectancies LoadInitialData",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5291a325-1017-41e9-987c-a5c47fba6252",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/loadInitialData",
+					"host": [
+						"{{https://sos1920-05.herokuapp.com}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"life_expectancies",
+						"loadInitialData"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
