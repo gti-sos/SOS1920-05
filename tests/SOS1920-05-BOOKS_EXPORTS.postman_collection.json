@@ -259,7 +259,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\"country\": \"nuevo\",\r\n\"year\": 2016,\r\n\"exp_book\": 2282,\r\n\"exp_editorial\": 282,\r\n\"exp_graphic_sector\": 282\r\n}",
+					"raw": "{\r\n\"country\": \"nuevo\",\r\n\"year\": 2000,\r\n\"exp_book\": 2282,\r\n\"exp_editorial\": 282,\r\n\"exp_graphic_sector\": 282\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
