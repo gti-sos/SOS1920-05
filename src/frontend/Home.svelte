@@ -1,10 +1,10 @@
 <main>
-	<h3>Frontends:</h3>
+	
+	<body>
+		<h3>Frontends:</h3>
 	<p><a href="#/books_exportsAPI"> Exportacion libros </a></p>
 	<p><a href="#/health_publicAPI"> Salud pública </a></p>
 	<p><a href="#/life_expectanciesAPI"> Esperanza vida </a></p>
-	<body>
-	
 		<h3>Team</h3>
 		<ul>
 			<h6> <a href="https://github.com/dieruiper">Diego Ruiz Perez</a></h6>
@@ -31,9 +31,3 @@
 		</ul>	
 	</body>
 </main>
-
-<style>
-	main {
-		text-align: left;
-	}
-</style>
