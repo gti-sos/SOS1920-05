@@ -41,9 +41,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/books-exports/",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/",
 					"host": [
-						"{{BASE_URL}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -128,9 +128,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/books-exports/?limit=2&offset=2",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/?limit=2&offset=2",
 					"host": [
-						"{{BASE_URL}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -188,9 +188,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/books-exports/?exp_graphic_sector=26254",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/?exp_graphic_sector=26254",
 					"host": [
-						"{{BASE_URL}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -267,9 +267,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/books-exports/",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/",
 					"host": [
-						"{{BASE_URL}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -317,9 +317,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/books-exports/france/2015",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/france/2015",
 					"host": [
-						"{{BASE_URL}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -361,9 +361,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/books-exports/nuevo/2000",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/nuevo/2000",
 					"host": [
-						"{{BASE_URL}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -405,9 +405,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/books-exports/france/2015",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/france/2015",
 					"host": [
-						"{{BASE_URL}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -449,9 +449,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/books-exports/france/2015",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/france/2015",
 					"host": [
-						"{{BASE_URL}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -493,9 +493,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/books-exports/",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/",
 					"host": [
-						"{{BASE_URL}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -536,9 +536,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/books-exports/",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/",
 					"host": [
-						"{{BASE_URL}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -582,9 +582,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{BASE_URL}}/api/v1/books-exports/loadInitialData",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/books-exports/loadInitialData",
 					"host": [
-						"{{BASE_URL}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
