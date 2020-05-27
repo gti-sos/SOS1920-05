@@ -22,7 +22,7 @@
 		"/life_expectancies/:country/:year": edit_life_expectancies,
 		"/books-exports/graph": Graph_books_exports,
 		"/books-exports/graphC3": Graph_books_exports_C3,
-		"/health_public/HighChart": HighChart_health_public,
+		"/health_publicHighChart": HighChart_health_public,
 		"*": NotFound
 	};
 </script>
