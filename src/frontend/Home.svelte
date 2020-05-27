@@ -2,9 +2,9 @@
 	
 	<body>
 		<h3>Frontends:</h3>
-	<p><a href="#/books_exportsAPI"> Exportacion libros </a></p>
-	<p><a href="#/health_publicAPI"> Salud pública </a></p>
-	<p><a href="#/life_expectanciesAPI"> Esperanza vida </a></p>
+			<p><a href="#/books_exportsAPI"> Exportacion libros </a></p>
+			<p><a href="#/health_publicAPI"> Salud pública </a></p>
+			<p><a href="#/life_expectanciesAPI"> Esperanza vida </a></p>
 		<h3>Team</h3>
 		<ul>
 			<h6> <a href="https://github.com/dieruiper">Diego Ruiz Perez</a></h6>
@@ -26,6 +26,10 @@
 		<p><a href="https://sos1920-05.herokuapp.com/api/v1/books-exports">[https://sos1920-05.herokuapp.com/api/v1/books-exports]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/dieruiper">Diego Ruiz Pérez)</a></p>
 		<p><a href="https://sos1920-05.herokuapp.com/api/v1/health_public">[https://sos1920-05.herokuapp.com/api/v1/health_public]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/J5Mario">Mario Jimenez Santos)</a></p>
 	    <p><a href="https://sos1920-05.herokuapp.com/api/v1/life_expectancies">[https://sos1920-05.herokuapp.com/api/v1/life_expectancies]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/Kingmathy">Mathias Abban Ehentam)</a></p>
+		</ul>
+		<h3>HighCharts:</h3>
+		<ul>
+			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graph">HighChart Exportacion Libros</a></p>
 		</ul>	
 	</body>
 </main>
