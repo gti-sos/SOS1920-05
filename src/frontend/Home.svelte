@@ -3,7 +3,7 @@
 	<body>
 		<h3>Frontends:</h3>
 			<p><a href="#/books_exportsAPI"> Exportacion libros </a></p>
-			<p><a href="#/health_publicAPI"> Salud pública </a></p>
+			<p><a href="#/health_publicAPI"> Gasto en salud </a></p>
 			<p><a href="#/life_expectanciesAPI"> Esperanza vida </a></p>
 		<h3>Team</h3>
 		<ul>
@@ -30,6 +30,7 @@
 		<h3>HighCharts:</h3>
 		<ul>
 			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graph">HighChart Exportacion Libros</a></p>
+			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/graph">HighChart Gasto en Salud</a></p>
 		</ul>	
 	</body>
 </main>
