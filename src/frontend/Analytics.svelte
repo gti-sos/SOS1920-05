@@ -15,17 +15,11 @@
     mario = await resDataMario.json();
     
     let datos_diego = diego.map((x) => {
-			let res = {
-				name: x.country + " " + x.year,
-				value: x["exp_editorial"]
-			};
+			let res = {name: x.country + " " + x.year,value: x["exp_editorial"]};
 			return res;
         });
     let datos_mario = mario.map((x) => {
-			let res = {
-				name: x.country + " " + x.year,
-				value: x["total_spending"]
-			};
+			let res = {name: x.country + " " + x.year,value: x["total_spending"]};
 			return res;
         });
         
@@ -94,6 +88,9 @@
 </main>
 
 <style>
+	main {
+		text-align: center;
+	}
     .highcharts-figure, .highcharts-data-table table {
   min-width: 320px; 
   max-width: 800px;
