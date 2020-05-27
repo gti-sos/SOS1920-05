@@ -9,8 +9,7 @@
 	import edit_life_expectancies from './life_expectanciesAPI/Edit_life_expectancies.svelte';
 	import Graph_books_exports from './books_exportsAPI/Graph_Books_Exports.svelte';
 	import Graph_books_exports_C3 from './books_exportsAPI/Graph_Books_Exports_C3.svelte';
-	import Graph from './health_publicAPI/Graph.svelte';
-	import Graph_health_public from './health_publicAPI/Graph_health_public.svelte';
+	import HighChart_health_public from './health_publicAPI/HighChart_health_public.svelte';
 	import NotFound from './NotFound.svelte';
 
 	const routes =  {
@@ -23,8 +22,7 @@
 		"/life_expectancies/:country/:year": edit_life_expectancies,
 		"/books-exports/graph": Graph_books_exports,
 		"/books-exports/graphC3": Graph_books_exports_C3,
-		"/health_public/Graph": Graph,
-		"/health_public/graph": Graph_health_public,
+		"/health_public/HighChart": HighChart_health_public,
 		"*": NotFound
 	};
 </script>
