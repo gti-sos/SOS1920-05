@@ -10,10 +10,12 @@
 	import Graph_books_exports from './books_exportsAPI/Graph_Books_Exports.svelte';
 	import Graph_books_exports_C3 from './books_exportsAPI/Graph_Books_Exports_C3.svelte';
 	import HighChart_health_public from './health_publicAPI/HighChart_health_public.svelte';
+	import Analytics from './Analytics.svelte';
 	import NotFound from './NotFound.svelte';
 
 	const routes =  {
 		"/": Home,
+		"/Analytics": Analytics,
 		"/books_exportsAPI": books_exports,
 		"/health_publicAPI": health_public,
 		"/life_expectanciesAPI": life_expectancies,
