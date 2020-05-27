@@ -6,8 +6,10 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "npx newman run tests/SOS1920-05-BOOKS_EXPORTS.postman_collection.json && npx newman run tests/SOS1920-05-health_public.postman_collection.json",
-    "start": "node index"
+    "test": "snyk test && npx newman run tests/SOS1920-05-BOOKS_EXPORTS.postman_collection.json && npx newman run tests/SOS1920-05-health_public.postman_collection.json",
+    "start": "node index",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "11.0.2",
@@ -34,7 +36,9 @@
     "path": "^0.12.7",
     "save": "^2.4.0",
     "sirv-cli": "^0.4.5",
+    "snyk": "^1.330.2",
     "svelte-spa-router": "^2.1.0",
     "sveltestrap": "^3.3.3"
-  }
+  },
+  "snyk": true
 }
