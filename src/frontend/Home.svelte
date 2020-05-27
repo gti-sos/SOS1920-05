@@ -30,7 +30,11 @@
 		<h3>HighCharts:</h3>
 		<ul>
 			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graph">HighChart Exportacion Libros</a></p>
-		</ul>	
+		</ul>
+		<h3>Awesome Charts:</h3>
+		<ul>
+			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graphC3">C3 Exportacion Libros</a></p>
+		</ul>		
 	</body>
 </main>
 

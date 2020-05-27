@@ -8,6 +8,7 @@
 	import edit_health_public from './health_publicAPI/Edit_health_public.svelte';
 	import edit_life_expectancies from './life_expectanciesAPI/Edit_life_expectancies.svelte';
 	import Graph_books_exports from './books_exportsAPI/Graph_Books_Exports.svelte';
+	import Graph_books_exports_C3 from './books_exportsAPI/Graph_Books_Exports_C3.svelte';
 	import Graph from './health_publicAPI/Graph.svelte';
 	import NotFound from './NotFound.svelte';
 
@@ -20,6 +21,7 @@
 		"/health_public/:country/:year": edit_health_public,
 		"/life_expectancies/:country/:year": edit_life_expectancies,
 		"/books-exports/graph": Graph_books_exports,
+		"/books-exports/graphC3": Graph_books_exports_C3,
 		"/health_public/Graph": Graph,
 		"*": NotFound
 	};
