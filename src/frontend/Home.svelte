@@ -30,7 +30,7 @@
 		<h3>HighCharts:</h3>
 		<ul>
 			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graph">HighChart Exportacion Libros</a></p>
-			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/HighChart">HighChart Gasto en Salud</a></p>
+			<p><a href="https://sos1920-05.herokuapp.com/#/health_publicHighChart">HighChart Gasto en Salud</a></p>
 		</ul>
 		<h3>Awesome Charts:</h3>
 		<ul>
