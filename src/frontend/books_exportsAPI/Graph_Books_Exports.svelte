@@ -93,8 +93,9 @@
     <figure class="highcharts-figure">
         <div id="container"></div>
     </figure>
-    
+    <p align="center">
     <Button outline color="secondary" on:click="{pop}">Volver</Button>
+    </p>
 </main>
 
 <style>

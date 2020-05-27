@@ -33,8 +33,9 @@
 		</ul>
 		<h3>Awesome Charts:</h3>
 		<ul>
-			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graphC3">C3 Exportacion Libros</a></p>
-		</ul>		
+			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graphC3">C3 Exportacion Libros</a></p>		
+			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/graph">HighChart Gasto en Salud</a></p>
+		</ul>	
 	</body>
 </main>
 
