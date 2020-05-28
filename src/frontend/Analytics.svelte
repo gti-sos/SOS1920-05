@@ -7,12 +7,15 @@
 	async function loadGraph() {
     let datosConjuntos = [];   
     let diego = [];
-    let mario = [];
+	let mario = [];
+	let Mathias = [];
 
     const resDataDiego = await fetch("/api/v1/books-exports");
     diego = await resDataDiego.json();
     const resDataMario = await fetch("/api/v1/health_public");
-    mario = await resDataMario.json();
+	mario = await resDataMario.json();
+	const resDataMathias = await fetch("/api/v1/life_expectancies");
+    Mathias = await resDataMathias.json();
     
     let datos_diego = diego.map((x) => {
 			let res = {name: x.country + " " + x.year,value: x["exp_editorial"]};
@@ -22,8 +25,11 @@
 			let res = {name: x.country + " " + x.year,value: x["total_spending"]};
 			return res;
         });
-        
-        datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Gasto Sanidad Publica",data: datos_mario}];
+     let datos_Mathias = Mathias.map((x) => {
+			let res = {name: x.country + " " + x.year,value: x["Average_expectancy"]};
+			return res;
+        });    
+        datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Gasto Sanidad Publica",data: datos_mario},{name: "Esperanza de vida",data: datos_Mathias}];
 
         Highcharts.chart('container', {
 			chart: {

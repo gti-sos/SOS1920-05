@@ -11,6 +11,9 @@
 	import Graph_books_exports_C3 from './books_exportsAPI/Graph_Books_Exports_C3.svelte';
 	import HighChart_health_public from './health_publicAPI/HighChart_health_public.svelte';
 	import ChartJS_health_public from './health_publicAPI/ChartJS_health_public.svelte';
+	import Visual_life_expectancies from './life_expectanciesAPI//Visual_life_expectancies.svelte';
+	import Visual_Chart_life_expectancies from './life_expectanciesAPI//Visual_Chart_life_expectancies.svelte';
+
 
 	import Analytics from './Analytics.svelte';
 	import NotFound from './NotFound.svelte';
@@ -28,6 +31,8 @@
 		"/books-exports/graphC3": Graph_books_exports_C3,
 		"/health_publicHighChart": HighChart_health_public,
 		"/health_publicChartJS": ChartJS_health_public,
+		"/life_expectanciesAPI": Visual_life_expectancies,
+		"/life_expectanciesAPI": Visual_Chart_life_expectancies,
 		"*": NotFound
 	};
 </script>

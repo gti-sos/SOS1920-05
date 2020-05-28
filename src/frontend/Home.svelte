@@ -19,8 +19,9 @@
 		<a href="https://github.com/gti-sos/SOS1920-05">gti-sos/SOS1920-05</a>
 	
 		<h3>URL:</h3>
-		<a href="http://sos1920-05.herokuapp.com/">http://sos1920-05.herokuapp.com/</a>
-	
+		<p><a href="http://sos1920-05.herokuapp.com/">http://sos1920-05.herokuapp.com/</a></p>
+		<p><a href="https://sos1920-05.azurewebsites.net/">https://sos1920-05.azurewebsites.net/</a></p>
+
 		<h3>APIs:</h3>
 		<ul>
 		<p><a href="https://sos1920-05.herokuapp.com/api/v1/books-exports">[https://sos1920-05.herokuapp.com/api/v1/books-exports]</a><a href=""> Fuente </a> (developed by <a href="https://github.com/dieruiper">Diego Ruiz Pérez)</a></p>
@@ -32,12 +33,14 @@
 		<ul>
 			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graph">HighChart Exportacion Libros</a></p>
 			<p><a href="https://sos1920-05.herokuapp.com/#/health_publicHighChart">HighChart Gasto en Salud</a></p>
+			<p><a href="https://sos1920-05.herokuapp.com/#/life_expectancies">HighChart Esperanza de vida</a></p>
 		</ul>
 		<h3>Awesome Charts:</h3>
 		<ul>
 			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graphC3">Apexchart Exportacion Libros</a></p>
 			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/health_publicChartJS">ChartJS Gasto en Salud</a></p>				
-			
+			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/life_expectancies"> Esperanza de vida</a></p>
+
 		</ul>
 		
 		<h3><p><a href="https://sos1920-05.herokuapp.com/#/analytics">Grafica Comun</a></p>	</h3>
