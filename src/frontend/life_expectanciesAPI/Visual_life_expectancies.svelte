@@ -5,6 +5,7 @@
     import Button from "sveltestrap/src/Button.svelte";
     
     async function loadGraph() {
+      
         let MyData = [];
         let MyDataGraph = [];
         const resData = await fetch("/api/v1/life_expectancies");
@@ -58,12 +59,10 @@
                 useHTML: true
               },
               plotOptions: {
-                bar: {
-                  dataLabels: {
-                    enabled: true
-                  }
-                }
-              },
+        column: {
+            depth: 25
+        }
+    },
               legend: {
                 layout: 'vertical',
                 align: 'right',
@@ -85,7 +84,9 @@
                     }
                 }
             });
+            
     }
+
 </script>
 
 <svelte:head>
