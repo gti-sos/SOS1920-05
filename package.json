@@ -38,6 +38,6 @@
     "sirv-cli": "^0.4.5",
     "svelte-spa-router": "^2.1.0",
     "sveltestrap": "^3.3.3"
-  },
-  "snyk": true
+  }
+  
 }
