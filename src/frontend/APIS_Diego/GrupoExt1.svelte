@@ -1,3 +1,4 @@
+
 <script>
     import {
             pop
@@ -7,21 +8,23 @@
 	async function loadGraph() {
     let datosConjuntos = [];   
     let diego = [];
-    let ext1 = [];
-	
+    let mario = [];
+
     const resDataDiego = await fetch("/api/v1/books-exports");
     diego = await resDataDiego.json();
-    const resDataExt1 = await fetch("https://jsonplaceholder.typicode.com/todos/1");
-    ext1 = await resDataExt1.json();
-	let datos_diego = diego.map((x) => {
+    const resDataMario = await fetch("/api/v1/health_public");
+    mario = await resDataMario.json();
+    
+    let datos_diego = diego.map((x) => {
 			let res = {name: x.country + " " + x.year,value: x["exp_editorial"]};
 			return res;
-		});
-    let datos_ext1 = ext1.map((x) => {
-			let res = {name: x.userId ,value: x.id};
+        });
+    let datos_mario = mario.map((x) => {
+			let res = {name: x.country + " " + x.year,value: x["total_spending"]};
 			return res;
-		});
-        datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Gasto Sanidad Publica",data: datos_ext1}];
+        });
+        
+        datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Gasto Sanidad Publica",data: datos_mario}];
 
         Highcharts.chart('container', {
 			chart: {
