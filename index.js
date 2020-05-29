@@ -24,3 +24,9 @@ app.listen(port, () => {
 });
 
 console.log("Starting server...");
+
+var APIExt1 = "https://www.metaweather.com/api/location/753692/";
+    app.use("/GrupoExt1", function(req, res) {
+        console.log('piped: '+ APIExt1);
+        req.pipe(request(APIExt1)).pipe(res);
+    })

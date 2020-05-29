@@ -49,10 +49,10 @@
         <td><a href="/#/integrations/APIS_Diego/Grupo30">Grupo 30</a></td>
       </tr>
       <tr>
-        <td><a href="/#/integrations/APIS_Diego/Grupo11">Grupo11</a></td>
+        <td><a href="/#/integrations/APIS_Diego/GrupoExt1">API Externa 1</a></td>
       </tr>
       <tr>
-        <td><a href="/#/integrations/APIS_Diego/Grupo11">Grupo11</a></td>
+        <td><a href="/#/integrations/APIS_Diego/GrupoExt2">API Externa 2</a></td>
       </tr>
 
     </tbody>
