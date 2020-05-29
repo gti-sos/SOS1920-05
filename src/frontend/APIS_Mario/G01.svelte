@@ -1,11 +1,6 @@
 <script>
-	import  {onMount} from "svelte";
 	import {pop} from "svelte-spa-router";
-	import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
-    
-    
-
 
 	async function loadGraph(){
         let MyData = [];
@@ -33,29 +28,29 @@
 			return res;
         });
         
-        let datosConjuntos = [{name: "Gasto total",data: MyDataGraph},{name: "Natalidad total",data: OtherDataGraph}];
+        let datosConjuntos = [{name: "Gasto total", data: MyDataGraph}, {name: "Natalidad total",data: OtherDataGraph}];
         
-                Highcharts.chart('container', {
+        Highcharts.chart('container', {
 			chart: {
 				type: 'packedbubble',
 				height: '60%'
-			},
+            },
+            title: {
+                text: 'Gráfica que representa el gasto total y la natalidad total'
+            },
 			tooltip: {
 				useHTML: true,
 				pointFormat: '<b>{point.name}:</b> {point.value}'
 			},
 			plotOptions: {
 				packedbubble: {
-					minSize: '10%',
-					maxSize: '100%',
+					minSize: '30%',
+					maxSize: '120%',
 					zMin: 0,
 					zMax: 1000,
 					layoutAlgorithm: {
 						gravitationalConstant: 0.05,
-                        splitSeries: true,
-                        seriesInteraction: false,
-                        dragBetweenSeries: false,
-                        parentNodeLimit: true
+                        splitSeries: false,
 					},
 					dataLabels: {
 						enabled: true,
@@ -86,7 +81,6 @@
     
 </svelte:head>
 <main>
-    <h3> Representacion de las exportaciones, el gasto y la esperanza de vida en el mundo</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>
