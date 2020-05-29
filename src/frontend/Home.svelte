@@ -36,7 +36,7 @@
 		<h3>Awesome Charts:</h3>
 		<ul>
 			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graphC3">Apexchart Exportacion Libros</a></p>
-			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/ChartJS">ChartJS Gasto en Salud a</a></p>				
+			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/ChartJS">ChartJS Gasto en Salud</a></p>				
 			
 		</ul>
 		
