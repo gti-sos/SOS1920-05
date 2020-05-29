@@ -39,8 +39,10 @@
 			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/health_publicChartJS">ChartJS Gasto en Salud</a></p>				
 			
 		</ul>
-		
+		<p></p>
 		<h3><p><a href="https://sos1920-05.herokuapp.com/#/analytics">Grafica Comun</a></p>	</h3>
+		<p></p>
+		<h3><p><a href="https://sos1920-05.herokuapp.com/#/integrations">Integraciones</a></p></h3>
 	</body>
 </main>
 
