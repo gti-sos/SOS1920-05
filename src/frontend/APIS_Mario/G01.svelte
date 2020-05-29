@@ -4,14 +4,13 @@
 	import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
     
-    const url = "/api/v2/natality-stats";
-    let MyData = [];
-    let OtherData = [];
-    let MyDataGraph = [];
-    let OtherDataGraph = [];
-    let TotalDataGraph = [];
+    
+
 
 	async function loadGraph(){
+        let MyData = [];
+        let OtherData = [];
+        const url = "https://sos1920-01.herokuapp.com/api/v2/natality-stats";
 
         const resData = await fetch("/api/v1/health_public");
         MyData = await resData.json();
@@ -25,136 +24,112 @@
 			console.log("Error al cargar API externa");
         }
 
-        MyData.forEach( (x) => {
-            MyDataGraph.push({name: x.country + " " + x.year, data: [parseInt(x.total_spending), parseInt(x.public_spending), parseInt(x.public_spending_pib)], pointPlacement: 'on'});
+        let MyDataGraph = MyData.map((x) => {
+			let res = {name: x.country + " " + x.year, value: x["total_spending"]};
+			return res;
         });
-
-        OtherData.forEach( (x)=>{
-            OtherDataGraph.push({name: x.country + " " + x.year, data: [parseInt(x.natality_totals), parseInt(x.natality_men), parseInt(x.natality_women)], pointPlacement: 'on'});
+        let OtherDataGraph = OtherData.map((x) => {
+			let res = {name: x.country + " " + x.year, value: x["natality_totals"]};
+			return res;
         });
-
-        TotalDataGraph = MyDataGraph + OtherDataGraph;
-
-        Highcharts.chart('container', {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Gráfica que muestra el gasto en salud y las estadísticas en natalidad'
-            },
-            xAxis: {
-                  
-                categories:  [
-                    'Gasto Total (Millones de €)',
-                    'Gasto Público (Millones de €)',
-                    'Gasto Público (%PIB)',
-                    'Natalidad Total',
-                    'Natalidad Hombres',
-                    'Natalidad Mujeres'
-                ],
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                  text: '',
-                  align: 'high'
-                },
-                labels: {
-                  overflow: 'justify'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                bar: {
-                    dataLabels: {
-                    enabled: true
-                    }
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -40,
-                y: 80,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-                shadow: true
-            },
-            credits: {
-                enabled: false
-            },
-            series:TotalDataGraph,
-            responsive: {
-                condition: {
-                    maxWidth: 500
-                }
-            }
-        });
+        
+        let datosConjuntos = [{name: "Gasto total",data: MyDataGraph},{name: "Natalidad total",data: OtherDataGraph}];
+        
+                Highcharts.chart('container', {
+			chart: {
+				type: 'packedbubble',
+				height: '60%'
+			},
+			tooltip: {
+				useHTML: true,
+				pointFormat: '<b>{point.name}:</b> {point.value}'
+			},
+			plotOptions: {
+				packedbubble: {
+					minSize: '10%',
+					maxSize: '100%',
+					zMin: 0,
+					zMax: 1000,
+					layoutAlgorithm: {
+						gravitationalConstant: 0.05,
+                        splitSeries: true,
+                        seriesInteraction: false,
+                        dragBetweenSeries: false,
+                        parentNodeLimit: true
+					},
+					dataLabels: {
+						enabled: true,
+						format: '{point.name}',
+						filter: {
+							property: 'y',
+							operator: '>',
+							value: 250
+						},
+						style: {
+							color: 'black',
+							textOutline: 'none',
+							fontWeight: 'normal'
+						}
+					}
+				}
+			},
+			series: datosConjuntos
+		});
     }
 </script>
 
 <svelte:head>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js" on:load="{loadGraph}"></script>
+    <script src="https://code.highcharts.com/highcharts.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/highcharts-more.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/modules/exporting.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
+    
 </svelte:head>
-
 <main>
+    <h3> Representacion de las exportaciones, el gasto y la esperanza de vida en el mundo</h3>
+	<figure class="highcharts-figure">
+		<div id="container"></div>
+	</figure>
+	
+	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
 
-    <h2 style="text-align: center;"> <i class="fas fa-car"></i> Integración</h2>
-    <figure class="highcharts-figure">
-        <div id="container"></div>
-    </figure>
-    <p align="center">
-        <Button outline color="secondary" on:click="{pop}">Atrás</Button>
-    </p>
 </main>
 
 <style>
+	main {
+		text-align: center;
+	}
     .highcharts-figure, .highcharts-data-table table {
-        min-width: 85%; 
-        max-width: 95%;
-        margin: 1em auto;
-    }
-    #container {
-        height: 600px;
-    }
-    .highcharts-data-table table {
-        font-family: Verdana, sans-serif;
-        border-collapse: colapse;
-        border: 1px solid #EBEBEB;
-        margin: 10px auto;
-        text-align: center;
-        width: 100%;
-        max-width: 500px;
-    }
-    .highcharts-data-table caption {
-        padding: 1em 0;
-        font-size: 1.2em;
-        color: #555;
-    }
-    .highcharts-data-table th {
-        font-weight: 600;
-        padding: 0.5em;
-    }
-    .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-        padding: 0.5em;
-    }
-    .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-        background: #f8f8f8;
-    }
-    .highcharts-data-table tr:hover {
-        background: #f1f7ff;
-    }
+  min-width: 320px; 
+  max-width: 800px;
+  margin: 1em auto;
+}
+
+.highcharts-data-table table {
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
+}
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
+}
+.highcharts-data-table th {
+	font-weight: 600;
+  padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+  padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
+}
 </style>
