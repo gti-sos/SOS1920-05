@@ -8,23 +8,19 @@
     let datosConjuntos = [];   
     let diego = [];
     let ext1 = [];
-
+	
     const resDataDiego = await fetch("/api/v1/books-exports");
     diego = await resDataDiego.json();
-    const resDataMario = await fetch("/GrupoExt1");
-    mario = await resDataMario.json();
-    const url = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=landslide&q=&sort=date&facet=countrynam&facet=landslide&facet=location_a&facet=adminname1&facet=country&facet=landslide1"
-	const res = await fetch(url);
-	const json = await res.json();
-	pluginGasolina = json;
+    const resDataExt1 = await fetch("https://jsonplaceholder.typicode.com/todos/1");
+    ext1 = await resDataExt1.json();
 	let datos_diego = diego.map((x) => {
 			let res = {name: x.country + " " + x.year,value: x["exp_editorial"]};
 			return res;
-        });
-    let datos_ext1 = response.data.consolidated_weather.map((x) => {
-			let res = {name: "Hola" + " " + x.year,value: x.predictability};
+		});
+    let datos_ext1 = ext1.map((x) => {
+			let res = {name: x.userId ,value: x.id};
 			return res;
-        });
+		});
         datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Gasto Sanidad Publica",data: datos_ext1}];
 
         Highcharts.chart('container', {
