@@ -12,6 +12,9 @@
 	import HighChart_health_public from './health_publicAPI/HighChart_health_public.svelte';
 	import ChartJS_health_public from './health_publicAPI/ChartJS_health_public.svelte';
 	import Integrations_Diego from './APIS_Diego/Home.svelte';
+	import Integrations_Mario from './APIS_Mario/Home.svelte';
+
+	//APIS DIEGO
 	import DiegoG01 from './APIS_Diego/Grupo01.svelte';
 	import DiegoG09 from './APIS_Diego/Grupo09.svelte';
 	import DiegoG10 from './APIS_Diego/Grupo10.svelte';
@@ -25,6 +28,10 @@
 	import DiegoExt1 from './APIS_Diego/GrupoExt1.svelte';
 	import DiegoExt2 from './APIS_Diego/GrupoExt2.svelte';
 
+	//APIS MARIO
+	import MarioG01 from './APIS_Mario/G01.svelte';
+
+
 	import Integrations from './Integrations.svelte';
 	import Analytics from './Analytics.svelte';
 	import NotFound from './NotFound.svelte';
@@ -34,6 +41,7 @@
 		"/analytics": Analytics,
 		"/integrations": Integrations,
 
+		//RUTAS DIEGO
 		"/integrations/APIS_Diego": Integrations_Diego,
 		"/integrations/APIS_Diego/Grupo01": DiegoG01,
 		"/integrations/APIS_Diego/Grupo09": DiegoG09,
@@ -47,6 +55,11 @@
 		"/integrations/APIS_Diego/Grupo30": DiegoG30,
 		"/integrations/APIS_Diego/GrupoExt1": DiegoExt1,
 		"/integrations/APIS_Diego/GrupoExt2": DiegoExt2,
+
+		//RUTAS MARIO
+		"/integrations/APIS_Mario": Integrations_Mario,
+		"/integrations/APIS_Mario/G01": MarioG01,
+		
 
 		"/books_exportsAPI": books_exports,
 		"/health_publicAPI": health_public,
