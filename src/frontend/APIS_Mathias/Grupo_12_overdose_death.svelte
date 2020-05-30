@@ -1,126 +1,151 @@
 <script>
-	import  {onMount}from "svelte";
+	import  {onMount} from "svelte";
 	import {pop} from "svelte-spa-router";
-	import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
     
-	const url = "https://sos1920-12.herokuapp.com/api/v2/overdose-deaths";
-	
-	onMount(getGrupo_12_overdose_death);
-    let Grupo_12_overdose_death = [];
-	async function getGrupo_12_overdose_death() {
-		console.log("Fetching Grupo_12_overdose_death...");	
+    
+
+
+	async function loadGraph(){
+        let MyData = [];
+        let OtherData = [];
+        const url = "https://sos1920-12.herokuapp.com/api/v2/overdose-deaths";
+
+        const resData = await fetch("/api/v1/life_expectancies");
+        MyData = await resData.json();
+
+        console.log("Fetching url...");	
 		const res = await fetch(url); 
 		if (res.ok) {
-			console.log("Ok:");
-			const json = await res.json();
-			Grupo_12_overdose_death = json;
-			console.log("Received " + Grupo_12_overdose_death.length + " overdose deaths.");
+			console.log("Ok");
+            OtherData = await res.json();
 		} else {
-			console.log("ERROR!");
-		}
+			console.log("Error al cargar API externa");
+        }
+
+        let MyDataGraph = MyData.map((x) => {
+			let res = {name: x.country + " " + x.year, value: x["women_life_expectancy"]};
+			return res;
+        });
+        let OtherDataGraph = OtherData.map((x) => {
+			let res = {name: x.country + " " + x.year, value: x["em_totals"]};
+			return res;
+        });
+        
+		let datosConjuntos = [{name: "m1",data: MyDataGraph},
+								{name: "g1",data: OtherDataGraph},
+								 type, 'pie',
+        						  allowPointSelect, true,
+        						showInLegend, true];
+        
+                Highcharts.chart('container', {
+
+    chart: {
+        polar: true,
+        type: 'line'
+    },
+
+    accessibility: {
+        description: 'dfhghj'
+    },
+
+    title: {
+        text: 'Budget vs spending',
+        x: -80
+    },
+
+    pane: {
+        size: '80%'
+    },
+
+    xAxis: {
+        categories: ['Sales', 'Marketing', 'Development', 'Customer Support',
+            'Information Technology', 'Administration'],
+        tickmarkPlacement: 'on',
+        lineWidth: 0
+    },
+
+    yAxis: {
+        gridLineInterpolation: 'polygon',
+        lineWidth: 0,
+        min: 0
+    },
+
+    tooltip: {
+        shared: true,
+        pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
+    },
+
+    legend: {
+        align: 'right',
+        verticalAlign: 'middle',
+        layout: 'vertical'
+    },
+
+    series: datosConjuntos,
+
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    align: 'center',
+                    verticalAlign: 'bottom',
+                    layout: 'horizontal'
+                },
+                pane: {
+                    size: '70%'
+                }
+            }
+        }]
+    }
+
+});
 	}
-	async function loadGraph(){
-		let MyData = [];
-		const resData = await fetch("/api/v1/life_expectancies");
-		MyData = await resData.json();
-		let parsed_data = [];
-		MyData.forEach( (v) => {
-			let total = Math.round(v.total / 10) / 100
-			let data = {
-				name: v.country + " " + v.year,
-				data: [total, null]
-			};
-			parsed_data.push(data)
-		});
-		const resData2 = await fetch(url);
-		Grupo_12_overdose_death = await resData2.json();
-		console.log(Grupo_12_overdose_death);
-		Grupo_12_overdose_death.forEach( (o) => {
-			if(o.country == "France"){
-				let data = {
-					name: "España"+" " + o.year,
-					data: [null, o.death_total]
-				};
-				parsed_data.push(data)
-			}
-		});
-		
-		Highcharts.chart('container', {
-			chart: {
-				type: 'column'
-			},
-			title: {
-				text: 'Total de vehículos y muertes por sobredosis'
-			},
-			xAxis: {
-				categories: ["Vehículos (en miles)", "Muertes por sobredosis"]
-			},
-			yAxis: {
-				min: 0,
-				stackLabels: {
-					enabled: true,
-					style: {
-						fontWeight: 'bold',
-						color: ( // theme
-							Highcharts.defaultOptions.title.style &&
-							Highcharts.defaultOptions.title.style.color
-						) || 'gray'
-					}
-				}
-			},
-			legend: {
-				align: 'right',
-				x: -30,
-				verticalAlign: 'top',
-				y: 25,
-				floating: true,
-				backgroundColor:
-					Highcharts.defaultOptions.legend.backgroundColor || 'white',
-				borderColor: '#CCC',
-				borderWidth: 1,
-				shadow: false
-			},
-			tooltip: {
-				headerFormat: '<b>{point.x}</b><br/>',
-				pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-			},
-			plotOptions: {
-				column: {
-					stacking: 'normal',
-					dataLabels: {
-						enabled: true
-					}
-				}
-			},
-			series: parsed_data
-		});
-	};
 </script>
 
 <svelte:head>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-more.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js" on:load="{loadGraph}"></script>
+	<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    
 </svelte:head>
+<main>
+    <h3> g1</h3>
+	<figure class="highcharts-figure">
+		<div id="container"></div>
+		 <p class="highcharts-description">
+        Spider web.
+    </p>
+	</figure>
+	
+	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
+
+</main>
+
 <style>
-	#container {
-    height: 400px; 
-}
+	main {
+		text-align: center;
+	}
 .highcharts-figure, .highcharts-data-table table {
-    min-width: 310px; 
-    max-width: 800px;
+    min-width: 320px;
+    max-width: 700px;
     margin: 1em auto;
 }
+
 .highcharts-data-table table {
-    font-family: Verdana, sans-serif;
-    border-collapse: collapse;
-    border: 1px solid #EBEBEB;
-    margin: 10px auto;
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
 }
 .highcharts-data-table caption {
     padding: 1em 0;
@@ -141,43 +166,3 @@
     background: #f1f7ff;
 }
 </style>
-
-
-<main>
-
-	{#await Grupo_12_overdose_death}
-		Loading overdose deaths ...
-	{:then Grupo_12_overdose_death}
-		<figure class="highcharts-figure">
-			<div id="container"></div>
-			<p class="highcharts-description">
-				El gráfico compara la esperanza de vida y las muertes por sobredosis.
-			</p>
-		</figure>	
-		<Table bordered>
-			<thead>
-				<tr>
-					<th>Pais</th>
-					<th>Año</th>
-					<th>Hombres fallecidos</th>
-					<th>Mujeres fallecidas</th>
-					<th>Total fallecidos</th>
-					<th>Edad media</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each Grupo_12_overdose_death as overdose_death}
-				<tr>
-                    <td>{overdose_death.country}</td>
-                    <td>{overdose_death.year}</td>
-                    <td>{overdose_death.death_male}</td>
-                    <td>{overdose_death.death_female}</td>
-                    <td>{overdose_death.death_total}</td>
-                    <td>{overdose_death.mean_age}</td>
-				</tr>
-				{/each}
-			</tbody>
-		</Table>
-	{/await}
-	
-</main>
