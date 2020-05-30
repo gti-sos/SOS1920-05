@@ -11,14 +11,11 @@
 	import Graph_books_exports_C3 from './books_exportsAPI/Graph_Books_Exports_C3.svelte';
 	import HighChart_health_public from './health_publicAPI/HighChart_health_public.svelte';
 	import ChartJS_health_public from './health_publicAPI/ChartJS_health_public.svelte';
-<<<<<<< HEAD
 	import Visual_life_expectancies from './life_expectanciesAPI//Visual_life_expectancies.svelte';
 	import Visual_Chart_life_expectancies from './life_expectanciesAPI//Visual_Chart_life_expectancies.svelte';
 
-=======
 	import Integrations_Diego from './APIS_Diego/Home.svelte';
 	import Integrations_Mario from './APIS_Mario/Home.svelte';
->>>>>>> 462d86e89511ea669cb4d5e4cd6b195a87776a1b
 
 	//APIS DIEGO
 	import DiegoG01 from './APIS_Diego/Grupo01.svelte';
@@ -75,15 +72,11 @@
 		"/life_expectancies/:country/:year": edit_life_expectancies,
 		"/books-exports/graph": Graph_books_exports,
 		"/books-exports/graphC3": Graph_books_exports_C3,
-<<<<<<< HEAD
 		"/health_publicHighChart": HighChart_health_public,
 		"/health_publicChartJS": ChartJS_health_public,
 		"/life_expectanciesAPI": Visual_life_expectancies,
 		"/life_expectanciesAPI": Visual_Chart_life_expectancies,
-=======
-		"/health_public/HighChart": HighChart_health_public,
-		"/health_public/ChartJS": ChartJS_health_public,
->>>>>>> 462d86e89511ea669cb4d5e4cd6b195a87776a1b
+
 		"*": NotFound
 	};
 </script>
