@@ -75,8 +75,19 @@
 		"/books-exports/graphC3": Graph_books_exports_C3,
 		"/health_publicHighChart": HighChart_health_public,
 		"/health_publicChartJS": ChartJS_health_public,
-		"/life_expectanciesAPI": Visual_life_expectancies,
-		"/life_expectanciesAPI": Visual_Chart_life_expectancies,
+		"/life_expectanciesV": Visual_life_expectancies,
+		"/life_expectanciesVC": Visual_Chart_life_expectancies,
+
+
+
+		//APIs Mathias
+	
+		"/integrations/APIS_Mathias":Integrations_Mathias,
+		import Grupo_01_soverty_stats from './APIS_Mathias/Grupo_01_soverty_stats.svelte',
+		
+		"/integrations/APIS_Mathias/Grupo_01_soverty_stats": Grupo_01_soverty_stats,
+
+		"/integrations/APIS_Mathias/Grupo_12_overdose_death": Grupo_12_overdose_death,
 
 		"*": NotFound
 	};
