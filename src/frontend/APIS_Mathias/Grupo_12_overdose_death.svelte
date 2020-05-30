@@ -109,7 +109,7 @@
 <svelte:head>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" on:load={loadGraph}></script>
 	<script src="https://code.highcharts.com/highcharts.js" on:load={loadGraph}></script>
-	<script src="https://code.highcharts.com/highcharts-more.js" ></script>
+	<script src="https://code.highcharts.com/highcharts-more.js" on:load={loadGraph}></script>
 	<script src="https://code.highcharts.com/modules/exporting.js" on:load={loadGraph}></script>
 	<script src="https://code.highcharts.com/modules/export-data.js" on:load={loadGraph}></script>
 	<script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>

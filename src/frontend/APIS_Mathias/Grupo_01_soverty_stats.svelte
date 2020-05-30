@@ -62,7 +62,8 @@
 	<script src="https://code.highcharts.com/modules/exporting.js" on:load={loadGraph}></script>
 	<script src="https://code.highcharts.com/modules/export-data.js" on:load={loadGraph}></script>
 	<script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
-    
+    <script src="https://code.highcharts.com/css/highcharts.css" on:load={loadGraph}></script>
+
 </svelte:head>
 <main>
     <h3> g1</h3>
@@ -84,7 +85,6 @@
 	main {
 		text-align: center;
 	}
-@import 'https://code.highcharts.com/css/highcharts.css';
 
 .highcharts-pie-series .highcharts-point {
 	stroke: #EDE;
