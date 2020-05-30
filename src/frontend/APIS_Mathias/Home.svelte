@@ -19,10 +19,10 @@
 
     <tbody>
       <tr>
-        <td><a href="/#/integrations/APIS_Mathias/Grupo_01_soverty_stats">Grupo 01 Poverty Stats</a></td>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_01_soverty_stats">Grupo_01_soverty_stats</a></td>
       </tr>
       <tr>
-        <td><a href="/#/integrations/APIS_Mathias/Grupo_12_overdose_death">Grupo 12 Overdose Death</a></td>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_12_overdose_death">Grupo_01_soverty_stats</a></td>
       </tr>
      
 
