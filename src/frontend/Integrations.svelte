@@ -36,7 +36,7 @@ color: white;
 <table id="customers">
     <thead>
         <tr>
-            <td scope="row">APIs integradas</td>
+            <th scope="row">APIs integradas</th>
         </tr>
     </thead>
 

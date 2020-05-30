@@ -13,7 +13,7 @@
 <table id="customers">
     <thead>
         <tr>
-            <td scope="row">APIs integradas por Mario</td>
+            <th scope="row">APIs integradas por Mario</th>
         </tr>
     </thead>
 
