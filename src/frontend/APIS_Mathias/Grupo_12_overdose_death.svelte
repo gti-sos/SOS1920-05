@@ -151,7 +151,7 @@
 		<figure class="highcharts-figure">
 			<div id="container"></div>
 			<p class="highcharts-description">
-				El gráfico compara el número total de vehículos según la provincia y las muertes por sobredosis en España.
+				El gráfico compara la esperanza de vida y las muertes por sobredosis.
 			</p>
 		</figure>	
 		<Table bordered>
