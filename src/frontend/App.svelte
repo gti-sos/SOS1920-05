@@ -17,7 +17,7 @@
 	import Integrations_Diego from './APIS_Diego/Home.svelte';
 	import Integrations_Mario from './APIS_Mario/Home.svelte';
 	import Integrations_Mathias from './APIS_Mathias/Home.svelte';
-	
+
 	//APIS DIEGO
 	import DiegoG01 from './APIS_Diego/Grupo01.svelte';
 	import DiegoG09 from './APIS_Diego/Grupo09.svelte';
