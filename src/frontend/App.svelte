@@ -14,16 +14,10 @@
 	import Visual_life_expectancies from './life_expectanciesAPI//Visual_life_expectancies.svelte';
 	import Visual_Chart_life_expectancies from './life_expectanciesAPI//Visual_Chart_life_expectancies.svelte';
 
-<<<<<<< HEAD
 	import Integrations_Diego from './APIS_Diego/Home.svelte';
 	import Integrations_Mario from './APIS_Mario/Home.svelte';
-=======
+	import Integrations_Mathias from './APIS_Mario/Home.svelte';
 	
-	import Integrations_Diego from './APIS_Diego/Home.svelte';
-	import Integrations_Mario from './APIS_Mario/Home.svelte';
-
->>>>>>> c6cdbc59088b73f8149f34b798278a043ff55944
-
 	//APIS DIEGO
 	import DiegoG01 from './APIS_Diego/Grupo01.svelte';
 	import DiegoG09 from './APIS_Diego/Grupo09.svelte';
@@ -83,11 +77,7 @@
 		"/health_publicChartJS": ChartJS_health_public,
 		"/life_expectanciesAPI": Visual_life_expectancies,
 		"/life_expectanciesAPI": Visual_Chart_life_expectancies,
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> c6cdbc59088b73f8149f34b798278a043ff55944
 		"*": NotFound
 	};
 </script>
