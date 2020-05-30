@@ -8,7 +8,6 @@
 - **Project description**: Our information sources are oriented to analyze statistics about books exports, public health spending and life expectancies in some countries.
 - **Repository**: [gti-sos/SOS1920-05](https://github.com/gti-sos/SOS1920-05)
 - **URL**: [http://sos1920-05.herokuapp.com](http://sos1920-05.herokuapp.com)
-- **URL**: [https://sos1920-05.azurewebsites.net/](https://sos1920-05.azurewebsites.net/)
 - **Documentation**:
 	- API_URL_DIEGO: 	https://documenter.getpostman.com/view/6925017/SzYUZgDv
 	- API_URL_MARIO: https://documenter.getpostman.com/view/10675350/SzYgRFDy

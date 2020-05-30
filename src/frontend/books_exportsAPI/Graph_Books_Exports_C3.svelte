@@ -49,7 +49,7 @@
 
 <main >
     <h3>Exportaciones de libros 2015</h3>
-    <h6>Gráfica en la que se muestran las exportaciones de libros del año 2016</h6>
+    <h6>Gráfica en la que se muestran las exportaciones de libros del año 2015</h6>
     <div  id="chart" style="min-width: 310px; max-width: 800px; height: 400px; margin:auto"></div>
     <p></p>
     <Button outline color="secondary" on:click="{pop}"> Volver</Button>

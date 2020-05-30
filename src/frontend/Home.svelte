@@ -32,18 +32,29 @@
 		<h3>HighCharts:</h3>
 		<ul>
 			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graph">HighChart Exportacion Libros</a></p>
+<<<<<<< HEAD
 			<p><a href="https://sos1920-05.herokuapp.com/#/health_publicHighChart">HighChart Gasto en Salud</a></p>
 			<p><a href="https://sos1920-05.herokuapp.com/#/life_expectancies">HighChart Esperanza de vida</a></p>
+=======
+			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/HighChart">HighChart Gasto en Salud</a></p>
+>>>>>>> 462d86e89511ea669cb4d5e4cd6b195a87776a1b
 		</ul>
 		<h3>Awesome Charts:</h3>
 		<ul>
 			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graphC3">Apexchart Exportacion Libros</a></p>
+<<<<<<< HEAD
 			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/health_publicChartJS">ChartJS Gasto en Salud</a></p>				
 			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/life_expectancies"> Esperanza de vida</a></p>
 
+=======
+			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/ChartJS">ChartJS Gasto en Salud</a></p>				
+			
+>>>>>>> 462d86e89511ea669cb4d5e4cd6b195a87776a1b
 		</ul>
-		
+		<p></p>
 		<h3><p><a href="https://sos1920-05.herokuapp.com/#/analytics">Grafica Comun</a></p>	</h3>
+		<p></p>
+		<h3><p><a href="https://sos1920-05.herokuapp.com/#/integrations">Integraciones</a></p></h3>
 	</body>
 </main>
 
