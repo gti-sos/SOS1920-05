@@ -79,8 +79,8 @@
 		"/books-exports/graphC3": Graph_books_exports_C3,
 		"/health_publicHighChart": HighChart_health_public,
 		"/health_publicChartJS": ChartJS_health_public,
-		"/life_expectanciesV": Visual_life_expectancies,
-		"/life_expectanciesVC": Visual_Chart_life_expectancies,
+		"/Visual_life_expectancies": Visual_life_expectancies,
+		"/Visual_Chart_life_expectancies": Visual_Chart_life_expectancies,
 
 
 
