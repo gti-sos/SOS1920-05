@@ -35,6 +35,10 @@
 	//APIS MARIO
 	import MarioG01 from './APIS_Mario/G01.svelte';
 
+	//APIs Mathias
+	import Grupo_01_soverty_stats from './APIS_Mathias/Grupo_01_soverty_stats.svelte';
+	import Grupo_12_overdose_death from './APIS_Mathias/Grupo_12_overdose_death.svelte';
+
 
 	import Integrations from './Integrations.svelte';
 	import Analytics from './Analytics.svelte';
@@ -80,13 +84,10 @@
 
 
 
-		//APIs Mathias
+		//Ruta Mathias
 	
 		"/integrations/APIS_Mathias":Integrations_Mathias,
-		import Grupo_01_soverty_stats from './APIS_Mathias/Grupo_01_soverty_stats.svelte',
-		
 		"/integrations/APIS_Mathias/Grupo_01_soverty_stats": Grupo_01_soverty_stats,
-
 		"/integrations/APIS_Mathias/Grupo_12_overdose_death": Grupo_12_overdose_death,
 
 		"*": NotFound
