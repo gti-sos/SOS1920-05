@@ -13,7 +13,7 @@
 		</ul>
 	
 		<h3>Project description:</h3>
-		<p>Nuestras fuentes de información están orientadas a analizar las estadisticas sobre la exportación de libros, gasto publico en salud, y esperanza de vida en el ámbito europeo.</p>
+		<p>Nuestras fuentes de información están orientadas a analizar las estadisticas sobre la exportación de libros, gasto publico en salud, y esperanza de vida en algunos paises.</p>
 	
 		<h3>Repository:</h3>
 		<a href="https://github.com/gti-sos/SOS1920-05">gti-sos/SOS1920-05</a>

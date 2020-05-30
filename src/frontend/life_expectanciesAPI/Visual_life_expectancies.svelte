@@ -71,7 +71,7 @@
                 y: 80,
                 floating: true,
                 borderWidth: 1,
-                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFF5FF'),
                 shadow: true
               },
               credits: {
@@ -98,7 +98,7 @@
 
 <main>
 
-    <h2 style="text-align: center;"> <i class="fas fa-car"></i> Estadísticas de las exportaciones de libros</h2>
+    <h2 style="text-align: center;"> <i class="fas fa-car"></i> Estadísticas de las esperanza de vida</h2>
     <figure class="highcharts-figure">
         <div id="container"></div>
     </figure>
