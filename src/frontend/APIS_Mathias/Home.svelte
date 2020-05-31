@@ -28,7 +28,31 @@
         <td><a href="/#/integrations/APIS_Mathias/Grupo_04_vehicles">Grupo_04_vehicles</a></td>
       </tr>
       <tr>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_07_imports">Grupo_07_imports</a></td>
+      </tr>
+      <tr>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_09_plugin_vehicles">Grupo_09_plugin_vehicles</a></td>
+      </tr>
+      <tr>
         <td><a href="/#/integrations/APIS_Mathias/Grupo_12_overdose_death">Grupo_12_overdose_death</a></td>
+      </tr>
+      <tr>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_23_cigarretes_sales">Grupo_23_cigarretes_sales</a></td>
+      </tr>
+      <tr>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_25_happiness_rate">Grupo_25_happiness_rate</a></td>
+      </tr>
+      <tr>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_27_life_quality">Grupo_27_life_quality</a></td>
+      </tr>
+      <tr>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_28_gce">Grupo_28_gce</a></td>
+      </tr>
+      <tr>
+        <td><a href="/#/integrations/APIS_Mathias/API_externa_01">API_externa_01</a></td>
+      </tr>
+      <tr>
+        <td><a href="/#/integrations/APIS_Mathias/API_externa_02">API_externa_02</a></td>
       </tr>
      
      

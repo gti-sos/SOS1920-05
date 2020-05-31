@@ -22,13 +22,13 @@
 	}
 	async function loadGraph(){
 		let MyData = [];
-		const resData = await fetch("/api/v1/vehicles");
+		const resData = await fetch("/api/v1/life_expectancies");
 		MyData = await resData.json();
 		let parsed_data = [];
 		MyData.forEach( (v) => {
 			let total = Math.round(v.total / 10) / 100
 			let data = {
-				name: v.province + " " + v.year,
+				name: v.country + " " + v.year,
 				data: [total, null]
 			};
 			parsed_data.push(data)

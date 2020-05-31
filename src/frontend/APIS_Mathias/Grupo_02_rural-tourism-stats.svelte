@@ -11,7 +11,7 @@
 		MyData = await resData2.json();
 		const resData2 = await fetch("/api/v2/rural-tourism-stats");
 		if (resData.ok) {
-			console.log("Ok, api 05 loaded");
+			console.log("Ok, rural tourism up");
 			const json = await resData.json();
             Grupo_02_rural_tourism = json;
 			console.log(Grupo_02_rural_tourism)
@@ -24,7 +24,7 @@
         	if(x.year==2016 && (x.women_life_expectancy,x.men_life_expectancy,0)){	
 				aux={
 					name: x.country,
-					data: [0,0,x.averagestay]
+					data: [0,0,x.average_life_expectancy]
 				}
 				valores.push(aux)
 			}

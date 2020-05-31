@@ -1,21 +1,21 @@
 <script>
-	import {onMount}from "svelte";
+	import{onMount}from "svelte";
 	import {pop} from "svelte-spa-router";
 	import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
     
-	const url = "https://sos1920-25.herokuapp.com/api/v1/happiness_rate";
+	const url = "/api/v1/gce";
 	
-	onMount(getLife_expectancies );
-    let life_expectancies  = [];
-	async function getLife_expectancies() {
-		console.log("Fetching life expectancies...");	
+	onMount(getGce);
+    let gce = [];
+	async function getGce() {
+		console.log("Fetching gce...");	
 		const res = await fetch(url); 
 		if (res.ok) {
 			console.log("Ok:");
 			const json = await res.json();
-			life_expectancies = json;
-			console.log("Received " + life_expectancies.length + " life expectancies.");
+			gce = json;
+			console.log("Received " + gce.length + " gce.");
 		} else {
 			console.log("ERROR!");
 		}
@@ -26,35 +26,35 @@
 		MyData = await resData.json();
 		let parsed_data = [];
 		MyData.forEach( (v) => {
-			let total = Math.round(v.total / 10) / 100
 			let data = {
-				name: v.province + " " + v.year,
-				data: [total, null]
+				name: v.country + " " + v.year,
+				data: [v.average_life_expectancy, null]
 			};
 			parsed_data.push(data)
 		});
 		const resData2 = await fetch(url);
-		life_expectancies = await resData2.json();
-		console.log(life_expectancies);
-		life_expectancies.forEach( (l) => {
-            let data = {
-                name: l.country + " " + l.year,
-                data: [null, l['average_life_expectancy']]
-            };
-            parsed_data.push(data)
+		gce = await resData2.json();
+		console.log(gce);
+		gce.forEach( (g) => {
+			if (g.country== "france"){
+				let data = {
+                name: "francia " + g.year,
+                data: [null, g.gce_cars]
+            	};
+            	parsed_data.push(data)
+			}
+            
 		});
 		
 		Highcharts.chart('container', {
 			chart: {
-				type: 'column',
-				inverted: true,
-        		polar: true
+				type: 'bar'
 			},
 			title: {
-				text: 'Total de vehículos y esperanza de vida'
+				text: 'Total de coches y producción de coches'
 			},
 			xAxis: {
-				categories: ["Vehículos (en miles)", "Esperanza de vida"]
+				categories: ["Coches", "Producción de coches"]
 			},
 			yAxis: {
 				min: 0,
@@ -86,7 +86,7 @@
 				pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
 			},
 			plotOptions: {
-				column: {
+				bar: {
 					stacking: 'normal',
 					dataLabels: {
 						enabled: true
