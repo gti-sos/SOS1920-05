@@ -40,7 +40,7 @@ color: white;
 <table id="customers">
     <thead>
         <tr>
-            <td scope="row">APIs integradas</td>
+            <th scope="row">APIs integradas</th>
         </tr>
     </thead>
 
@@ -49,6 +49,7 @@ color: white;
     
         <td><a href="/#/integrations/APIS_Diego">APIS Integradas por Diego</a></td>
         <td><a href="/#/integrations/APIS_Mario">APIS Integradas por Mario</a></td>
+        <td><a href="/#/integrations/APIS_Mathias">APIS Integradas por Mathias</a></td>
     
       </tr>
     </tbody>

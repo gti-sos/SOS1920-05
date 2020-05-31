@@ -17,7 +17,7 @@
 <table id="customers">
     <thead>
         <tr>
-            <td scope="row">APIs integradas por Diego</td>
+            <th scope="row">APIs integradas por Diego</th>
         </tr>
     </thead>
 

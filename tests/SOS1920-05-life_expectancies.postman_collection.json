@@ -41,9 +41,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -91,9 +91,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?limit=2&offset=1",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/?limit=2&offset=1",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -151,9 +151,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?men_life_expectancy=79.20",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/?men_life_expectancy=79.20",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -194,9 +194,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?year=2016",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/?year=2016",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -237,9 +237,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?country=italy",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/?country=italy",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -283,9 +283,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?country=uk&year=2016",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/?country=uk&year=2016",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -334,9 +334,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?fromYear=2014&toYear=2019",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/?fromYear=2014&toYear=2019",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -382,9 +382,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?women_life_expectancy=84.60",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/?women_life_expectancy=84.60",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -426,9 +426,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?men_life_expectancy=74.72",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/?men_life_expectancy=74.72",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -470,9 +470,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/?average_life_expectancy=81.60",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/?average_life_expectancy=81.60",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -519,9 +519,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectiances/",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectiances/",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -563,9 +563,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectiances/",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectiances/",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -613,9 +613,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/france/2015",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/france/2015",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -657,9 +657,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/brazil/2001",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/brazil/2001",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -692,9 +692,9 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/denmark",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/denmark",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -735,9 +735,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/france/2015",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/france/2015",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -779,9 +779,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/france/2015",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/france/2015",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -823,9 +823,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -866,9 +866,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",
@@ -900,9 +900,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{https://sos1920-05.herokuapp.com}}/api/v1/life_expectancies/loadInitialData",
+					"raw": "https://sos1920-05.herokuapp.com/api/v1/life_expectancies/loadInitialData",
 					"host": [
-						"{{https://sos1920-05.herokuapp.com}}"
+						"https://sos1920-05.herokuapp.com"
 					],
 					"path": [
 						"api",

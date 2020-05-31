@@ -11,8 +11,12 @@
 	import Graph_books_exports_C3 from './books_exportsAPI/Graph_Books_Exports_C3.svelte';
 	import HighChart_health_public from './health_publicAPI/HighChart_health_public.svelte';
 	import ChartJS_health_public from './health_publicAPI/ChartJS_health_public.svelte';
+	import Visual_life_expectancies from './life_expectanciesAPI//Visual_life_expectancies.svelte';
+	import Visual_Chart_life_expectancies from './life_expectanciesAPI//Visual_Chart_life_expectancies.svelte';
+
 	import Integrations_Diego from './APIS_Diego/Home.svelte';
 	import Integrations_Mario from './APIS_Mario/Home.svelte';
+	import Integrations_Mathias from './APIS_Mathias/Home.svelte';
 
 	//APIS DIEGO
 	import DiegoG01 from './APIS_Diego/Grupo01.svelte';
@@ -30,6 +34,19 @@
 
 	//APIS MARIO
 	import MarioG01 from './APIS_Mario/G01.svelte';
+	import MarioG02 from './APIS_Mario/G02.svelte';
+	import MarioG04 from './APIS_Mario/G04.svelte';
+	import MarioG06 from './APIS_Mario/G06.svelte';
+	import MarioG07 from './APIS_Mario/G07.svelte';
+	import MarioG08 from './APIS_Mario/G08.svelte';
+	import MarioG09 from './APIS_Mario/G09.svelte';
+	import MarioG22 from './APIS_Mario/G22.svelte';
+	import MarioG24 from './APIS_Mario/G24.svelte';
+	import MarioG28 from './APIS_Mario/G28.svelte';
+
+	//APIs Mathias
+	import Grupo_01_soverty_stats from './APIS_Mathias/Grupo_01_soverty_stats.svelte';
+	import Grupo_12_overdose_death from './APIS_Mathias/Grupo_12_overdose_death.svelte';
 
 
 	import Integrations from './Integrations.svelte';
@@ -37,9 +54,27 @@
 	import NotFound from './NotFound.svelte';
 
 	const routes =  {
+
 		"/": Home,
 		"/analytics": Analytics,
 		"/integrations": Integrations,
+
+		"/books_exportsAPI": books_exports,
+		"/health_publicAPI": health_public,
+		"/life_expectanciesAPI": life_expectancies,
+
+		"/books-exports/:country/:year": edit_books_exports,
+		"/health_public/:country/:year": edit_health_public,
+		"/life_expectancies/:country/:year": edit_life_expectancies,
+
+		"/books-exports/graph": Graph_books_exports,
+		"/books-exports/graphC3": Graph_books_exports_C3,
+
+		"/health_public/HighChart": HighChart_health_public,
+		"/health_public/ChartJS": ChartJS_health_public,
+
+		"/Visual_life_expectancies": Visual_life_expectancies,
+		"/Visual_Chart_life_expectancies": Visual_Chart_life_expectancies,
 
 		//RUTAS DIEGO
 		"/integrations/APIS_Diego": Integrations_Diego,
@@ -59,18 +94,25 @@
 		//RUTAS MARIO
 		"/integrations/APIS_Mario": Integrations_Mario,
 		"/integrations/APIS_Mario/G01": MarioG01,
+		"/Integrations/APIS_Mario/G02": MarioG02,
+		"/Integrations/APIS_Mario/G04": MarioG04,
+		"/Integrations/APIS_Mario/G06": MarioG06,
+		"/Integrations/APIS_Mario/G07": MarioG07,
+		"/Integrations/APIS_Mario/G08": MarioG08,
+		"/Integrations/APIS_Mario/G09": MarioG09,
+		"/Integrations/APIS_Mario/G22": MarioG22,
+		"/Integrations/APIS_Mario/G24": MarioG24,
+		"/Integrations/APIS_Mario/G28": MarioG28,
+
+		//Ruta Mathias
+		"/integrations/APIS_Mathias":Integrations_Mathias,
+		"/integrations/APIS_Mathias/Grupo_01_soverty_stats": Grupo_01_soverty_stats,
+		"/integrations/APIS_Mathias/Grupo_12_overdose_death": Grupo_12_overdose_death,
+
+
+
 		
 
-		"/books_exportsAPI": books_exports,
-		"/health_publicAPI": health_public,
-		"/life_expectanciesAPI": life_expectancies,
-		"/books-exports/:country/:year": edit_books_exports,
-		"/health_public/:country/:year": edit_health_public,
-		"/life_expectancies/:country/:year": edit_life_expectancies,
-		"/books-exports/graph": Graph_books_exports,
-		"/books-exports/graphC3": Graph_books_exports_C3,
-		"/health_public/HighChart": HighChart_health_public,
-		"/health_public/ChartJS": ChartJS_health_public,
 		"*": NotFound
 	};
 </script>
