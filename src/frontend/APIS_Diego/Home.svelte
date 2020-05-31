@@ -1,3 +1,7 @@
+<script> 
+    import {pop} from "svelte-spa-router";
+    import Button from "sveltestrap/src/Button.svelte";
+</script>
 <center>
     <h1>Integraciones
     </h1>
@@ -57,6 +61,9 @@
 
     </tbody>
 </table>
+
+<Button outline color="secondary" on:click="{pop}"> Volver</Button>
+
 <style>
     #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;

@@ -1,3 +1,7 @@
+<script> 
+  import {pop} from "svelte-spa-router";
+  import Button from "sveltestrap/src/Button.svelte";
+</script>
 <center>
     <h1>Integraciones
     </h1>
@@ -49,3 +53,5 @@ color: white;
       </tr>
     </tbody>
 </table>
+
+<Button outline color="secondary" on:click="{pop}"> Volver</Button>
