@@ -35,11 +35,16 @@
 			<p><a href="https://sos1920-05.herokuapp.com/#/health_publicHighChart">HighChart Gasto en Salud</a></p>
 			<p><a href="https://sos1920-05.herokuapp.com/#/Visual_life_expectancies">HighChart Esperanza de vida</a></p>
 		</ul>
+
 		<h3>Awesome Charts:</h3>
 		<ul>
 			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graphC3">Apexchart Exportacion Libros</a></p>
 			<p><a href="https://sos1920-05.herokuapp.com/#/health_publicChartJS">ChartJS Gasto en Salud</a></p>				
-			<p><a href="https://sos1920-05.herokuapp.com/#/Visual_Chart_life_expectancies"> Esperanza de vida</a></p>
+			<p><a href="https://sos1920-05.herokuapp.com/#/Visual_Chart_life_expectancies">Esperanza de vida con chartjs</a></p>
+		</ul>
+		<h3>Anychart:</h3>
+		<ul>
+			<p><a href="https://sos1920-05.herokuapp.com/#/Visual_Chart_life_expectancies"> Esperanza de vida con anychart</a></p>
 
 		</ul>
 		<p></p>
