@@ -19,11 +19,18 @@
 
     <tbody>
       <tr>
-        <td><a href="/#/integrations/APIS_Mathias/Grupo_01_soverty_stats">Grupo_01_soverty_stats</a></td>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_01_poverty_stats">Grupo_01_poverty_stats</a></td>
+      </tr>
+     <tr>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_02_rural_tourism">Grupo_02_rural_tourism</a></td>
       </tr>
       <tr>
-        <td><a href="/#/integrations/APIS_Mathias/Grupo_12_overdose_death">Grupo_01_soverty_stats</a></td>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_04_vehicles">Grupo_04_vehicles</a></td>
       </tr>
+      <tr>
+        <td><a href="/#/integrations/APIS_Mathias/Grupo_12_overdose_death">Grupo_12_overdose_death</a></td>
+      </tr>
+     
      
 
     </tbody>

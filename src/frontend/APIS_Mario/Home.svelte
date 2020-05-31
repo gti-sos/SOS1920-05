@@ -1,3 +1,8 @@
+<script>
+  import Button from "sveltestrap/src/Button.svelte";
+  import {pop} from "svelte-spa-router";
+</script> 
+
 <center>
     <h1>Integraciones
     </h1>
@@ -57,6 +62,8 @@
 
     </tbody>
 </table>
+
+
 <style>
     #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -81,3 +88,8 @@
     color: white;
     }
     </style>
+
+<p></p>
+ <p align="center">
+        <Button outline color="secondary" on:click="{pop}">Atrás</Button>
+  </p>

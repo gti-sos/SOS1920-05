@@ -1,37 +1,40 @@
 <script>
-    import {
-            pop
-	} from "svelte-spa-router";
-    
+	import  {onMount} from "svelte";
+	import {pop} from "svelte-spa-router";
     import Button from "sveltestrap/src/Button.svelte";
-	async function loadGraph() {
-    let datosConjuntos = [];   
-    let diego = [];
-	let mario = [];
-	let Mathias = [];
-
-    const resDataDiego = await fetch("/api/v1/books-exports");
-    diego = await resDataDiego.json();
-    const resDataMario = await fetch("/api/v1/health_public");
-	mario = await resDataMario.json();
-	const resDataMathias = await fetch("/api/v1/life_expectancies");
-    Mathias = await resDataMathias.json();
     
-    let datos_diego = diego.map((x) => {
-			let res = {name: x.country + " " + x.year,value: x["exp_editorial"]};
-			return res;
-        });
-    let datos_mario = mario.map((x) => {
-			let res = {name: x.country + " " + x.year,value: x["total_spending"]};
-			return res;
-        });
-     let datos_Mathias = Mathias.map((x) => {
-			let res = {name: x.country + " " + x.year,value: x["average_life_expectancy"]};
-			return res;
-        });    
-        datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Gasto Sanidad Publica",data: datos_mario},{name: "Esperanza de vida",data: datos_Mathias}];
+    
 
-        Highcharts.chart('container', {
+
+	async function loadGraph(){
+        let MyData = [];
+        let OtherData = [];
+        const url = "https://sos1920-23.herokuapp.com/api/v2/cigarretes-sales/";
+
+        const resData = await fetch("/api/v1/books-exports");
+        MyData = await resData.json();
+
+        console.log("Fetching url...");	
+		const res = await fetch(url); 
+		if (res.ok) {
+			console.log("Ok");
+            OtherData = await res.json();
+		} else {
+			console.log("Error al cargar API externa");
+        }
+
+        let MyDataGraph = MyData.map((x) => {
+			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
+			return res;
+        });
+        let OtherDataGraph = OtherData.map((x) => {
+			let res = {name: x.country + " " + x.year, value: x["total_fire"]};
+			return res;
+        });
+        
+        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Fuegos totales",data: OtherDataGraph}];
+        
+                Highcharts.chart('container', {
 			chart: {
 				type: 'packedbubble',
 				height: '60%'
@@ -71,8 +74,7 @@
 			},
 			series: datosConjuntos
 		});
-	}
-	
+    }
 </script>
 
 <svelte:head>
@@ -82,9 +84,8 @@
     <script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
     
 </svelte:head>
-
 <main>
-    <h2> Representacion de las exportaciones, el gasto y la esperanza de vida en el mundo</h2>
+    <h3> Grafica exportaciones de libros y emigrantes en el mundo</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>
