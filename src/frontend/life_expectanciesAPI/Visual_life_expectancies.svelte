@@ -53,7 +53,7 @@
             label: {
                 connectorAllowed: false
             },
-            pointStart: 2015
+            pointStart: Women, Men, Average
         }
     },
               legend: {
