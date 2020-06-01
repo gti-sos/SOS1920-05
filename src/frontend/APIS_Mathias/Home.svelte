@@ -1,3 +1,8 @@
+<script> 
+    import {pop} from "svelte-spa-router";
+    import Button from "sveltestrap/src/Button.svelte";
+</script>
+
 <center>
     <h1>Integraciones
     </h1>
@@ -59,6 +64,7 @@
 
     </tbody>
 </table>
+
 <style>
     #customers {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -67,19 +73,24 @@
     }
     
     #customers td, #customers th {
-    border: 1px solid rgb(221, 221, 221);
+    border: 1px solid #ddd;
     padding: 8px;
     }
     
-    #customers tr:nth-child(even){background-color: #488792;}
+    #customers tr:nth-child(even){background-color: #f2f2f2;}
     
-    #customers tr:hover {background-color: rgb(129, 28, 28);}
+    #customers tr:hover {background-color: #ddd;}
     
     #customers th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: rgb(37, 103, 141);
-    color: rgb(128, 120, 56);
+    background-color: #4CAF50;
+    color: white;
     }
     </style>
+
+<p></p>
+ <p align="center">
+        <Button outline color="secondary" on:click="{pop}">Atrás</Button>
+  </p>

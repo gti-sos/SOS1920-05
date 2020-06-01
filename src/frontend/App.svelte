@@ -45,7 +45,7 @@
 	import MarioG28 from './APIS_Mario/G28.svelte';
 
 	//APIs Mathias
-	import Grupo_01_soverty_stats from './APIS_Mathias/Grupo_01_poverty_stats.svelte';
+	import Grupo_01_poverty_stats from './APIS_Mathias/Grupo_01_poverty_stats.svelte';
 	import Grupo_02_rural_tourism from './APIS_Mathias/Grupo_02_rural-tourism-stats.svelte';
 	import Grupo_04_vehicles from './APIS_Mathias/Grupo_04_vehicles.svelte';
 	import Grupo_07_imports from './APIS_Mathias/Grupo_07_imports.svelte';
@@ -83,8 +83,8 @@
 		"/health_public/HighChart": HighChart_health_public,
 		"/health_public/ChartJS": ChartJS_health_public,
 
-		"/Visual_life_expectancies": Visual_life_expectancies,
-		"/Visual_Chart_life_expectancies": Visual_Chart_life_expectancies,
+		"/life_expectancies/Visual_life_expectancies": Visual_life_expectancies,
+		"/life_expectancies/Visual_Chart_life_expectancies": Visual_Chart_life_expectancies,
 
 		//RUTAS DIEGO
 		"/integrations/APIS_Diego": Integrations_Diego,
@@ -115,7 +115,7 @@
 		"/Integrations/APIS_Mario/G28": MarioG28,
 
 		//Ruta Mathias
-		"/integrations/APIS_Mathias":Integrations_Mathias,
+		"/integrations/APIS_Mathias": Integrations_Mathias,
 		"/integrations/APIS_Mathias/Grupo_01_poverty_stats": Grupo_01_poverty_stats,
 		"/integrations/APIS_Mathias/Grupo_02_rural_tourism": Grupo_02_rural_tourism,
 		"/integrations/APIS_Mathias/Grupo_04_vehicles": Grupo_04_vehicles,

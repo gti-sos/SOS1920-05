@@ -1,21 +1,20 @@
 <script>
 	import{onMount}from "svelte";
 	import {pop} from "svelte-spa-router";
-	import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
     
-	const url = "/api/v1/gce";
+	const url = "/api/v1/grupo28gce";
 	
 	onMount(getGce);
-    let gce = [];
+    let grupo28gce = [];
 	async function getGce() {
-		console.log("Fetching gce...");	
+		console.log("Fetching grupo28gce...");	
 		const res = await fetch(url); 
 		if (res.ok) {
 			console.log("Ok:");
 			const json = await res.json();
-			gce = json;
-			console.log("Received " + gce.length + " gce.");
+			grupo28gce = json;
+			console.log("Received " + grupo28gce.length + " grupo28gce.");
 		} else {
 			console.log("ERROR!");
 		}
@@ -24,24 +23,25 @@
 		let MyData = [];
 		const resData = await fetch("/api/v1/life_expectancies");
 		MyData = await resData.json();
-		let parsed_data = [];
+		
+		let incomingData = [];
 		MyData.forEach( (v) => {
 			let data = {
 				name: v.country + " " + v.year,
 				data: [v.average_life_expectancy, null]
 			};
-			parsed_data.push(data)
+			incomingData.push(data)
 		});
 		const resData2 = await fetch(url);
-		gce = await resData2.json();
-		console.log(gce);
-		gce.forEach( (g) => {
+		grupo28gce = await resData2.json();
+		console.log(grupo28gce);
+		grupo28gce.forEach( (g) => {
 			if (g.country== "france"){
 				let data = {
                 name: "francia " + g.year,
                 data: [null, g.gce_cars]
             	};
-            	parsed_data.push(data)
+            	incomingData.push(data)
 			}
             
 		});
@@ -93,7 +93,7 @@
 					}
 				}
 			},
-			series: parsed_data
+			series: incomingData
 		});
 	};
 </script>
