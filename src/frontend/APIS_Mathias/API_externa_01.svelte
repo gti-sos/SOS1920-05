@@ -1,126 +1,123 @@
-<script>
-	import{onMount}from "svelte";
+    <script>
+	import {onMount}from "svelte";
 	import {pop} from "svelte-spa-router";
 	import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
     
-	const url = "/api/v1/gce";
 	
-	onMount(getGce);
-    let gce = [];
-	async function getGce() {
-		console.log("Fetching gce...");	
+	
+	async function loadGraph(){
+        let MyData = [];
+        let OtherData = [];
+		const url = "http://citibikenyc.com/stations/json";
+
+        const resData = await fetch("/api/v1/life_expectancies");
+        MyData = await resData.json();
+
+        console.log("Fetching url...");	
 		const res = await fetch(url); 
 		if (res.ok) {
-			console.log("Ok:");
-			const json = await res.json();
-			gce = json;
-			console.log("Received " + gce.length + " gce.");
+			console.log("Ok");
+            OtherData = await res.json();
 		} else {
-			console.log("ERROR!");
-		}
-	}
-	async function loadGraph(){
-		let MyData = [];
-		const resData = await fetch("/api/v1/life_expectancies");
-		MyData = await resData.json();
-		let parsed_data = [];
-		MyData.forEach( (v) => {
-			let data = {
-				name: v.country + " " + v.year,
-				data: [v.average_life_expectancy, null]
-			};
-			parsed_data.push(data)
-		});
-		const resData2 = await fetch(url);
-		gce = await resData2.json();
-		console.log(gce);
-		gce.forEach( (g) => {
-			if (g.country== "france"){
-				let data = {
-                name: "francia " + g.year,
-                data: [null, g.gce_cars]
-            	};
-            	parsed_data.push(data)
-			}
-            
-		});
-		
-		Highcharts.chart('container', {
+			console.log("Error al cargar API externa");
+        }
+
+        let MyDataGraph = MyData.map((x) => {
+			let res = {name: x.country + " " + x.year, value: x["average_life_expectancy"]};
+			return res;
+        });
+        let OtherDataGraph = OtherData.map((x) => {
+			let res = {name: x.country + " " + x.year, value: x["totalDocks"]};
+			return res;
+        });
+        
+        let datosConjuntos = [{name: "Esperanza de vida media",data: MyDataGraph},{name: "Estaciones de bicis en NYC",data: OtherDataGraph}];
+        
+  Highcharts.chart('container', {
 			chart: {
-				type: 'bar'
-			},
-			title: {
-				text: 'Total de coches y producción de coches'
-			},
-			xAxis: {
-				categories: ["Coches", "Producción de coches"]
-			},
-			yAxis: {
-				min: 0,
-				stackLabels: {
-					enabled: true,
-					style: {
-						fontWeight: 'bold',
-						color: ( // theme
-							Highcharts.defaultOptions.title.style &&
-							Highcharts.defaultOptions.title.style.color
-						) || 'gray'
-					}
-				}
-			},
-			legend: {
-				align: 'right',
-				x: -30,
-				verticalAlign: 'top',
-				y: 25,
-				floating: true,
-				backgroundColor:
-					Highcharts.defaultOptions.legend.backgroundColor || 'white',
-				borderColor: '#CCC',
-				borderWidth: 1,
-				shadow: false
+				type: 'packedbubble',
+				height: '100%'
 			},
 			tooltip: {
-				headerFormat: '<b>{point.x}</b><br/>',
-				pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+				useHTML: true,
+				pointFormat: '<b>{point.name}:</b> {point.value}'
 			},
 			plotOptions: {
-				bar: {
-					stacking: 'normal',
+				packedbubble: {
+					minSize: '5%',
+					maxSize: '90%',
+					zMin: 0,
+					zMax: 100,
+					layoutAlgorithm: {
+						gravitationalConstant: 0.05,
+                        splitSeries: true,
+                        seriesInteraction: false,
+                        dragBetweenSeries: true,
+                        parentNodeLimit: true
+					},
 					dataLabels: {
-						enabled: true
+						enabled: true,
+						format: '{point.name}',
+						filter: {
+							property: 'y',
+							operator: '>',
+							value: 300
+						},
+						style: {
+							color: 'black',
+							textOutline: 'none',
+							fontWeight: 'normal'
+						}
 					}
 				}
 			},
-			series: parsed_data
+			series: datosConjuntos
 		});
-	};
+    }
 </script>
 
 <svelte:head>
-	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
-	<script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js" on:load="{loadGraph}"></script>
+    <script src="https://code.highcharts.com/highcharts.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/highcharts-more.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/modules/exporting.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
+    
 </svelte:head>
+<main>
+    <h3> Grafica esperanza de vida en media y Estaciones de bicis en NYC</h3>
+	<figure class="highcharts-figure">
+		<div id="container"></div>
+	</figure>
+	
+	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
+
+</main>
+
 <style>
-	#container {
-    height: 400px; 
+	main {
+		text-align: center;
+	}
+    .highcharts-figure, .highcharts-data-table table {
+  min-width: 320px; 
+  max-width: 800px;
+  margin: 1em auto;
 }
+
 .highcharts-figure, .highcharts-data-table table {
-    min-width: 310px; 
+    min-width: 320px; 
     max-width: 800px;
     margin: 1em auto;
 }
+
 .highcharts-data-table table {
-    font-family: Verdana, sans-serif;
-    border-collapse: collapse;
-    border: 1px solid #EBEBEB;
-    margin: 10px auto;
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
 }
 .highcharts-data-table caption {
     padding: 1em 0;
