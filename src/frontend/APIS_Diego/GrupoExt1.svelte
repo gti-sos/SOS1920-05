@@ -1,4 +1,3 @@
-
 <script>
     import {
             pop
@@ -12,7 +11,7 @@
 
     const resDataDiego = await fetch("/api/v1/books-exports");
     diego = await resDataDiego.json();
-    const resDataMario = await fetch("/api/v1/health_public");
+    const resDataMario = await fetch("/GrupoExt1");
     mario = await resDataMario.json();
     
     let datos_diego = diego.map((x) => {
@@ -20,7 +19,7 @@
 			return res;
         });
     let datos_mario = mario.map((x) => {
-			let res = {name: x.country + " " + x.year,value: x["total_spending"]};
+			let res = {name: x.id,value: x["humidity"]};
 			return res;
         });
         

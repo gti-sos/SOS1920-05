@@ -9,20 +9,14 @@
 	async function loadGraph(){
         let MyData = [];
         let OtherData = [];
-        const url = "https://sos1920-28.herokuapp.com/api/v1/ppas";
+        const url = "/api/v1/ppas";
 
         const resData = await fetch("/api/v1/books-exports");
-        MyData = await resData.json();
-
-        console.log("Fetching url...");	
-		const res = await fetch(url); 
-		if (res.ok) {
-			console.log("Ok");
-            OtherData = await res.json();
-		} else {
-			console.log("Error al cargar API externa");
-        }
-
+		MyData = await resData.json();
+		
+		const res = await fetch(url);
+		OtherData = await res.json();
+		
         let MyDataGraph = MyData.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;

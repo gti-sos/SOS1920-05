@@ -48,6 +48,7 @@
       </tr>
       <tr>
         <td><a href="/#/integrations/APIS_Diego/Grupo28">Grupo 28</a></td>
+        <td><a href="/APIS_Diego/Grupo28.svelte">Fuente</a></td>
       </tr>
       <tr>
         <td><a href="/#/integrations/APIS_Diego/Grupo30">Grupo 30</a></td>

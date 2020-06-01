@@ -5,7 +5,7 @@ module.exports =function (app) {
 	
 	const BASE_API_URL = "/api/v1";
 	const dbFileName = path.join(__dirname,"books_exports.db");
-
+	
 
 	const db = new dataStore({
 		filename: dbFileName,
@@ -15,7 +15,9 @@ module.exports =function (app) {
 
 	//----------API DIEGO-------//
 
+	
 	var books_exports = [] ;
+	
 
 	var Initialbooks_exports = [
 		{ 
