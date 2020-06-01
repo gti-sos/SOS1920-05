@@ -83,8 +83,8 @@
 		"/health_public/HighChart": HighChart_health_public,
 		"/health_public/ChartJS": ChartJS_health_public,
 
-		"/life_expectancies/Visual_life_expectancies": Visual_life_expectancies,
-		"/life_expectancies/Visual_Chart_life_expectancies": Visual_Chart_life_expectancies,
+		"/Visual_life_expectancies": Visual_life_expectancies,
+		"/Visual_Chart_life_expectancies": Visual_Chart_life_expectancies,
 
 		//RUTAS DIEGO
 		"/integrations/APIS_Diego": Integrations_Diego,
