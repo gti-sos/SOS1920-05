@@ -1,126 +1,123 @@
-<script>
+	<script>
 	import {onMount}from "svelte";
 	import {pop} from "svelte-spa-router";
 	import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
     
-	const url = "https://sos1920-25.herokuapp.com/api/v1/happiness_rate";
 	
-	onMount(getLife_expectancies );
-    let life_expectancies  = [];
-	async function getLife_expectancies() {
-		console.log("Fetching life expectancies...");	
+	
+	async function loadGraph(){
+        let MyData = [];
+        let OtherData = [];
+        const url = "https://sos1920-25.herokuapp.com/api/v1/happiness_rate";
+
+        const resData = await fetch("/api/v1/life_expectancies");
+        MyData = await resData.json();
+
+        console.log("Fetching url...");	
 		const res = await fetch(url); 
 		if (res.ok) {
-			console.log("Ok:");
-			const json = await res.json();
-			life_expectancies = json;
-			console.log("Received " + life_expectancies.length + " life expectancies.");
+			console.log("Ok");
+            OtherData = await res.json();
 		} else {
-			console.log("ERROR!");
-		}
-	}
-	async function loadGraph(){
-		let MyData = [];
-		const resData = await fetch("/api/v1/life_expectancies");
-		MyData = await resData.json();
-		let parsed_data = [];
-		MyData.forEach( (v) => {
-			let total = Math.round(v.total / 10) / 100
-			let data = {
-				name: v.province + " " + v.year,
-				data: [total, null]
-			};
-			parsed_data.push(data)
-		});
-		const resData2 = await fetch(url);
-		life_expectancies = await resData2.json();
-		console.log(life_expectancies);
-		life_expectancies.forEach( (l) => {
-            let data = {
-                name: l.country + " " + l.year,
-                data: [null, l['average_life_expectancy']]
-            };
-            parsed_data.push(data)
-		});
-		
-		Highcharts.chart('container', {
+			console.log("Error al cargar API externa");
+        }
+
+        let MyDataGraph = MyData.map((x) => {
+			let res = {name: x.country + " " + x.year, value: x["average_life_expectancy"]};
+			return res;
+        });
+        let OtherDataGraph = OtherData.map((x) => {
+			let res = {name: x.country + " " + x.year, value: x["happinessRanking"]};
+			return res;
+        });
+        
+        let datosConjuntos = [{name: "Esperanza de vida media",data: MyDataGraph},{name: "nivel de felicidad",data: OtherDataGraph}];
+        
+  Highcharts.chart('container', {
 			chart: {
-				type: 'column',
-				inverted: true,
-        		polar: true
-			},
-			title: {
-				text: 'Total de vehículos y esperanza de vida'
-			},
-			xAxis: {
-				categories: ["Vehículos (en miles)", "Esperanza de vida"]
-			},
-			yAxis: {
-				min: 0,
-				stackLabels: {
-					enabled: true,
-					style: {
-						fontWeight: 'bold',
-						color: ( // theme
-							Highcharts.defaultOptions.title.style &&
-							Highcharts.defaultOptions.title.style.color
-						) || 'gray'
-					}
-				}
-			},
-			legend: {
-				align: 'right',
-				x: -30,
-				verticalAlign: 'top',
-				y: 25,
-				floating: true,
-				backgroundColor:
-					Highcharts.defaultOptions.legend.backgroundColor || 'white',
-				borderColor: '#CCC',
-				borderWidth: 1,
-				shadow: false
+				type: 'packedbubble',
+				height: '100%'
 			},
 			tooltip: {
-				headerFormat: '<b>{point.x}</b><br/>',
-				pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+				useHTML: true,
+				pointFormat: '<b>{point.name}:</b> {point.value}'
 			},
 			plotOptions: {
-				column: {
-					stacking: 'normal',
+				packedbubble: {
+					minSize: '35%',
+					maxSize: '85%',
+					zMin: 0,
+					zMax: 100,
+					layoutAlgorithm: {
+						gravitationalConstant: 0.05,
+                        splitSeries: true,
+                        seriesInteraction: false,
+                        dragBetweenSeries: true,
+                        parentNodeLimit: true
+					},
 					dataLabels: {
-						enabled: true
+						enabled: true,
+						format: '{point.name}',
+						filter: {
+							property: 'y',
+							operator: '>',
+							value: 250
+						},
+						style: {
+							color: 'black',
+							textOutline: 'none',
+							fontWeight: 'normal'
+						}
 					}
 				}
 			},
-			series: parsed_data
+			series: datosConjuntos
 		});
-	};
+    }
 </script>
 
 <svelte:head>
-	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
-	<script src="https://code.highcharts.com/modules/export-data.js"></script>
-    <script src="https://code.highcharts.com/modules/accessibility.js" on:load="{loadGraph}"></script>
+    <script src="https://code.highcharts.com/highcharts.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/highcharts-more.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/modules/exporting.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
+    
 </svelte:head>
+<main>
+    <h3> Grafica esperanza de vida media y nivel de felicidad</h3>
+	<figure class="highcharts-figure">
+		<div id="container"></div>
+	</figure>
+	
+	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
+
+</main>
+
 <style>
-	#container {
-    height: 400px; 
+	main {
+		text-align: center;
+	}
+    .highcharts-figure, .highcharts-data-table table {
+  min-width: 320px; 
+  max-width: 800px;
+  margin: 1em auto;
 }
+
 .highcharts-figure, .highcharts-data-table table {
-    min-width: 310px; 
+    min-width: 320px; 
     max-width: 800px;
     margin: 1em auto;
 }
+
 .highcharts-data-table table {
-    font-family: Verdana, sans-serif;
-    border-collapse: collapse;
-    border: 1px solid #EBEBEB;
-    margin: 10px auto;
-    text-align: center;
-    width: 100%;
-    max-width: 500px;
+	font-family: Verdana, sans-serif;
+	border-collapse: collapse;
+	border: 1px solid #EBEBEB;
+	margin: 10px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 500px;
 }
 .highcharts-data-table caption {
     padding: 1em 0;

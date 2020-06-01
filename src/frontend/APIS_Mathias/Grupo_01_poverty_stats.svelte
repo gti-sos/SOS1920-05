@@ -24,7 +24,7 @@
         }
 
         let MyDataGraph = MyData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["men_life_expectancy"]};
+			let res = {name: x.country + " " + x.year, value: x["average_life_expectancy"]};
 			return res;
         });
         let OtherDataGraph = OtherData.map((x) => {
@@ -32,45 +32,60 @@
 			return res;
         });
         
-        let datosConjuntos = [{name: "Esperanza de vida",data: MyDataGraph},{name: "Nivel de pobreza",data: OtherDataGraph}];
+        let datosConjuntos = [{name: "Esperanza de vida media",data: MyDataGraph},{name: "Nivel de pobreza",data: OtherDataGraph}];
         
-                Highcharts.chart('container', {
-    chart: {
-        type: 'variablepie'
-    },
-    title: {
-        text: 'Countries compared by population density and total area.'
-    },
-    tooltip: {
-        headerFormat: '',
-        pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> {point.name}</b><br/>' +
-            'Area (square km): <b>{point.y}</b><br/>' +
-            'Population density (people per square km): <b>{point.z}</b><br/>'
-    },
-    series: [{
-        minPointSize: 10,
-        innerSize: '20%',
-        zMin: 0,
-        name: 'countries',
-        data: datosConjuntos
-            
-    }]
-});
-
+  Highcharts.chart('container', {
+			chart: {
+				type: 'packedbubble',
+				height: '100%'
+			},
+			tooltip: {
+				useHTML: true,
+				pointFormat: '<b>{point.name}:</b> {point.value}'
+			},
+			plotOptions: {
+				packedbubble: {
+					minSize: '5%',
+					maxSize: '90%',
+					zMin: 0,
+					zMax: 100,
+					layoutAlgorithm: {
+						gravitationalConstant: 0.05,
+                        splitSeries: true,
+                        seriesInteraction: false,
+                        dragBetweenSeries: true,
+                        parentNodeLimit: true
+					},
+					dataLabels: {
+						enabled: true,
+						format: '{point.name}',
+						filter: {
+							property: 'y',
+							operator: '>',
+							value: 300
+						},
+						style: {
+							color: 'black',
+							textOutline: 'none',
+							fontWeight: 'normal'
+						}
+					}
+				}
+			},
+			series: datosConjuntos
+		});
     }
 </script>
 
 <svelte:head>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/variable-pie.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
-	<script src="https://code.highcharts.com/modules/export-data.js"></script>
-	<script src="https://code.highcharts.com/modules/accessibility.js"  on:load={loadGraph}></script>></script>
-
+    <script src="https://code.highcharts.com/highcharts.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/highcharts-more.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/modules/exporting.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones de libros y emigrantes en el mundo</h3>
+    <h3> Grafica esperanza de vida media y nivel de pobreza</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>
@@ -80,13 +95,18 @@
 </main>
 
 <style>
-	#container {
-	height: 500px;
+	main {
+		text-align: center;
+	}
+    .highcharts-figure, .highcharts-data-table table {
+  min-width: 320px; 
+  max-width: 800px;
+  margin: 1em auto;
 }
 
 .highcharts-figure, .highcharts-data-table table {
     min-width: 320px; 
-    max-width: 700px;
+    max-width: 800px;
     margin: 1em auto;
 }
 
@@ -117,5 +137,4 @@
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
-
 </style>

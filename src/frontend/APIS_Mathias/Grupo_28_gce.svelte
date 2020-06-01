@@ -37,7 +37,7 @@
 		gceIncoming = await result.json();
 		
         let MyOwn = MyData.map((x) => {
-			let result = {name: x.country + " " + x.year, value: x["men_life_expectancy"]};
+			let result = {name: x.country + " " + x.year, value: x["women_life_expectancy"]};
 			return result;
         });
         let gceg = gceIncoming.map((x) => {
@@ -135,7 +135,7 @@
 
 <main>
 
-    <h2 style="text-align: center;"> <i class="fas fa-car"></i> Estadísticas de las esperanza de vida</h2>
+    <h2 style="text-align: center;"> <i class="fas fa-car"></i> Estadísticas de las esperanza de vida en mujeres</h2>
     <figure class="highcharts-figure">
         <div id="container"></div>
     </figure>

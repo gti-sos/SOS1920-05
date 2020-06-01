@@ -1,11 +1,11 @@
-<script>
-	import  {onMount} from "svelte";
+  	<script>
+	import {onMount}from "svelte";
 	import {pop} from "svelte-spa-router";
+	import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
     
-    
-
-
+	
+	
 	async function loadGraph(){
         let MyData = [];
         let OtherData = [];
@@ -24,104 +24,70 @@
         }
 
         let MyDataGraph = MyData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["women_life_expectancy"]};
+			let res = {name: x.country + " " + x.year, value: x["men_life_expectancy"]};
 			return res;
         });
         let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["em_totals"]};
+			let res = {name: x.country + " " + x.year, value: x["death_male"]};
 			return res;
         });
         
-		let datosConjuntos = [{name: "m1",data: MyDataGraph},
-								{name: "g1",data: OtherDataGraph},
-								 type, 'pie',
-        						  allowPointSelect, true,
-        						showInLegend, true];
+        let datosConjuntos = [{name: "Esperanza de vida",data: MyDataGraph},{name: "Hombres muerto por sobredosis",data: OtherDataGraph}];
         
-                Highcharts.chart('container', {
-
-    chart: {
-        polar: true,
-        type: 'line'
-    },
-
-    accessibility: {
-        description: 'dfhghj'
-    },
-
-    title: {
-        text: 'Budget vs spending',
-        x: -80
-    },
-
-    pane: {
-        size: '80%'
-    },
-
-    xAxis: {
-        categories: ['Sales', 'Marketing', 'Development', 'Customer Support',
-            'Information Technology', 'Administration'],
-        tickmarkPlacement: 'on',
-        lineWidth: 0
-    },
-
-    yAxis: {
-        gridLineInterpolation: 'polygon',
-        lineWidth: 0,
-        min: 0
-    },
-
-    tooltip: {
-        shared: true,
-        pointFormat: '<span style="color:{series.color}">{series.name}: <b>${point.y:,.0f}</b><br/>'
-    },
-
-    legend: {
-        align: 'right',
-        verticalAlign: 'middle',
-        layout: 'vertical'
-    },
-
-    series: datosConjuntos,
-
-    responsive: {
-        rules: [{
-            condition: {
-                maxWidth: 500
-            },
-            chartOptions: {
-                legend: {
-                    align: 'center',
-                    verticalAlign: 'bottom',
-                    layout: 'horizontal'
-                },
-                pane: {
-                    size: '70%'
-                }
-            }
-        }]
+  Highcharts.chart('container', {
+			chart: {
+				type: 'packedbubble',
+				height: '100%'
+			},
+			tooltip: {
+				useHTML: true,
+				pointFormat: '<b>{point.name}:</b> {point.value}'
+			},
+			plotOptions: {
+				packedbubble: {
+					minSize: '35%',
+					maxSize: '80%',
+					zMin: 0,
+					zMax: 100,
+					layoutAlgorithm: {
+						gravitationalConstant: 0.05,
+                        splitSeries: true,
+                        seriesInteraction: false,
+                        dragBetweenSeries: true,
+                        parentNodeLimit: true
+					},
+					dataLabels: {
+						enabled: true,
+						format: '{point.name}',
+						filter: {
+							property: 'y',
+							operator: '>',
+							value: 250
+						},
+						style: {
+							color: 'black',
+							textOutline: 'none',
+							fontWeight: 'normal'
+						}
+					}
+				}
+			},
+			series: datosConjuntos
+		});
     }
-
-});
-	}
 </script>
 
 <svelte:head>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" on:load={loadGraph}></script>
-	<script src="https://code.highcharts.com/highcharts.js" on:load={loadGraph}></script>
-	<script src="https://code.highcharts.com/highcharts-more.js" on:load={loadGraph}></script>
-	<script src="https://code.highcharts.com/modules/exporting.js" on:load={loadGraph}></script>
-	<script src="https://code.highcharts.com/modules/export-data.js" on:load={loadGraph}></script>
-	<script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
+    <script src="https://code.highcharts.com/highcharts.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/highcharts-more.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/modules/exporting.js" on:load={loadGraph}></script>>
+    <script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
     
 </svelte:head>
 <main>
-    <h3> g1</h3>
+    <h3> Grafica esperanza de vida en hombres y hombres muerto por sobredosis</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
-		 <p class="highcharts-description">
-        Spider web.
-    </p>
 	</figure>
 	
 	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
@@ -132,9 +98,15 @@
 	main {
 		text-align: center;
 	}
+    .highcharts-figure, .highcharts-data-table table {
+  min-width: 320px; 
+  max-width: 800px;
+  margin: 1em auto;
+}
+
 .highcharts-figure, .highcharts-data-table table {
-    min-width: 320px;
-    max-width: 700px;
+    min-width: 320px; 
+    max-width: 800px;
     margin: 1em auto;
 }
 
