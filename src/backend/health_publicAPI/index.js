@@ -10,7 +10,7 @@ module.exports =function (app) {
 	const db = new dataStore({
 		filename: dbFileName,
 		autoload: true
-		});
+	});
 	
 
 	//----- API MARIO --------//

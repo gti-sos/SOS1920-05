@@ -3,9 +3,10 @@
     import Button from "sveltestrap/src/Button.svelte";
 
 	async function loadGraph(){
+
         let MyData = [];
-        let OtherData = [];
-        const url = "/api/v2/atc-stats";
+        let OtherData = {};
+        const url = "https://api.covid19api.com/stats";
 
         const resData = await fetch("/api/v1/health_public");
         MyData = await resData.json();
@@ -22,22 +23,30 @@
         let MyDataGraph = MyData.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["total_spending"]};
 			return res;
-        });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.aut_com + " " + x.year, value: x["obu"]};
-			return res;
-        });
-        
-        let datosConjuntos = [{name: "Gasto total", data: MyDataGraph}, {name: "Coste Matricula según la página obu",data: OtherDataGraph}];
+		});
+		
+        let OtherDataGraph = {name: "Covid19", value: OtherData.Total};
+		
+		let datosJuntos = 
+        [
+            {
+                name: "Gasto Total",
+                data: MyDataGraph
+            },
+            {
+                name: "Covid19",
+                data: OtherDataGraph
+            }
+        ];
         
         Highcharts.chart('container', {
 			chart: {
 				type: 'packedbubble',
-				height: '60%'
-            },
-            title: {
-                text: 'Gráfica que representa el gasto público y el coste medio de matrícula universitaria'
-            },
+				height: '100%'
+			},
+			title: {
+				text: 'Gráfica que representa el gasto total y una frase random de Kanye West.'
+			},
 			tooltip: {
 				useHTML: true,
 				pointFormat: '<b>{point.name}:</b> {point.value}'
@@ -49,8 +58,8 @@
 					zMin: 0,
 					zMax: 1000,
 					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: false,
+						splitSeries: false,
+						gravitationalConstant: 0.02
 					},
 					dataLabels: {
 						enabled: true,
@@ -68,9 +77,11 @@
 					}
 				}
 			},
-			series: datosConjuntos
+			series: datosJuntos
 		});
     }
+
+
 </script>
 
 <svelte:head>

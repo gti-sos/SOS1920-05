@@ -23,12 +23,12 @@
 			let res = {name: x.country + " " + x.year, value: x["public_spending"]};
 			return res;
         });
-        let OtherDataGraph = OtherData.map((x) => {
+        let OtherDataGraph = OtherData.filter((x) => {return x.year == 2014;}).map((x) => {
 			let res = {name: x.name + " " + x.year, value: x["fruitJuice"]};
 			return res;
         });
         
-        let datosConjuntos = [{name: "Gasto público", data: MyDataGraph}, {name: "Importaciones de zumos de frutas",data: OtherDataGraph}];
+        let datosConjuntos = [{name: "Gasto público", data: MyDataGraph}, {name: "Importaciones de zumos de frutas", data: OtherDataGraph}];
         
         Highcharts.chart('container', {
 			chart: {
@@ -36,7 +36,7 @@
 				height: '60%'
             },
             title: {
-                text: 'Gráfica que representa el gasto público y las importaciones de zumos de frutas'
+                text: 'Gráfica que representa el gasto público y las importaciones de zumos de frutas en 2014'
             },
 			tooltip: {
 				useHTML: true,
