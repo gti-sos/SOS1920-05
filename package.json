@@ -6,9 +6,9 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "test": "npx newman run tests/SOS1920-05-BOOKS_EXPORTS.postman_collection.json && npx newman run tests/SOS1920-05-health_public.postman_collection.json && npx newman run tests/SOS1920-05-life_expectancies.postman_collection.json",
+    "test": "npx newman run tests/SOS1920-05-BOOKS_EXPORTS.postman_collection.json && npx newman run tests/SOS1920-05-health_public.postman_collection.json ",
     "start": "node index"
-  },
+  },                                    
   "devDependencies": {
     "@rollup/plugin-commonjs": "11.0.2",
     "@rollup/plugin-node-resolve": "^7.0.0",
