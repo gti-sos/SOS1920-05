@@ -5,7 +5,7 @@
 	async function loadGraph(){
 
         let MyData = [];
-        let OtherData = {};
+        let OtherData = [];
         const url = "https://www.balldontlie.io/api/v1/players";
 
         const resData = await fetch("/api/v1/health_public");
@@ -103,7 +103,10 @@
 		<div id="container"></div>
 	</figure>
 	
+	<h6><a href="https://www.balldontlie.io/api/v1/players">URL API EXTERNA</a></h6>
+	<p></p>
 	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
+	
 
 </main>
 
