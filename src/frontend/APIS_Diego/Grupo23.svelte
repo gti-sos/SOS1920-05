@@ -9,7 +9,7 @@
 	async function loadGraph(){
         let MyData = [];
         let OtherData = [];
-        const url = "https://sos1920-23.herokuapp.com/api/v2/fire-sales/";
+        const url = "https://sos1920-23.herokuapp.com/api/v2/fires-stats/";
 
         const resData = await fetch("/api/v1/books-exports");
         MyData = await resData.json();
@@ -22,7 +22,7 @@
 			return res;
         });
         let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["total_fire"]};
+			let res = {name: x.year, value: x["total_fire"]};
 			return res;
         });
         

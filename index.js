@@ -10,7 +10,10 @@ const life_expectanciesAPI = require(path.join(__dirname,"./src/backend/life_exp
 var proxyGrupo28 = "/api/v1/ppas";
 var proxyGrupo_28_gce = "/api/v1/gce";
 var urlProxyGrupo28 = "https://sos1920-28.herokuapp.com";
-
+var proxyGrupoExt1 = "/api/digimon";
+var urlProxyGrupoExt1 = "https://digimon-api.herokuapp.com";
+var proxyGrupoExt2 = "/v2/networks?fields=location";
+var urlProxyGrupoExt2 = "http://api.citybik.es";
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -20,6 +23,18 @@ app.use("/",express.static("./public"));
 //-------Proxy Diego a Grupo 28
 app.use(proxyGrupo28, function(req, res){
     var url = urlProxyGrupo28 + req.baseUrl + req.url;
+    console.log("piped: " + req.baseUrl + req.url);
+    req.pipe(request(url)).pipe(res)
+});
+//-------Proxy Diego a Grupo Ext 1
+app.use(proxyGrupoExt1, function(req, res){
+    var url = urlProxyGrupoExt1 + req.baseUrl + req.url;
+    console.log("piped: " + req.baseUrl + req.url);
+    req.pipe(request(url)).pipe(res)
+});
+//-------Proxy Diego a Grupo Ext 2
+app.use(proxyGrupoExt2, function(req, res){
+    var url = urlProxyGrupoExt2 + req.baseUrl + req.url;
     console.log("piped: " + req.baseUrl + req.url);
     req.pipe(request(url)).pipe(res)
 });

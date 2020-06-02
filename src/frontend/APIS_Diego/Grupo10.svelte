@@ -9,7 +9,7 @@
 	async function loadGraph(){
         let MyData = [];
         let OtherData = [];
-        const url = "https://sos1920-10.herokuapp.com/api/v2/global-marriages";
+        const url = "https://sos1920-10.herokuapp.com/api/v3/global-marriages";
 
         const resData = await fetch("/api/v1/books-exports");
         MyData = await resData.json();
