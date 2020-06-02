@@ -5,7 +5,7 @@
 	async function loadGraph(){
         let MyData = [];
         let OtherData = [];
-        const url = "http://sos1920-02.herokuapp.com/api/v2/evolution-of-cycling-routes";
+        const url = "https://sos1920-02.herokuapp.com/api/v2/evolution-of-cycling-routes";
 
         const resData = await fetch("/api/v1/health_public");
         MyData = await resData.json();
