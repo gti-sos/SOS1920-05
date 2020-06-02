@@ -40,7 +40,7 @@
 		<ul>
 			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graphC3">Apexchart Exportacion Libros</a></p>
 			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/ChartJS">ChartJS Gasto en Salud</a></p>				
-			<p><a href="https://sos1920-05.herokuapp.com/#/Visual_Chart_life_expectancies"> Esperanza de vida</a></p>
+			<p><a href="https://sos1920-05.herokuapp.com/#/Any_Chart_life_expectancies">AnyChart Esperanza de vida</a></p>
 
 		</ul>
 		<p></p>
