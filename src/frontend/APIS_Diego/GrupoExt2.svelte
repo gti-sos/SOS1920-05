@@ -9,7 +9,7 @@
     let diego = [];
     let mario = [];
 	
-	const url = "/v2/networks?fields=location";
+	const url = "https://api.openbrewerydb.org/breweries";
     const resDataDiego = await fetch("/api/v1/books-exports");
 	diego = await resDataDiego.json();
 	
@@ -21,7 +21,7 @@
 			return res;
         });
     let datos_mario = mario.map((x) => {
-			let res = {name: x.networks.location.city,value: x["latitude"]};
+			let res = {name: x.city,value: parseInt(x.phone)};
 			return res;
         });
         

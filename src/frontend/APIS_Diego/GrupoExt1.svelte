@@ -8,19 +8,21 @@
     let diego = [];
     let mario = [];
 	
-	const url = "https://digimon-api.herokuapp.com/api/digimon";
+	const url = "https://api.n.exchange/en/api/v1/currency/";
     const resDataDiego = await fetch("/api/v1/books-exports");
 	diego = await resDataDiego.json();
-	
     const resDataMario = await fetch(url);
     mario = await resDataMario.json();
     
     let datos_diego = diego.map((x) => {
 			let res = {name: x.country + " " + x.year,value: x["exp_editorial"]};
 			return res;
-        });
-    let datos_mario = mario.filter((x) => {return x.name == "Omnimon";}).map((x) => {
-			let res = {name: x.name,value: x["level"]};
+		});
+	
+	//let utilUtilMario = mario.networks;
+	//let utilMario= utilUtilMario.location;
+    let datos_mario = mario.filter((d) => {return parseInt(d.minimal_amount) > 10.0;}).map((x) => {
+			let res = {name: x.code,value: parseInt(x.minimal_amount)};
 			console.log(x);
 			return res;
         });
