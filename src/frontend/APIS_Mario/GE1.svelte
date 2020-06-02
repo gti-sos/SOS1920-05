@@ -6,7 +6,7 @@
 
         let MyData = [];
         let OtherData = {};
-        const url = "https://api.covid19api.com/stats";
+        const url = "https://www.balldontlie.io/api/v1/players";
 
         const resData = await fetch("/api/v1/health_public");
         MyData = await resData.json();
@@ -25,7 +25,14 @@
 			return res;
 		});
 		
-        let OtherDataGraph = {name: "Covid19", value: OtherData.Total};
+		let utilData = OtherData.data;
+
+        let OtherDataGraph = utilData.filter((y) => {
+			return y.position == "G";
+			}).map((x) => {
+				let res = {name: x.first_name + " " + x.last_name, value: x.id};
+			return res;
+		});
 		
 		let datosJuntos = 
         [
@@ -34,7 +41,7 @@
                 data: MyDataGraph
             },
             {
-                name: "Covid19",
+                name: "Jugadores NBA",
                 data: OtherDataGraph
             }
         ];
@@ -45,7 +52,7 @@
 				height: '100%'
 			},
 			title: {
-				text: 'Gráfica que representa el gasto total y una frase random de Kanye West.'
+				text: 'Gráfica que representa el gasto total y el ID de los jugadores de la NBA de posición "G".'
 			},
 			tooltip: {
 				useHTML: true,
