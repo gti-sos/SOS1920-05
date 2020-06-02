@@ -6,7 +6,7 @@
 
         let MyData = [];
         let OtherData = [];
-        const url = "https://api.covid19api.com/countries";
+        const url = "https://api.covid19api.com/country/spain";
 
         const resData = await fetch("/api/v1/health_public");
         MyData = await resData.json();
@@ -26,9 +26,9 @@
 		});
 
         let OtherDataGraph = OtherData.filter((y) => {
-			return y.ISO2.charAt(0) == "M";
+			return (y.Deaths >=100 && y.Deaths <=1000);
 			}).map((x) => {
-				let res = {name: x.Country + " - " + x.ISO2, value: x.Country.length};
+				let res = {name: x.Date, value: x.Deaths};
 			return res;
 		});
 		
@@ -39,7 +39,7 @@
                 data: MyDataGraph
             },
             {
-                name: "Paises afectados por Covid",
+                name: "Fecha en las que se registraron el número de fallecidos",
                 data: OtherDataGraph
             }
         ];
@@ -50,7 +50,7 @@
 				height: '100%'
 			},
 			title: {
-				text: 'Gráfica que representa el gasto total y los paises afectados por covid.'
+				text: 'Gráfica que representa el gasto total y las fechas en las que fallecieron entre las 100 y 1000 primeras personas en España a causa del Covid-19.'
 			},
 			tooltip: {
 				useHTML: true,
@@ -63,7 +63,7 @@
 					zMin: 0,
 					zMax: 1000,
 					layoutAlgorithm: {
-						splitSeries: true,
+						splitSeries: false,
 						gravitationalConstant: 0.02
 					},
 					dataLabels: {
@@ -101,9 +101,10 @@
 		<div id="container"></div>
 	</figure>
 	
-	<h6><a href="https://api.covid19api.com/countries">URL API EXTERNA</a></h6>
+	<h4><a href="https://api.covid19api.com/country/spain">Fuente</a></h4>
 	<p></p>
 	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
+	<p></p>
 	
 
 </main>

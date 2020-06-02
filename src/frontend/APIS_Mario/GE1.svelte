@@ -103,10 +103,10 @@
 		<div id="container"></div>
 	</figure>
 	
-	<h6><a href="https://www.balldontlie.io/api/v1/players">URL API EXTERNA</a></h6>
+	<h4><a href="https://www.balldontlie.io/api/v1/players">Fuente</a></h4>
 	<p></p>
 	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
-	
+	<p></p>
 
 </main>
 
