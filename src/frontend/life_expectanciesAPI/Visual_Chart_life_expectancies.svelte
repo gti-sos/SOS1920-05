@@ -12,7 +12,6 @@
     
     let countries = Array.from(new Set(MyData.filter(d => d.year == 2015).map((d) => {return d.country;})));
     let women_life_expectancy = Array.from(new Set(MyData.map((d) => {return d["women_life_expectancy"];})));
-    
 
     // create data
     var data = [countries, women_life_expectancy];
