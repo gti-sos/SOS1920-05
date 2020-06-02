@@ -9,20 +9,23 @@
     let OtherData = [];
     const url = "https://cdn.anychart.com/charts-data/data_json.json";
 
-    anychart.onDocumentReady(function () {
-    // To work with the data adapter you need to reference the data adapter script file from AnyChart CDN
-    // https://cdn.anychart.com/releases/8.7.1/js/anychart-data-adapter.min.js
+    anychart.onDocumentReady(function() {
+      // To work with the data adapter you need to reference the data adapter script file from AnyChart CDN
+      // https://cdn.anychart.com/releases/8.7.1/js/anychart-data-adapter.min.js
 
-    // Load JSON data and create a chart by JSON data.
-    anychart.data.loadJsonFile("https://cdn.anychart.com/charts-data/data_json.json", function (data) {
-// create a chart and set loaded data
-var chart = anychart.pie3d(data);
-// configure and display
-chart.title("Load JSON data and create a chart");
-chart.container("container");
-chart.draw();
+      // Load JSON data and create a chart by JSON data.
+      anychart.data.loadJsonFile(
+        "https://cdn.anychart.com/charts-data/data_json.json",
+        function(data) {
+          // create a chart and set loaded data
+          var chart = anychart.pie3d(data);
+          // configure and display
+          chart.title("Load JSON data and create a chart");
+          chart.container("container");
+          chart.draw();
+        }
+      );
     });
-});
   }
 </script>
 
@@ -38,18 +41,19 @@ chart.draw();
 </style>
 
 <svelte:head>
+  <script>
+    src =
+      "https://cdn.anychart.com/releases/8.7.1/js/anychart-data-adapter.min.js"on:load={loadGraph}
+  </script>
   <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js">
 
   </script>
   <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js">
 
   </script>
-  <script
-    src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"
-    on:load={loadGraph}>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js">
 
   </script>
-
 </svelte:head>
 <main>
   <h3>Grafica esperanza de vida en media con casos de muertes por COVID 19</h3>
