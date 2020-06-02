@@ -9,8 +9,9 @@
     let MyData = [];
     const resData = await fetch("/api/v1/life_expectancies");
     MyData = await resData.json();
-    let countries = Array.from(new Set(MyData.filter(d => d.year == 2016).map((d) => {return d.country;})));
-    let women_life_expectancy = Array.from(new Set(MyData.filter(d => d.year == 2016).map((d) => {return d["women_life_expectancy"];})));
+    
+    let countries = Array.from(new Set(MyData.filter(d => d.year == 2015).map((d) => {return d.country;})));
+    let women_life_expectancy = Array.from(new Set(MyData.map((d) => {return d["women_life_expectancy"];})));
     
 
     // create data
@@ -18,10 +19,10 @@
       
     
     // create a chart
-    var chart = anychart.radar();
+    var chart = anychart.pie();
 
     // create an area series and set the data
-    var series = chart.area(data);
+    var series = chart.data(data);
 
     // set the chart title
     chart.title("Radar Area Chart");

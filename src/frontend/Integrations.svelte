@@ -54,5 +54,5 @@ color: white;
       </tr>
     </tbody>
 </table>
-
+<p></p>
 <Button outline color="secondary" on:click="{pop}"> Volver</Button>
