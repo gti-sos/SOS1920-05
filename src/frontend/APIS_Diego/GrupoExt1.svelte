@@ -82,7 +82,7 @@
 </svelte:head>
 
 <main>
-    <h2> Representacion de las exportaciones, el gasto y la esperanza de vida en el mundo</h2>
+    <h2> Representacion de las exportaciones y los tipos de monedas en el mundo</h2>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>
