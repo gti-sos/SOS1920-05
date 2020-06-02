@@ -36,8 +36,6 @@ app.use(pathProxyG24, function(req, res) {
 });
 //---------------------------------------
 
-
-=======
 //       Proxy Mathias grupo_28_gce
 app.use(proxyGrupo_28_gce, function(req, res){
     var url = urlProxyGrupo28 + req.baseUrl + req.url;
