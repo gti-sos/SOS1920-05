@@ -2,42 +2,53 @@
 	import {pop} from "svelte-spa-router";
     import Button from "sveltestrap/src/Button.svelte";
 
-	async function loadGraph(){
-        let MyData = [];
-        let OtherData = [];
-        const url = "https://sos1920-28.herokuapp.com/api/v1/ppas";
-
-        const resData = await fetch("/api/v1/health_public");
-        MyData = await resData.json();
-
-        console.log("Fetching url...");	
-		const res = await fetch(url); 
-		if (res.ok) {
-			console.log("Ok");
-            OtherData = await res.json();
-		} else {
-			console.log("Error al cargar API externa");
-        }
-
-        let MyDataGraph = MyData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["public_spending"]};
-			return res;
-        });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["aas_net"]};
-			return res;
+	async function loadGraphExt1(){
+        console.log("Loading external api");
+        
+        const BASE_API_URL  = "/api/v1/health_public";
+        const BASE_API_URL_External01 = "https://restcountries.eu/rest/v2/all?fields=name;area;population";
+        const resData = await fetch(BASE_API_URL);
+        const resDataExternal01 = await fetch(BASE_API_URL_External01);
+        let MyData = await resData.json();
+        let DataExternal01 = await resDataExternal01.json();
+        console.log(DataExternal01);
+        console.log(MyData);
+            
+            let dataPrimary = MyData.map((d) => {
+                let res = {
+                    name: d.country + " - " + d.year,
+                    value: d["total_spending"]
+                };
+                return res;
+            });
+            let dataAPIExternal01 = DataExternal01.filter((d) => {return d.area > 5000000;}).map((d) =>  {
+            let res = {
+                name:  d.name + " - " + d.population,
+                value: d.area
+            };
+            return res;
         });
         
-        let datosConjuntos = [{name: "Gasto público", data: MyDataGraph}, {name: "Salario neto",data: OtherDataGraph}];
         
-        Highcharts.chart('container', {
+		let datos = 
+        [
+            {
+                name: "Millones de toneladas de petróleo.",
+                data: dataPrimary
+            },
+            {
+                name: "Area por País y Población.",
+                data: dataAPIExternal01
+            }
+        ];
+        Highcharts.chart('container-ext', {
 			chart: {
 				type: 'packedbubble',
-				height: '60%'
-            },
-            title: {
-                text: 'Gráfica que representa el gasto público y el salario neto de PPA'
-            },
+				height: '100%'
+			},
+			title: {
+				text: 'Relacion Consumo de petroleo por Países junto con Países y su Poblacion con un area meno que 250.'
+			},
 			tooltip: {
 				useHTML: true,
 				pointFormat: '<b>{point.name}:</b> {point.value}'
@@ -49,8 +60,8 @@
 					zMin: 0,
 					zMax: 1000,
 					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: true,
+						splitSeries: false,
+						gravitationalConstant: 0.02
 					},
 					dataLabels: {
 						enabled: true,
@@ -68,9 +79,11 @@
 					}
 				}
 			},
-			series: datosConjuntos
+			series: datos
 		});
     }
+
+
 </script>
 
 <svelte:head>
