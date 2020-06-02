@@ -1,73 +1,87 @@
 <script>
-    import {pop} from "svelte-spa-router";
-	import Button from "sveltestrap/src/Button.svelte";
-    let Data = [];
-    let countries = [];
-    let CountriesData = [];
-    let CountriesData2 = [];
-    async function loadGraph(){
-        const resData = await fetch("https://covid-193.p.rapidapi.com/statistics", {	
-			"method": "GET",
-			"headers": {
-			"x-rapidapi-host": "covid-193.p.rapidapi.com",
-			"x-rapidapi-key": "0f1c9a6651mshcc6fb880746f7d2p18a345jsna7eda5bbbed3"
-			}
-    		})
-		CountriesData = await resData.json();
-			console.log(CountriesData.response);
-		
-		CountriesData2 = CountriesData.response;
-		CountriesData2.forEach((data) => {
-				let country = { 
-					'name': data.country,
-					'value': data.deaths.total
-			};
-		Data.push(country);
+	import {pop} from "svelte-spa-router";
+    import Button from "sveltestrap/src/Button.svelte";
+
+	async function loadGraph(){
+
+        let MyData = [];
+        let OtherData = {};
+        const url = "https://api.covid19api.com/stats";
+
+        const resData = await fetch("/api/v1/health_public");
+        MyData = await resData.json();
+
+        console.log("Fetching url...");	
+		const res = await fetch(url); 
+		if (res.ok) {
+			console.log("Ok");
+            OtherData = await res.json();
+		} else {
+			console.log("Error al cargar API externa");
+        }
+
+        let MyDataGraph = MyData.map((x) => {
+			let res = {name: x.country + " " + x.year, value: x["total_spending"]};
+			return res;
 		});
-			Highcharts.chart('container', {
-		chart: {
-			type: 'packedbubble',
-			height: '100%'
-		},
-		title: {
-			text: 'Deaths caused by Covid-19'
-		},
-		tooltip: {
-			useHTML: true,
-			pointFormat: '<b>{point.name}:</b> {point.value} deaths'
-		},
-		plotOptions: {
-			packedbubble: {
-				minSize: '30%',
-				maxSize: '120%',
-				zMin: 0,
-				zMax: 1000,
-				layoutAlgorithm: {
-					splitSeries: false,
-					gravitationalConstant: 0.02
-				},
-				dataLabels: {
-					enabled: true,
-					format: '{point.name}',
-					filter: {
-						property: 'y',
-						operator: '>',
-						value: 250
+		
+        let OtherDataGraph = {name: "Covid19", value: OtherData.Total};
+		
+		let datosJuntos = 
+        [
+            {
+                name: "Gasto Total",
+                data: MyDataGraph
+            },
+            {
+                name: "Covid19",
+                data: OtherDataGraph
+            }
+        ];
+        
+        Highcharts.chart('container', {
+			chart: {
+				type: 'packedbubble',
+				height: '100%'
+			},
+			title: {
+				text: 'Gráfica que representa el gasto total y una frase random de Kanye West.'
+			},
+			tooltip: {
+				useHTML: true,
+				pointFormat: '<b>{point.name}:</b> {point.value}'
+			},
+			plotOptions: {
+				packedbubble: {
+					minSize: '30%',
+					maxSize: '120%',
+					zMin: 0,
+					zMax: 1000,
+					layoutAlgorithm: {
+						splitSeries: false,
+						gravitationalConstant: 0.02
 					},
-					style: {
-						color: 'black',
-						textOutline: 'none',
-						fontWeight: 'normal'
+					dataLabels: {
+						enabled: true,
+						format: '{point.name}',
+						filter: {
+							property: 'y',
+							operator: '>',
+							value: 250
+						},
+						style: {
+							color: 'black',
+							textOutline: 'none',
+							fontWeight: 'normal'
+						}
 					}
 				}
-			}
-		},
-		series: [{
-			name: 'Countries',
-			data: Data
-		}]
-	});
-	}
+			},
+			series: datosJuntos
+		});
+    }
+
+
 </script>
 
 <svelte:head>
