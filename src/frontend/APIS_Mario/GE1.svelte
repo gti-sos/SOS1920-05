@@ -65,7 +65,7 @@
 					zMin: 0,
 					zMax: 1000,
 					layoutAlgorithm: {
-						splitSeries: false,
+						splitSeries: true,
 						gravitationalConstant: 0.02
 					},
 					dataLabels: {
