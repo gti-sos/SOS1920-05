@@ -8,6 +8,7 @@ const health_publicAPI = require(path.join(__dirname,"./src/backend/health_publi
 const life_expectanciesAPI = require(path.join(__dirname,"./src/backend/life_expectanciesAPI"));
 
 var proxyGrupo28 = "/api/v1/ppas";
+var proxyGrupo_28_gce = "/api/v1/gce";
 var urlProxyGrupo28 = "https://sos1920-28.herokuapp.com";
 
 const port = process.env.PORT || 5000;
@@ -23,6 +24,7 @@ app.use(proxyGrupo28, function(req, res){
     req.pipe(request(url)).pipe(res)
 });
 
+<<<<<<< HEAD
 
 //Proxy Mario Grupo24 -----------------------------
 var pathProxyG24='/api/v2/atc-stats';
@@ -36,6 +38,14 @@ app.use(pathProxyG24, function(req, res) {
 //---------------------------------------
 
 
+=======
+//       Proxy Mathias grupo_28_gce
+app.use(proxyGrupo_28_gce, function(req, res){
+    var url = urlProxyGrupo28 + req.baseUrl + req.url;
+    console.log("piped: " + req.baseUrl + req.url);
+    req.pipe(request(url)).pipe(res)
+});
+>>>>>>> b640ab33b006088c1b3a05eb0d69e4cb4ec84f50
 
 app.use(cors());
 books_exportsAPI(app);

@@ -14,15 +14,9 @@
         const resData = await fetch("/api/v1/books-exports");
         MyData = await resData.json();
 
-        console.log("Fetching url...");	
 		const res = await fetch(url); 
-		if (res.ok) {
-			console.log("Ok");
-            OtherData = await res.json();
-		} else {
-			console.log("Error al cargar API externa");
-        }
-
+		OtherData = await res.json();
+		
         let MyDataGraph = MyData.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
@@ -85,7 +79,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones de libros y emigrantes en el mundo</h3>
+    <h3> Grafica exportaciones de libros y accidentes en el mundo</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>

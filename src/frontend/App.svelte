@@ -46,8 +46,19 @@
 	import MarioGE2 from './APIS_Mario/GE1.svelte';
 
 	//APIs Mathias
-	import Grupo_01_soverty_stats from './APIS_Mathias/Grupo_01_soverty_stats.svelte';
+	import Grupo_01_poverty_stats from './APIS_Mathias/Grupo_01_poverty_stats.svelte';
+	import Grupo_02_rural_tourism from './APIS_Mathias/Grupo_02_rural-tourism-stats.svelte';
+	import Grupo_04_vehicles from './APIS_Mathias/Grupo_04_vehicles.svelte';
+	import Grupo_07_imports from './APIS_Mathias/Grupo_07_imports.svelte';
+	import Grupo_09_plugin_vehicles from './APIS_Mathias/Grupo_09_plugin_vehicles.svelte';
 	import Grupo_12_overdose_death from './APIS_Mathias/Grupo_12_overdose_death.svelte';
+	import Grupo_23_cigarretes_sales from './APIS_Mathias/Grupo_23_cigarretes_sales.svelte';
+	import Grupo_25_happiness_rate from './APIS_Mathias/Grupo_25_happiness_rate.svelte';
+	import Grupo_27_life_quality from './APIS_Mathias/Grupo_27_life_quality.svelte';
+	import Grupo_28_gce from './APIS_Mathias/Grupo_28_gce.svelte';
+	import API_externa_01_COVID_19 from './APIS_Mathias/API_externa_01_COVID_19.svelte';
+	import API_externa_01 from './APIS_Mathias/API_externa_01.svelte';
+	import API_externa_02 from './APIS_Mathias/API_externa_02.svelte';
 
 
 	import Integrations from './Integrations.svelte';
@@ -107,11 +118,22 @@
 		"/Integrations/APIS_Mario/GE2": MarioGE1,
 
 		//Ruta Mathias
-		"/integrations/APIS_Mathias":Integrations_Mathias,
-		"/integrations/APIS_Mathias/Grupo_01_soverty_stats": Grupo_01_soverty_stats,
+		"/integrations/APIS_Mathias": Integrations_Mathias,
+		"/integrations/APIS_Mathias/Grupo_01_poverty_stats": Grupo_01_poverty_stats,
+		"/integrations/APIS_Mathias/Grupo_02_rural_tourism": Grupo_02_rural_tourism,
+		"/integrations/APIS_Mathias/Grupo_04_vehicles": Grupo_04_vehicles,
+		"/integrations/APIS_Mathias/Grupo_07_imports": Grupo_07_imports,
+		"/integrations/APIS_Mathias/Grupo_09_plugin_vehicles": Grupo_09_plugin_vehicles,
 		"/integrations/APIS_Mathias/Grupo_12_overdose_death": Grupo_12_overdose_death,
-
-
+		"/integrations/APIS_Mathias/Grupo_23_cigarretes_sales": Grupo_23_cigarretes_sales,
+		"/integrations/APIS_Mathias/Grupo_25_happiness_rate": Grupo_25_happiness_rate,
+		"/integrations/APIS_Mathias/Grupo_27_life_quality": Grupo_27_life_quality,
+		"/integrations/APIS_Mathias/Grupo_28_gce": Grupo_28_gce,
+		
+		"/integrations/APIS_Mathias/API_externa_01_COVID_19": API_externa_01_COVID_19,
+		"/integrations/APIS_Mathias/API_externa_01": API_externa_01,
+		"/integrations/APIS_Mathias/API_externa_02": API_externa_02,
+		
 
 		
 

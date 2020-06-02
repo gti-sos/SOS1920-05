@@ -1,37 +1,43 @@
-<script>
-	import  {onMount} from "svelte";
+	<script>
+	import {onMount}from "svelte";
 	import {pop} from "svelte-spa-router";
+	import Table from "sveltestrap/src/Table.svelte";
     import Button from "sveltestrap/src/Button.svelte";
     
-    
-
-
+	
+	
 	async function loadGraph(){
         let MyData = [];
         let OtherData = [];
-        const url = "https://sos1920-23.herokuapp.com/api/v2/fire-sales/";
+        const url = "https://sos1920-04.herokuapp.com/api/v1/vehicles";
 
-        const resData = await fetch("/api/v1/books-exports");
+        const resData = await fetch("/api/v1/life_expectancies");
         MyData = await resData.json();
-		
-		const res = await fetch(url);
-		OtherData = await res.json();
-		
+
+        console.log("Fetching url...");	
+		const res = await fetch(url); 
+		if (res.ok) {
+			console.log("Ok");
+            OtherData = await res.json();
+		} else {
+			console.log("Error al cargar API externa");
+        }
+
         let MyDataGraph = MyData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
+			let res = {name: x.country + " " + x.year, value: x["average_life_expectancy"]};
 			return res;
         });
         let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["total_fire"]};
+			let res = {name: x.country + " " + x.year, value: x["bus"]};
 			return res;
         });
         
-        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Fuegos totales",data: OtherDataGraph}];
+        let datosConjuntos = [{name: "Esperanza de vida media",data: MyDataGraph},{name: "buses",data: OtherDataGraph}];
         
-                Highcharts.chart('container', {
+  Highcharts.chart('container', {
 			chart: {
 				type: 'packedbubble',
-				height: '60%'
+				height: '100%'
 			},
 			tooltip: {
 				useHTML: true,
@@ -39,15 +45,15 @@
 			},
 			plotOptions: {
 				packedbubble: {
-					minSize: '10%',
-					maxSize: '100%',
+					minSize: '5%',
+					maxSize: '90%',
 					zMin: 0,
-					zMax: 1000,
+					zMax: 100,
 					layoutAlgorithm: {
 						gravitationalConstant: 0.05,
                         splitSeries: true,
                         seriesInteraction: false,
-                        dragBetweenSeries: false,
+                        dragBetweenSeries: true,
                         parentNodeLimit: true
 					},
 					dataLabels: {
@@ -56,7 +62,7 @@
 						filter: {
 							property: 'y',
 							operator: '>',
-							value: 250
+							value: 300
 						},
 						style: {
 							color: 'black',
@@ -79,7 +85,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones de libros y fuegos totales en el mundo</h3>
+    <h3> Grafica esperanza de vida media y buses</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>
@@ -98,6 +104,12 @@
   margin: 1em auto;
 }
 
+.highcharts-figure, .highcharts-data-table table {
+    min-width: 320px; 
+    max-width: 800px;
+    margin: 1em auto;
+}
+
 .highcharts-data-table table {
 	font-family: Verdana, sans-serif;
 	border-collapse: collapse;
@@ -108,21 +120,21 @@
 	max-width: 500px;
 }
 .highcharts-data-table caption {
-  padding: 1em 0;
-  font-size: 1.2em;
-  color: #555;
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
 }
 .highcharts-data-table th {
 	font-weight: 600;
-  padding: 0.5em;
+    padding: 0.5em;
 }
 .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-  padding: 0.5em;
+    padding: 0.5em;
 }
 .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-  background: #f8f8f8;
+    background: #f8f8f8;
 }
 .highcharts-data-table tr:hover {
-  background: #f1f7ff;
+    background: #f1f7ff;
 }
 </style>

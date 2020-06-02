@@ -1,17 +1,52 @@
 <script>
-    import {pop} from "svelte-spa-router";
+	import{onMount}from "svelte";
+	import {pop} from "svelte-spa-router";
     import Button from "sveltestrap/src/Button.svelte";
     
-    async function loadGraph() {
-      
-        let MyData = [];
-        let MyDataGraph = [];
-        const resData = await fetch("/api/v1/life_expectancies");
-        MyData = await resData.json();
-        MyData.forEach( (x) => {
-            MyDataGraph.push({name: x.country + " " + x.year, data: [parseInt(x.women_life_expectancy), parseInt(x.men_life_expectancy), parseInt(x.average_life_expectancy)], pointPlacement: 'on'});
+	
+
+
+	async function loadGraph(){
+		let MyData = [];
+		let incomingData = [];
+		const url = "/api/v1/gce";
+
+		const resData = await fetch("/api/v1/life_expectancies");
+		MyData = await resData.json();
+		
+		
+		// MyData.forEach( (s) => {
+		// 	let data = {
+		// 		name: s.country + " " + s.year,
+		// 		value: [s.average_life_expectancy, s["men_life_expectancy"]]
+		// 	};
+		// 	incomingData = data;
+		// 	return incomingData;
+		// });
+		// const resData2 = await fetch(url);
+		// grupo28gce = await resData2.json();
+		// console.log(grupo28gce);
+		// grupo28gce.forEach( (t) => {
+		// 		let data = {name: t.country + " " + t.year,
+        //         value: t["gce_per_capita"]
+        //     	};
+        //     	incomingData.push(data)    
+		// });
+		
+		const result = await fetch(url);
+		gceIncoming = await result.json();
+		
+        let MyOwn = MyData.map((x) => {
+			let result = {name: x.country + " " + x.year, value: x["women_life_expectancy"]};
+			return result;
         });
-        Highcharts.chart('container', {
+        let gceg = gceIncoming.map((x) => {
+			let result = {name: x.country + " " + x.year, value: x["gce_per_capita"]};
+			return result;
+        });
+		let datosMixtos = [{name: "Esperanza de vida media",data: MyData},{name: "gce_per_capita",data: incomingData}];
+		
+		 Highcharts.chart('container', {
               chart: {
                 type: 'line'
               },
@@ -76,11 +111,11 @@
                 maxWidth: 500
             },
             chartOptions: {
-                legend: {
+                legend: [{
                     layout: 'horizontal',
                     align: 'center',
                     verticalAlign: 'bottom'
-                }
+                }]
             }
         }]
     }
@@ -100,7 +135,7 @@
 
 <main>
 
-    <h2 style="text-align: center;"> <i class="fas fa-car"></i> Estadísticas de las esperanza de vida</h2>
+    <h2 style="text-align: center;"> <i class="fas fa-car"></i> Estadísticas de las esperanza de vida en mujeres</h2>
     <figure class="highcharts-figure">
         <div id="container"></div>
     </figure>
