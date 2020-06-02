@@ -4,12 +4,11 @@
 	} from "svelte-spa-router";
     
     import Button from "sveltestrap/src/Button.svelte";
-	async function loadGraph() {
-    let datosConjuntos = [];   
+	async function loadGraph() { 
     let diego = [];
     let mario = [];
 	
-	const url = "/api/location/753692/";
+	const url = "https://digimon-api.herokuapp.com/api/digimon";
     const resDataDiego = await fetch("/api/v1/books-exports");
 	diego = await resDataDiego.json();
 	
@@ -20,12 +19,13 @@
 			let res = {name: x.country + " " + x.year,value: x["exp_editorial"]};
 			return res;
         });
-    let datos_mario = mario.map((x) => {
-			let res = {name: x.title,value: x["woeid"]};
+    let datos_mario = mario.filter((x) => {return x.name == "Omnimon";}).map((x) => {
+			let res = {name: x.name,value: x["level"]};
+			console.log(x);
 			return res;
         });
-        
-        datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Gasto Sanidad Publica",data: datos_mario}];
+            
+        let datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Gasto Sanidad Publica",data: datos_mario}];
 
         Highcharts.chart('container', {
 			chart: {

@@ -35,6 +35,7 @@
 			<p><a href="https://sos1920-05.herokuapp.com/#/health_public/HighChart">HighChart Gasto en Salud</a></p>
 			<p><a href="https://sos1920-05.herokuapp.com/#/Visual_life_expectancies">HighChart Esperanza de vida</a></p>
 		</ul>
+
 		<h3>Awesome Charts:</h3>
 		<ul>
 			<p><a href="https://sos1920-05.herokuapp.com/#/books-exports/graphC3">Apexchart Exportacion Libros</a></p>

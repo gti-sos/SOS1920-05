@@ -9,7 +9,7 @@
 	async function loadGraph(){
         let MyData = [];
         let OtherData = [];
-        const url = "https://sos1920-30.herokuapp.com/api/v2/indice_de_masa_corporal";
+        const url = "https://sos1920-30.herokuapp.com/api/v3/indice_de_masa_corporal";
 
         const resData = await fetch("/api/v1/books-exports");
         MyData = await resData.json();
@@ -22,7 +22,7 @@
 			return res;
         });
         let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["altura"]};
+			let res = {name: x.place + " " + x.year, value: x["altura"]};
 			return res;
         });
         

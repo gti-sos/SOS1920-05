@@ -7,9 +7,10 @@ const books_exportsAPI = require(path.join(__dirname,"./src/backend/books_export
 const health_publicAPI = require(path.join(__dirname,"./src/backend/health_publicAPI"));
 const life_expectanciesAPI = require(path.join(__dirname,"./src/backend/life_expectanciesAPI"));
 var proxyGrupo28 = "/api/v1/ppas";
+var proxyGrupo_28_gce = "/api/v1/gce";
 var urlProxyGrupo28 = "https://sos1920-28.herokuapp.com";
-var proxyGrupoExt1 = "/api/location/753692/";
-var urlProxyGrupoExt1 = "https://www.metaweather.com";
+var proxyGrupoExt1 = "/api/digimon";
+var urlProxyGrupoExt1 = "https://digimon-api.herokuapp.com";
 var proxyGrupoExt2 = "/v2/networks?fields=location";
 var urlProxyGrupoExt2 = "http://api.citybik.es";
 const port = process.env.PORT || 5000;
@@ -36,6 +37,14 @@ app.use(proxyGrupoExt2, function(req, res){
     console.log("piped: " + req.baseUrl + req.url);
     req.pipe(request(url)).pipe(res)
 });
+
+//       Proxy Mathias grupo_28_gce
+app.use(proxyGrupo_28_gce, function(req, res){
+    var url = urlProxyGrupo28 + req.baseUrl + req.url;
+    console.log("piped: " + req.baseUrl + req.url);
+    req.pipe(request(url)).pipe(res)
+});
+
 app.use(cors());
 books_exportsAPI(app);
 health_publicAPI(app);
