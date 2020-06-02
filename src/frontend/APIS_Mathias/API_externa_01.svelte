@@ -9,7 +9,7 @@
 	async function loadGraph(){
         let MyData = [];
         let OtherData = [];
-		const url = "http://citibikenyc.com/stations/json";
+		const url = "http://api.dhsprogram.com/rest/dhs/data/2010";
 
         const resData = await fetch("/api/v1/life_expectancies");
         MyData = await resData.json();
@@ -27,12 +27,12 @@
 			let res = {name: x.country + " " + x.year, value: x["average_life_expectancy"]};
 			return res;
         });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["totalDocks"]};
-			return res;
-        });
+        // let OtherDataGraph = OtherData.map((x) => {
+		// 	let res = {name: x.country + " " + x.CountryName + " ", value: x["value"]};
+		// 	return res;
+        // });
         
-        let datosConjuntos = [{name: "Esperanza de vida media",data: MyDataGraph},{name: "Estaciones de bicis en NYC",data: OtherDataGraph}];
+        let datosConjuntos = [{name: "Esperanza de vida media",data: MyDataGraph},{name: "USAID",data: OtherData}];
         
   Highcharts.chart('container', {
 			chart: {
@@ -85,7 +85,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica esperanza de vida en media y Estaciones de bicis en NYC</h3>
+    <h3> Grafica esperanza de vida en media con USAID</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>

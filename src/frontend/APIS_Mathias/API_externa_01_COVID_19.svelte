@@ -9,7 +9,7 @@
 	async function loadGraph(){
         let MyData = [];
         let OtherData = [];
-		const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
+		const url = "https://coronavirus-tracker-api.herokuapp.com/v2/locations";
 
         const resData = await fetch("/api/v1/life_expectancies");
         MyData = await resData.json();
@@ -26,13 +26,20 @@
         let MyDataGraph = MyData.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["average_life_expectancy"]};
 			return res;
-        });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.strDrink + " ", value: x["idDrink"]};
-			return res;
-        });
+		});
+		let reformattedArray = OtherData;
+		 reformattedArray.forEach((obj)=>{ 
+  			 let rObj = {name: obj.country + " " + obj.id, value: obj["deaths"]};
+   					//rObj[obj.country] = obj.deaths;
+   				return rObj;
+   });
+//         let OtherDataGraph = OtherData.(x => {
+// 			let res = {name: x.country + " " + x.id, value: x["deaths"]};
+// 			return res;
+//         });
         
-        let datosConjuntos = [{name: "Esperanza de vida media",data: MyDataGraph},{name: "Alcohol",data: OtherDataGraph}];
+		let datosConjuntos = [{name: "Esperanza de vida media",data: MyDataGraph},
+		{name: "Casos de muertes por COVID 19",data: reformattedArray}];
         
   Highcharts.chart('container', {
 			chart: {
@@ -85,7 +92,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica esperanza de vida en media con las nacionalidades de pilotos f1 2004</h3>
+    <h3> Grafica esperanza de vida en media con casos de muertes por COVID 19</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>

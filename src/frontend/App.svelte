@@ -55,6 +55,7 @@
 	import Grupo_25_happiness_rate from './APIS_Mathias/Grupo_25_happiness_rate.svelte';
 	import Grupo_27_life_quality from './APIS_Mathias/Grupo_27_life_quality.svelte';
 	import Grupo_28_gce from './APIS_Mathias/Grupo_28_gce.svelte';
+	import API_externa_01_COVID_19 from './APIS_Mathias/API_externa_01_COVID_19.svelte';
 	import API_externa_01 from './APIS_Mathias/API_externa_01.svelte';
 	import API_externa_02 from './APIS_Mathias/API_externa_02.svelte';
 
@@ -127,6 +128,7 @@
 		"/integrations/APIS_Mathias/Grupo_27_life_quality": Grupo_27_life_quality,
 		"/integrations/APIS_Mathias/Grupo_28_gce": Grupo_28_gce,
 		
+		"/integrations/APIS_Mathias/API_externa_01_COVID_19": API_externa_01_COVID_19,
 		"/integrations/APIS_Mathias/API_externa_01": API_externa_01,
 		"/integrations/APIS_Mathias/API_externa_02": API_externa_02,
 		
