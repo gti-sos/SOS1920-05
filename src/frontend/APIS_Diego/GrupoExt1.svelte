@@ -8,10 +8,12 @@
     let datosConjuntos = [];   
     let diego = [];
     let mario = [];
-
+	
+	const url = "/api/location/753692/";
     const resDataDiego = await fetch("/api/v1/books-exports");
-    diego = await resDataDiego.json();
-    const resDataMario = await fetch("/GrupoExt1");
+	diego = await resDataDiego.json();
+	
+    const resDataMario = await fetch(url);
     mario = await resDataMario.json();
     
     let datos_diego = diego.map((x) => {
@@ -19,7 +21,7 @@
 			return res;
         });
     let datos_mario = mario.map((x) => {
-			let res = {name: x.id,value: x["humidity"]};
+			let res = {name: x.title,value: x["woeid"]};
 			return res;
         });
         
