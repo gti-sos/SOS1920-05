@@ -8,7 +8,7 @@
     "dev": "rollup -c -w",
     "test": "npx newman run tests/SOS1920-05-BOOKS_EXPORTS.postman_collection.json && npx newman run tests/SOS1920-05-health_public.postman_collection.json ",
     "start": "node index"
-  },                                    
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "11.0.2",
     "@rollup/plugin-node-resolve": "^7.0.0",
@@ -32,6 +32,7 @@
     "chart.js": "^2.9.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "highcharts": "^8.1.0",
     "nedb": "^1.8.0",
     "node": "^14.0.0",
     "path": "^0.12.7",
