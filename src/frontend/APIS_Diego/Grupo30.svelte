@@ -20,7 +20,7 @@
 		const res = await fetch(url); 
 		jsonG30 = await res.json();
 
-		jsonDiego.filter((x) => {return x.country == "uk";}).forEach((x) => {
+		jsonDiego.filter((x) => {return x.country == "mexico";}).forEach((x) => {
 				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_graphic_sector),0]
 				}
 				datosConjuntos.push(data);
