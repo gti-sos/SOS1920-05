@@ -17,11 +17,11 @@
 		const res = await fetch(url);
         OtherData = await res.json();
 
-        let MyDataGraph = MyData.map((x) => {
+        let MyDataGraph = MyData.filter((x)=>{return x.year==2015}).map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
         });
-        let OtherDataGraph = OtherData.map((x) => {
+        let OtherDataGraph = OtherData.filter((x)=>{return x.year==2015}).map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["percentage-re-total"]};
 			return res;
         });
@@ -39,16 +39,13 @@
 			},
 			plotOptions: {
 				packedbubble: {
-					minSize: '10%',
-					maxSize: '100%',
+					minSize: '50%',
+					maxSize: '60%',
 					zMin: 0,
 					zMax: 1000,
 					layoutAlgorithm: {
 						gravitationalConstant: 0.05,
-                        splitSeries: true,
-                        seriesInteraction: false,
-                        dragBetweenSeries: false,
-                        parentNodeLimit: true
+                        splitSeries: false,
 					},
 					dataLabels: {
 						enabled: true,

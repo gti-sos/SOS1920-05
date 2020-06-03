@@ -17,12 +17,12 @@
 		const res = await fetch(url); 
 		OtherData = await res.json();
 		
-        let MyDataGraph = MyData.map((x) => {
+        let MyDataGraph = MyData.filter((x)=>{return x.year==2016}).map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
         });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["accident"]};
+        let OtherDataGraph = OtherData.filter((x)=>{return x.year==2016}).map((x) => {
+			let res = {name: x.auto_com + " " + x.year, value: x["accident"]};
 			return res;
         });
         
@@ -45,10 +45,7 @@
 					zMax: 1000,
 					layoutAlgorithm: {
 						gravitationalConstant: 0.05,
-                        splitSeries: true,
-                        seriesInteraction: false,
-                        dragBetweenSeries: false,
-                        parentNodeLimit: true
+                        splitSeries: false,
 					},
 					dataLabels: {
 						enabled: true,

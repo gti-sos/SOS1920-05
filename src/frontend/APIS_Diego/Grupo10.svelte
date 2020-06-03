@@ -8,66 +8,67 @@
 
 	async function loadGraph(){
         let MyData = [];
-        let OtherData = [];
+		let OtherData = [];
+		let data = {};
+		let datosConjuntos = [];
         const url = "https://sos1920-10.herokuapp.com/api/v3/global-marriages";
 
         const resData = await fetch("/api/v1/books-exports");
         MyData = await resData.json();
 
 		const res = await fetch(url); 
-        OtherData = await res.json();
-
-        let MyDataGraph = MyData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
-			return res;
+		OtherData = await res.json();
+		MyData.forEach((x) => {
+			if(x.year==2015){
+				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_editorial),0]
+				}
+				datosConjuntos.push(data);
+			}
         });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["marriages"]};
-			return res;
-        });
-        
-        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Bodas",data: OtherDataGraph}];
-        
-                Highcharts.chart('container', {
+		OtherData.forEach((x) => {
+			if(x.year==2018){
+				data={name: x.country +" "+ x.year,	data: [0,parseInt(x.marriages)]
+				}
+				datosConjuntos.push(data);
+			}
+		});
+		Highcharts.chart('container', {
 			chart: {
-				type: 'packedbubble',
-				height: '60%'
+				type: 'column'
+			},
+			title: {
+				text: 'Monthly Average Rainfall'
+			},
+			subtitle: {
+				text: 'Source: WorldClimate.com'
+			},
+			xAxis: {
+				categories: ["Exportaciones Libros"," Bodas"],
+				crosshair: true
+			},
+			yAxis: {
+				min: 0,
+				title: {
+				text: 'Rainfall (mm)'
+				}
 			},
 			tooltip: {
-				useHTML: true,
-				pointFormat: '<b>{point.name}:</b> {point.value}'
+				headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+				pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+				'<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+				footerFormat: '</table>',
+				shared: false,
+				useHTML: false
 			},
 			plotOptions: {
-				packedbubble: {
-					minSize: '10%',
-					maxSize: '100%',
-					zMin: 0,
-					zMax: 1000,
-					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: true,
-                        seriesInteraction: false,
-                        dragBetweenSeries: false,
-                        parentNodeLimit: true
-					},
-					dataLabels: {
-						enabled: true,
-						format: '{point.name}',
-						filter: {
-							property: 'y',
-							operator: '>',
-							value: 250
-						},
-						style: {
-							color: 'black',
-							textOutline: 'none',
-							fontWeight: 'normal'
-						}
-					}
+				column: {
+				pointPadding: 0.2,
+				borderWidth: 0
 				}
 			},
 			series: datosConjuntos
-		});
+			});
+
     }
 </script>
 
