@@ -76,7 +76,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones de libros y porcentaje de energias renovables en el mundo</h3>
+    <h3> Grafica exportaciones de libros y porcentaje de energias renovables en el mundo (2015)</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>
