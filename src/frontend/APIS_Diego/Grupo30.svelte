@@ -20,7 +20,7 @@
 		const res = await fetch(url); 
 		jsonG30 = await res.json();
 
-		jsonDiego.filter((x) => {return x.country == "polonia";}).forEach((x) => {
+		jsonDiego.filter((x) => {return x.country == "france";}).forEach((x) => {
 				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_graphic_sector),0]
 				}
 				datosConjuntos.push(data);
@@ -73,7 +73,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones del sector grafico y la altura en Polonia</h3>
+    <h3> Grafica exportaciones del sector grafico en Francia y la altura en Polonia</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>
