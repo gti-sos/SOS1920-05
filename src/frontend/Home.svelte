@@ -20,7 +20,6 @@
 	
 		<h3>URL:</h3>
 		<p><a href="http://sos1920-05.herokuapp.com/">http://sos1920-05.herokuapp.com/</a></p>
-		<p><a href="https://sos1920-05.azurewebsites.net/">https://sos1920-05.azurewebsites.net/</a></p>
 
 		<h2>APIs:</h2>
 		<ul>
