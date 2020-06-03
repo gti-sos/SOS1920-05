@@ -20,7 +20,6 @@
 	
 		<h3>URL:</h3>
 		<p><a href="http://sos1920-05.herokuapp.com/">http://sos1920-05.herokuapp.com/</a></p>
-		<p><a href="https://sos1920-05.azurewebsites.net/">https://sos1920-05.azurewebsites.net/</a></p>
 
 		<h2>APIs:</h2>
 		<ul>
@@ -47,6 +46,9 @@
 		<h3><p><a href="https://sos1920-05.herokuapp.com/#/analytics">Grafica Comun</a></p>	</h3>
 		<p></p>
 		<h3><p><a href="https://sos1920-05.herokuapp.com/#/integrations">Integraciones</a></p></h3>
+		<p></p>
+		<h3><p><a href="https://sos1920-05.herokuapp.com/#/about">About</a></p></h3>
+		
 	</body>
 </main>
 

@@ -3,30 +3,27 @@
 	import {pop} from "svelte-spa-router";
     import Button from "sveltestrap/src/Button.svelte";
     
-    
-
-
 	async function loadGraph(){
-        let MyData = [];
-        let OtherData = [];
+        let jsonDiego = [];
+        let jsonG22 = [];
         const url = "https://sos1920-22.herokuapp.com/api/v1/swim-stats";
 
         const resData = await fetch("/api/v1/books-exports");
-        MyData = await resData.json();
+        jsonDiego = await resData.json();
 	
 		const res = await fetch(url); 
-        OtherData = await res.json();
+        jsonG22 = await res.json();
 
-        let MyDataGraph = MyData.map((x) => {
+        let datosDiego = jsonDiego.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
         });
-        let OtherDataGraph = OtherData.map((x) => {
+        let datosG22 = jsonG22.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["position"]};
 			return res;
         });
         
-        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Posicion",data: OtherDataGraph}];
+        let datosConjuntos = [{name: "Exportaciones Libros",data: datosDiego},{name: "Posicion",data: datosG22}];
         
                 Highcharts.chart('container', {
 			chart: {
@@ -89,10 +86,10 @@
 </main>
 
 <style>
-	main {
-		text-align: center;
-	}
-    .highcharts-figure, .highcharts-data-table table {
+main {
+	text-align: center;
+}
+.highcharts-figure, .highcharts-data-table table {
   min-width: 320px; 
   max-width: 800px;
   margin: 1em auto;

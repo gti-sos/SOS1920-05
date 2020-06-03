@@ -13,6 +13,10 @@
 	import ChartJS_health_public from './health_publicAPI/ChartJS_health_public.svelte';
 	import Visual_life_expectancies from './life_expectanciesAPI//Visual_life_expectancies.svelte';
 	import Any_Chart_life_expectancies from './life_expectanciesAPI//Any_Chart_life_expectancies.svelte';
+	
+	//About
+	import About_Home from './about/Home.svelte';
+
 
 	import Integrations_Diego from './APIS_Diego/Home.svelte';
 	import Integrations_Mario from './APIS_Mario/Home.svelte';
@@ -137,7 +141,7 @@
 		"/integrations/APIS_Mathias/API_externa_01": API_externa_01,
 		"/integrations/APIS_Mathias/API_externa_02": API_externa_02,
 		
-
+		"/about": About_Home,
 		
 
 		"*": NotFound

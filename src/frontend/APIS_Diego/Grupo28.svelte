@@ -7,46 +7,38 @@
 
 
 	async function loadGraph(){
-        let MyData = [];
-        let OtherData = [];
-        const url = "/api/v1/ppas";
-
-        const resData = await fetch("/api/v1/books-exports");
-		MyData = await resData.json();
-		
-		const res = await fetch(url);
-		OtherData = await res.json();
+    let jsonDiego = [];
+		let jsonG28 = [];
 		let datosConjuntos = [];
 		let data = {};
 		
-		MyData.forEach((x) => {
-			if(x.year==2017){
-				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_editorial),0]
-				}
-				datosConjuntos.push(data);
-			}
-        });
-		OtherData.forEach((x) => {
-			if(x.year==2017){
+    const url = "/api/v1/ppas";
+
+    const resData = await fetch("/api/v1/books-exports");
+		jsonDiego = await resData.json();
+		
+		const res = await fetch(url);
+		jsonG28 = await res.json();
+
+		jsonDiego.filter((x) => {return x.year==2017;}).forEach((x) => {
+            data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_editorial),0]
+            }
+            datosConjuntos.push(data);
+    });
+    jsonG28.filter((x) => {return x.year==2017;}).forEach((x) => {
 				data={name: x.country +" "+ x.year,	data: [0,parseInt(x.ppa_per_capita)]
 				}
 				datosConjuntos.push(data);
-			}
-		});
+    });
+    
 		Highcharts.chart('container', {
               chart: {
                 type: 'bar'
               },
-              title: {
-                text: 'Exportaciones'
-              },
-              subtitle: {
-                text: 'Gráfica que refleja el número de exportaciones de libros,editoriales y del sector grafico'
-                },
               xAxis: {
                   
                 categories:  [
-                    'Libros',
+                    'Exportaciones Editoriales',
                     'Renta Per Capita',],
                 crosshair: true
               },
@@ -96,58 +88,7 @@
                     }
                 }
             });
-		/*
-        let MyDataGraph = MyData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
-			return res;
-        });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["ppa_per_capita"]};
-			return res;
-        });
-        
-        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Per Capita",data: OtherDataGraph}];
-        
-                Highcharts.chart('container', {
-			chart: {
-				type: 'packedbubble',
-				height: '60%'
-			},
-			tooltip: {
-				useHTML: true,
-				pointFormat: '<b>{point.name}:</b> {point.value}'
-			},
-			plotOptions: {
-				packedbubble: {
-					minSize: '10%',
-					maxSize: '100%',
-					zMin: 0,
-					zMax: 1000,
-					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: true,
-                        seriesInteraction: false,
-                        dragBetweenSeries: false,
-                        parentNodeLimit: true
-					},
-					dataLabels: {
-						enabled: true,
-						format: '{point.name}',
-						filter: {
-							property: 'y',
-							operator: '>',
-							value: 250
-						},
-						style: {
-							color: 'black',
-							textOutline: 'none',
-							fontWeight: 'normal'
-						}
-					}
-				}
-			},
-			series: datosConjuntos
-		});*/
+		
     }
 </script>
 
@@ -159,7 +100,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones de libros y emigrantes en el mundo</h3>
+    <h3> Grafica exportaciones de editoriales y renta en el mundo (2017)</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>

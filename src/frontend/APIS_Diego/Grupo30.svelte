@@ -7,50 +7,42 @@
 
 
 	async function loadGraph(){
-        let MyData = [];
-        let OtherData = [];
-        const url = "https://sos1920-30.herokuapp.com/api/v3/indice_de_masa_corporal";
-
-        const resData = await fetch("/api/v1/books-exports");
-        MyData = await resData.json();
-
-		const res = await fetch(url); 
-		OtherData = await res.json();
+		let jsonDiego = [];
+		let jsonG30 = [];
 		let datosConjuntos = [];
 		let data = {};
 		
-		MyData.forEach((x) => {
-			if(x.country == "polonia"){
+        const url = "https://sos1920-30.herokuapp.com/api/v3/indice_de_masa_corporal";
+
+        const resData = await fetch("/api/v1/books-exports");
+        jsonDiego = await resData.json();
+
+		const res = await fetch(url); 
+		jsonG30 = await res.json();
+
+		jsonDiego.filter((x) => {return x.country == "mexico";}).forEach((x) => {
 				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_graphic_sector),0]
 				}
 				datosConjuntos.push(data);
-			}
         });
-		OtherData.forEach((x) => {
-			if(x.place == "Polonia"){	
+		jsonG30.filter((x) => {return x.place == "Polonia";}).forEach((x) => {
 			data={name: x.place  +" "+ x.year,	data: [0,parseInt(x.altura)]
 				}
 				datosConjuntos.push(data);
-			}
 		});
+
 		Highcharts.chart('container', {
 			chart: {
 				type: 'column'
 			},
-			title: {
-				text: 'Monthly Average Rainfall'
-			},
-			subtitle: {
-				text: 'Source: WorldClimate.com'
-			},
 			xAxis: {
-				categories: ["Exportaciones Libros"," Bodas"],
+				categories: ["Exportaciones Sector Grafico"," Altura"],
 				crosshair: true
 			},
 			yAxis: {
 				min: 0,
 				title: {
-				text: 'Rainfall (mm)'
+				text: 'Numeros'
 				}
 			},
 			tooltip: {
@@ -69,58 +61,7 @@
 			},
 			series: datosConjuntos
 			});
-		/*
-        let MyDataGraph = MyData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
-			return res;
-        });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.place + " " + x.year, value: x["altura"]};
-			return res;
-        });
-        
-        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Altura",data: OtherDataGraph}];
-        
-                Highcharts.chart('container', {
-			chart: {
-				type: 'packedbubble',
-				height: '60%'
-			},
-			tooltip: {
-				useHTML: true,
-				pointFormat: '<b>{point.name}:</b> {point.value}'
-			},
-			plotOptions: {
-				packedbubble: {
-					minSize: '10%',
-					maxSize: '100%',
-					zMin: 0,
-					zMax: 1000,
-					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: true,
-                        seriesInteraction: false,
-                        dragBetweenSeries: false,
-                        parentNodeLimit: true
-					},
-					dataLabels: {
-						enabled: true,
-						format: '{point.name}',
-						filter: {
-							property: 'y',
-							operator: '>',
-							value: 250
-						},
-						style: {
-							color: 'black',
-							textOutline: 'none',
-							fontWeight: 'normal'
-						}
-					}
-				}
-			},
-			series: datosConjuntos
-		});*/
+		
     }
 </script>
 
@@ -132,7 +73,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones de libros y la altura en el mundo</h3>
+    <h3> Grafica exportaciones del sector grafico en Mexico y la altura en Polonia </h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>

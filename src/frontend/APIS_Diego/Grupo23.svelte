@@ -1,154 +1,93 @@
 <script>
-	import  {onMount} from "svelte";
-	import {pop} from "svelte-spa-router";
+    import  {onMount} from "svelte";
+    import {pop} from "svelte-spa-router";
     import Button from "sveltestrap/src/Button.svelte";
-    
-    
+      
+    async function loadGraph(){
+      let jsonDiego = [];
+      let jsonG23 = [];
+      let datosConjuntos = [];
+      let data = {};
 
+      const url = "https://sos1920-23.herokuapp.com/api/v2/fires-stats/";
 
-	async function loadGraph(){
-        let MyData = [];
-        let OtherData = [];
-        const url = "https://sos1920-23.herokuapp.com/api/v2/fires-stats/";
+      const resData = await fetch("/api/v1/books-exports");
+      jsonDiego = await resData.json();
+      
+      const res = await fetch(url);
+      jsonG23 = await res.json();
+      
+      jsonDiego.filter((x) => {return x.year==2016 && x.country != "uk";}).forEach((x) => {
+          data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_graphic_sector),0]
+            }
+          datosConjuntos.push(data);
+      });
+      
+      jsonG23.filter((x) => {return x.year==2008;}).forEach((x) => {
+          data={name: x.community  +" "+ x.year,	data: [0,parseInt(x.total_fire)]
+            }
+          datosConjuntos.push(data);
+      });
 
-        const resData = await fetch("/api/v1/books-exports");
-        MyData = await resData.json();
-		
-		const res = await fetch(url);
-		OtherData = await res.json();
-		let datosConjuntos = [];
-		let data = {};
-		
-		MyData.forEach((x) => {
-			if(x.year==2016 && x.country != "uk"){
-				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_graphic_sector),0]
-				}
-				datosConjuntos.push(data);
-			}
-        });
-		OtherData.forEach((x) => {
-			if(x.year==2008){
-				data={name: x.community  +" "+ x.year,	data: [0,parseInt(x.total_fire)]
-				}
-				datosConjuntos.push(data);
-			}
-		});
-		Highcharts.chart('container', {
-              chart: {
-                type: 'bar'
-              },
-              title: {
-                text: 'Exportaciones'
-              },
-              subtitle: {
-                text: 'Gráfica que refleja el número de exportaciones de libros,editoriales y del sector grafico'
+      Highcharts.chart('container', {
+                chart: {
+                  type: 'bar'
                 },
-              xAxis: {
-                  
-                categories:  [
-                    'Libros',
-                    'Fuegos Totales',],
-                crosshair: true
-              },
-              yAxis: {
-                min: 0,
-                title: {
-                  text: 'Numeros',
-                  align: 'high'
+                xAxis: {
+                    
+                  categories:  [
+                      'Exportaciones Sector Grafico',
+                      'Fuegos Totales',],
+                  crosshair: true
                 },
-                labels: {
-                  overflow: 'justify'
-                }
-              },
-              tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
-                footerFormat: '</table>',
-                shared: false,
-                useHTML: false
-              },
-              plotOptions: {
-                bar: {
-                  dataLabels: {
-                    enabled: false
+                yAxis: {
+                  min: 0,
+                  title: {
+                    text: 'Numeros',
+                    align: 'high'
+                  },
+                  labels: {
+                    overflow: 'justify'
                   }
-                }
-              },
-              legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -40,
-                y: 80,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-                shadow: true
-              },
-              credits: {
-                enabled: false
-              },
-              series:datosConjuntos,
-              responsive: {
-                condition: {
-                    maxWidth: 500
+                },
+                tooltip: {
+                  headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                  pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                      '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                  footerFormat: '</table>',
+                  shared: false,
+                  useHTML: false
+                },
+                plotOptions: {
+                  bar: {
+                    dataLabels: {
+                      enabled: false
                     }
-                }
-			});
-		}
-		/*
-        let MyDataGraph = MyData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
-			return res;
+                  }
+                },
+                legend: {
+                  layout: 'vertical',
+                  align: 'right',
+                  verticalAlign: 'top',
+                  x: -40,
+                  y: 80,
+                  floating: true,
+                  borderWidth: 1,
+                  backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                  shadow: true
+                },
+                credits: {
+                  enabled: false
+                },
+                series:datosConjuntos,
+                responsive: {
+                  condition: {
+                      maxWidth: 500
+                      }
+                  }
         });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.year, value: x["total_fire"]};
-			return res;
-        });
-        
-        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Fuegos totales",data: OtherDataGraph}];
-        
-                Highcharts.chart('container', {
-			chart: {
-				type: 'packedbubble',
-				height: '60%'
-			},
-			tooltip: {
-				useHTML: true,
-				pointFormat: '<b>{point.name}:</b> {point.value}'
-			},
-			plotOptions: {
-				packedbubble: {
-					minSize: '10%',
-					maxSize: '100%',
-					zMin: 0,
-					zMax: 1000,
-					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: true,
-                        seriesInteraction: false,
-                        dragBetweenSeries: false,
-                        parentNodeLimit: true
-					},
-					dataLabels: {
-						enabled: true,
-						format: '{point.name}',
-						filter: {
-							property: 'y',
-							operator: '>',
-							value: 250
-						},
-						style: {
-							color: 'black',
-							textOutline: 'none',
-							fontWeight: 'normal'
-						}
-					}
-				}
-			},
-			series: datosConjuntos
-		});*/
+      }
+      
 </script>
 
 <svelte:head>
@@ -159,7 +98,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones de libros y fuegos totales en el mundo</h3>
+    <h3> Grafica exportaciones del sector grafico (2016) y fuegos totales (2008) en el mundo</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>

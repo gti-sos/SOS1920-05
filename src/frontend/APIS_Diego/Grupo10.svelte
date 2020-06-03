@@ -2,54 +2,42 @@
 	import  {onMount} from "svelte";
 	import {pop} from "svelte-spa-router";
     import Button from "sveltestrap/src/Button.svelte";
-    
-    
-
-
+	
+	
 	async function loadGraph(){
-        let MyData = [];
-		let OtherData = [];
+        let jsonDiego = [];
+        let jsonG10 = [];
 		let data = {};
 		let datosConjuntos = [];
         const url = "https://sos1920-10.herokuapp.com/api/v3/global-marriages";
 
         const resData = await fetch("/api/v1/books-exports");
-        MyData = await resData.json();
+        jsonDiego = await resData.json();
 
 		const res = await fetch(url); 
-		OtherData = await res.json();
-		MyData.forEach((x) => {
-			if(x.year==2015){
+		jsonG10 = await res.json();
+		jsonDiego.filter((x) => {return x.year==2015;}).forEach((x) => {
 				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_editorial),0]
 				}
-				datosConjuntos.push(data);
-			}
+			datosConjuntos.push(data);
         });
-		OtherData.forEach((x) => {
-			if(x.year==2018){
+		jsonG10.filter((x) => {return x.year==2018;}).forEach((x) => {
 				data={name: x.country +" "+ x.year,	data: [0,parseInt(x.marriages)]
 				}
-				datosConjuntos.push(data);
-			}
+			datosConjuntos.push(data);
 		});
 		Highcharts.chart('container', {
 			chart: {
 				type: 'column'
 			},
-			title: {
-				text: 'Monthly Average Rainfall'
-			},
-			subtitle: {
-				text: 'Source: WorldClimate.com'
-			},
 			xAxis: {
-				categories: ["Exportaciones Libros"," Bodas"],
+				categories: ["Exportaciones Editoriales"," Bodas"],
 				crosshair: true
 			},
 			yAxis: {
 				min: 0,
 				title: {
-				text: 'Rainfall (mm)'
+				text: 'Numero'
 				}
 			},
 			tooltip: {
@@ -80,7 +68,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones de libros y bodas en el mundo</h3>
+    <h3> Grafica exportaciones de editoriales(2015) y bodas (2018) en el mundo</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>
@@ -90,10 +78,10 @@
 </main>
 
 <style>
-	main {
-		text-align: center;
+main {
+	text-align: center;
 	}
-    .highcharts-figure, .highcharts-data-table table {
+.highcharts-figure, .highcharts-data-table table {
   min-width: 320px; 
   max-width: 800px;
   margin: 1em auto;
