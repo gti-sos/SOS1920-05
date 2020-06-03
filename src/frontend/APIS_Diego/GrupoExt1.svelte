@@ -6,26 +6,25 @@
     import Button from "sveltestrap/src/Button.svelte";
 	async function loadGraph() { 
     let diego = [];
-    let mario = [];
+    let currency = [];
 	
 	const url = "https://api.n.exchange/en/api/v1/currency/";
     const resDataDiego = await fetch("/api/v1/books-exports");
 	diego = await resDataDiego.json();
-    const resDataMario = await fetch(url);
-    mario = await resDataMario.json();
+    const resDataCurrency = await fetch(url);
+    currency = await resDataCurrency.json();
     
     let datos_diego = diego.map((x) => {
 			let res = {name: x.country + " " + x.year,value: x["exp_editorial"]};
 			return res;
 		});
 	
-    let datos_mario = mario.filter((d) => {return parseInt(d.minimal_amount) > 10.0;}).map((x) => {
+    let datos_currency = currency.filter((x) => {return parseInt(x.minimal_amount) > 10.0;}).map((x) => {
 			let res = {name: x.code,value: parseInt(x.minimal_amount)};
-			console.log(x);
 			return res;
         });
             
-        let datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Gasto Sanidad Publica",data: datos_mario}];
+        let datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Minimo moneda",data: datos_currency}];
 
         Highcharts.chart('container', {
 			chart: {
@@ -80,7 +79,7 @@
 </svelte:head>
 
 <main>
-    <h2> Representacion de las exportaciones y los tipos de monedas en el mundo</h2>
+    <h2> Representacion de las exportaciones de editoriales en el mundo y el monto minimo de cada moneda mayor que 10 para Exchange </h2>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>

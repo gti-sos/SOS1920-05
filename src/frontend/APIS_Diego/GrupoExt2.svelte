@@ -7,25 +7,26 @@
 	async function loadGraph() {
     let datosConjuntos = [];   
     let diego = [];
-    let mario = [];
+    let breweries = [];
 	
 	const url = "https://api.openbrewerydb.org/breweries";
     const resDataDiego = await fetch("/api/v1/books-exports");
 	diego = await resDataDiego.json();
 	
-    const resDataMario = await fetch(url);
-    mario = await resDataMario.json();
+    const resDataBreweries = await fetch(url);
+    breweries = await resDataBreweries.json();
     
     let datos_diego = diego.map((x) => {
 			let res = {name: x.country + " " + x.year,value: x["exp_editorial"]};
 			return res;
         });
-    let datos_mario = mario.map((x) => {
+    let datos_breweries = breweries.map((x) => {
 			let res = {name: x.city,value: parseInt(x.phone)};
+			console.log(res);
 			return res;
         });
         
-        datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Gasto Sanidad Publica",data: datos_mario}];
+        datosConjuntos = [{name: "Exportaciones de editoriales",data: datos_diego},{name: "Numero cerveceria EEUU",data: datos_breweries}];
 
         Highcharts.chart('container', {
 			chart: {
@@ -80,7 +81,7 @@
 </svelte:head>
 
 <main>
-    <h2> Representacion de las exportaciones en el mundo y cervecerias en EEUU</h2>
+    <h2> Representacion de las exportaciones de editoriales en el mundo y el numero de cervecerias en EEUU</h2>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>
