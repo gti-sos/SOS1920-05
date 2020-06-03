@@ -9,9 +9,9 @@
       "https://cdn.anychart.com/charts-data/data_json.json",
       function(data) {
         // create a chart and set loaded data
-        var chart = anychart.bar(data);
+        var chart = anychart.pie3d(data);
         // configure and display 
-        //chart.innerRadius(10);
+        chart.innerRadius(10);
         chart.title("Productos de belleza facial");
         chart.container("container");
         chart.draw();

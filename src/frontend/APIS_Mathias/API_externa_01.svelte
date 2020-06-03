@@ -29,25 +29,23 @@
       return res;
     });
 
-    let utilData = OtherData.data;
-
-    let OtherDataGraph = utilData
+    let incomingData = OtherData
       .filter(y => {
-        return y.position == "G";
+        return y.Dataid;
       })
       .map(x => {
-        let res = { name: x.country + " " + x.id, value: x.deaths };
+        let res = { name: x.countryName + " " + x.country_code, value: x.value};
         return res;
       });
 
     let mixedData = [
       {
-        name: "Gasto Total",
+        name: "Esperanza de vida media",
         data: MyDataGraph
       },
       {
-        name: "Jugadores NBA",
-        data: OtherDataGraph
+        name: "AIDS",
+        data: incomingData
       }
     ];
 
@@ -56,7 +54,7 @@
         type: "packedbubble"
       },
       title: {
-        text: "Esperanza de vida de hombre con alcohol"
+        text: "Esperanza de vida media y AIDS"
       },
       tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',

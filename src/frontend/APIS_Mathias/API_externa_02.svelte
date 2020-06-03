@@ -30,25 +30,23 @@
       return res;
     });
 
-    let utilData = OtherData.data;
-
-    let OtherDataGraph = utilData
+    let incomingData = OtherData
       .filter(y => {
-        return y.position == "G";
+        return y.strIngredient1 == "Tequila";
       })
       .map(x => {
-        let res = { name: x.strDrink + " ", value: x.idDrink.parseInt };
+        let res = { name: x.strDrink + " ", value: parseInt(x.idDrink)};
         return res;
       });
 
     let mixedData = [
       {
-        name: "Gasto Total",
+        name: "Esperanza de vida media",
         data: MyDataGraph
       },
       {
-        name: "Jugadores NBA",
-        data: OtherDataGraph
+        name: "Tipos de bibidas alcohólicas",
+        data: incomingData
       }
     ];
     Highcharts.chart("container", {
@@ -56,7 +54,7 @@
         type: "packedbubble"
       },
       title: {
-        text: "Esperanza de vida de hombre con alcohol"
+        text: "Esperanza de vida media y tipos de bibidas alcohólicas"
       },
       tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',

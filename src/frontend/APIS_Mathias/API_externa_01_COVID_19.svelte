@@ -30,7 +30,7 @@
       if (x.id) {
         data = {
           name: x.country + " " + x.country_code,
-          data: [0, parseInt(x.deaths)]
+          data: [0, x.country_population]
         };
         mixedData.push(data);
       }
@@ -40,11 +40,11 @@
         type: "area"
       },
       title: {
-        text: "Esperanza de vida media con nivel de pobreza"
+        text: "Esperanza de vida media y localización de COVID-19"
       },
 
       xAxis: {
-        categories: ["Esperanza de vida media", "Nivel de pobreza"]
+        categories: ["Esperanza de vida media", "Localización de COVID-19"]
       },
 
       plotOptions: {

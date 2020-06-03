@@ -27,13 +27,13 @@
       var data = [countries, women_life_expectancy];
 
       // create a 3d pie chart and set the data
-      var chart = anychart.pie3d(data);
+      var chart = anychart.bar(data);
 
       // set the chart title
       chart.title("Esperanza de vida en Italia en mujeres 2016");
       // set the container id
       chart.container("container");
-      chart.innerRadius(50);
+     // chart.innerRadius(50);
       // initiate drawing the chart
       chart.draw();
     });
