@@ -57,6 +57,9 @@
         <td><a href="/#/integrations/APIS_Mathias/API_externa_01_COVID_19">API_externa_01_COVID_19</a></td>
       </tr>
       <tr>
+        <td><a href="/#/integrations/APIS_Mathias/API_externa_02_Face_Beauty">API_externa_02_Face_Beauty</a></td>
+      </tr>
+      <tr>
         <td><a href="/#/integrations/APIS_Mathias/API_externa_01">API_externa_01</a></td>
       </tr>
      <tr>

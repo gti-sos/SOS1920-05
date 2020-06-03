@@ -13,40 +13,39 @@
     let countries = Array.from(new Set(MyData.filter(d => d.year == 2015).map((d) => {return d.country;})));
     let women_life_expectancy = Array.from(new Set(MyData.map((d) => {return d["women_life_expectancy"];})));
 
-    // create data
-    var data = [countries, women_life_expectancy];
-      
-    
-    // create a chart
-    var chart = anychart.pie();
+        //var data = [countries, women_life_expectancy];
 
-    // create an area series and set the data
-    var series = chart.data(data);
+       anychart.onDocumentReady(function () {
+
+    var data = [countries, women_life_expectancy];
+
+    // create a 3d pie chart and set the data
+    var chart = anychart.pie3d(data);
 
     // set the chart title
-    chart.title("Radar Area Chart");
-
+	  chart.title("Esperanza de vida en Italia en mujeres 2016");
     // set the container id
     chart.container("container");
 
     // initiate drawing the chart
-    chart.draw(true);
-//});
-        
+    chart.draw();
+});
+ 
     }
  
 </script>
 
 
 <svelte:head>
-<script src="https://cdn.anychart.com/releases/8.7.1/js/anychart-base.min.js?hcode=a0c21fc77e1449cc86299c5faa067dc4" on:load={loadGraph}></script>
+<script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"on:load={loadGraph}></script>
 </svelte:head> 
 
 <main >
-    <p></p>
+     <div id="container"></div>
+    
     <Button outline color="secondary" on:click="{pop}"> Volver</Button>
-      <p></p>
-    <div id="container"></div>
 
 </main>
 

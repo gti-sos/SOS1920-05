@@ -12,7 +12,7 @@
 	import HighChart_health_public from './health_publicAPI/HighChart_health_public.svelte';
 	import ChartJS_health_public from './health_publicAPI/ChartJS_health_public.svelte';
 	import Visual_life_expectancies from './life_expectanciesAPI//Visual_life_expectancies.svelte';
-	import Visual_Chart_life_expectancies from './life_expectanciesAPI//Visual_Chart_life_expectancies.svelte';
+	import Any_Chart_life_expectancies from './life_expectanciesAPI//Any_Chart_life_expectancies.svelte';
 
 	import Integrations_Diego from './APIS_Diego/Home.svelte';
 	import Integrations_Mario from './APIS_Mario/Home.svelte';
@@ -56,7 +56,9 @@
 	import Grupo_25_happiness_rate from './APIS_Mathias/Grupo_25_happiness_rate.svelte';
 	import Grupo_27_life_quality from './APIS_Mathias/Grupo_27_life_quality.svelte';
 	import Grupo_28_gce from './APIS_Mathias/Grupo_28_gce.svelte';
+
 	import API_externa_01_COVID_19 from './APIS_Mathias/API_externa_01_COVID_19.svelte';
+	import API_externa_02_Face_Beauty from './APIS_Mathias/API_externa_02_Face_Beauty.svelte';
 	import API_externa_01 from './APIS_Mathias/API_externa_01.svelte';
 	import API_externa_02 from './APIS_Mathias/API_externa_02.svelte';
 
@@ -86,7 +88,7 @@
 		"/health_public/ChartJS": ChartJS_health_public,
 
 		"/Visual_life_expectancies": Visual_life_expectancies,
-		"/Visual_Chart_life_expectancies": Visual_Chart_life_expectancies,
+		"/Any_Chart_life_expectancies": Any_Chart_life_expectancies,
 
 		//RUTAS DIEGO
 		"/integrations/APIS_Diego": Integrations_Diego,
@@ -131,6 +133,7 @@
 		"/integrations/APIS_Mathias/Grupo_28_gce": Grupo_28_gce,
 		
 		"/integrations/APIS_Mathias/API_externa_01_COVID_19": API_externa_01_COVID_19,
+		"/integrations/APIS_Mathias/API_externa_02_Face_Beauty": API_externa_02_Face_Beauty,
 		"/integrations/APIS_Mathias/API_externa_01": API_externa_01,
 		"/integrations/APIS_Mathias/API_externa_02": API_externa_02,
 		
