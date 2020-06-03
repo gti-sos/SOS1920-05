@@ -5,136 +5,155 @@
     import Button from "sveltestrap/src/Button.svelte";
     
 	
-	
-	async function loadGraph(){
-        let MyData = [];
-        let OtherData = [];
-        const url = "https://sos1920-25.herokuapp.com/api/v1/happiness_rate";
+	let MyData = [];
+  let incomingData = [];
+   const url = "https://sos1920-25.herokuapp.com/api/v1/happiness_rate";
 
-        const resData = await fetch("/api/v1/life_expectancies");
-        MyData = await resData.json();
+  async function loadGraph() {
+    const resData = await fetch("/api/v1/life_expectancies");
+    MyData = await resData.json();
 
-        console.log("Fetching url...");	
-		const res = await fetch(url); 
-		if (res.ok) {
-			console.log("Ok");
-            OtherData = await res.json();
-		} else {
-			console.log("Error al cargar API externa");
+    const res = await fetch(url);
+    incomingData = await res.json();
+    let mixedData = [];
+    let data = {};
+
+    MyData.forEach(x => {
+      if (x.year) {
+        data = {
+          name: x.country + " " + x.year,
+          data: [parseInt(x.average_life_expectancy), 0]
+        };
+        mixedData.push(data);
+      }
+    });
+    incomingData.forEach(x => {
+      if (x.year) {
+        data = {
+          name: x.country + " " + x.year,
+          data: [0, parseInt(x.happinessRanking)]
+        };
+        mixedData.push(data);
+      }
+    });
+
+    Highcharts.chart("container", {
+      chart: {
+        type: "area"
+      },
+      title: {
+        text: "Esperanza de vida media con el nivel de felicidad"
+      },
+
+      xAxis: {
+        categories: ["Esperanza de vida media", "Nivel de felicidad"]
+      },
+     
+      plotOptions: {
+        area: {
+          dataLabels: {
+            enabled: true
+          }
         }
+      },
 
-        let MyDataGraph = MyData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["average_life_expectancy"]};
-			return res;
-        });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["happinessRanking"]};
-			return res;
-        });
-        
-        let datosConjuntos = [{name: "Esperanza de vida media",data: MyDataGraph},{name: "nivel de felicidad",data: OtherDataGraph}];
-        
-  Highcharts.chart('container', {
-			chart: {
-				type: 'packedbubble',
-				height: '100%'
-			},
-			tooltip: {
-				useHTML: true,
-				pointFormat: '<b>{point.name}:</b> {point.value}'
-			},
-			plotOptions: {
-				packedbubble: {
-					minSize: '35%',
-					maxSize: '85%',
-					zMin: 0,
-					zMax: 100,
-					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: true,
-                        seriesInteraction: false,
-                        dragBetweenSeries: true,
-                        parentNodeLimit: true
-					},
-					dataLabels: {
-						enabled: true,
-						format: '{point.name}',
-						filter: {
-							property: 'y',
-							operator: '>',
-							value: 250
-						},
-						style: {
-							color: 'black',
-							textOutline: 'none',
-							fontWeight: 'normal'
-						}
-					}
-				}
-			},
-			series: datosConjuntos
-		});
-    }
+      credits: {
+        enabled: false
+      },
+      series: mixedData,
+      responsive: {
+        rules: [
+          {
+            condition: {
+              maxWidth: 500
+            },
+            chartOptions: {
+              legend: [
+                {
+                  layout: "horizontal",
+                  align: "center",
+                  verticalAlign: "bottom"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    });
+  }
 </script>
 
-<svelte:head>
-    <script src="https://code.highcharts.com/highcharts.js" on:load={loadGraph}></script>>
-    <script src="https://code.highcharts.com/highcharts-more.js" on:load={loadGraph}></script>>
-    <script src="https://code.highcharts.com/modules/exporting.js" on:load={loadGraph}></script>>
-    <script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
-    
-</svelte:head>
-<main>
-    <h3> Grafica esperanza de vida media y nivel de felicidad</h3>
-	<figure class="highcharts-figure">
-		<div id="container"></div>
-	</figure>
-	
-	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
-
-</main>
-
 <style>
-	main {
-		text-align: center;
-	}
-    .highcharts-figure, .highcharts-data-table table {
-  min-width: 320px; 
-  max-width: 800px;
-  margin: 1em auto;
-}
-
-.highcharts-figure, .highcharts-data-table table {
-    min-width: 320px; 
+  .highcharts-figure,
+  .highcharts-data-table table {
+    min-width: 360px;
     max-width: 800px;
     margin: 1em auto;
-}
+  }
 
-.highcharts-data-table table {
-	font-family: Verdana, sans-serif;
-	border-collapse: collapse;
-	border: 1px solid #EBEBEB;
-	margin: 10px auto;
-	text-align: center;
-	width: 100%;
-	max-width: 500px;
-}
-.highcharts-data-table caption {
+  .highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+  }
+  .highcharts-data-table caption {
     padding: 1em 0;
     font-size: 1.2em;
     color: #555;
-}
-.highcharts-data-table th {
-	font-weight: 600;
+  }
+  .highcharts-data-table th {
+    font-weight: 600;
     padding: 0.5em;
-}
-.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+  }
+  .highcharts-data-table td,
+  .highcharts-data-table th,
+  .highcharts-data-table caption {
     padding: 0.5em;
-}
-.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+  }
+  .highcharts-data-table thead tr,
+  .highcharts-data-table tr:nth-child(even) {
     background: #f8f8f8;
-}
-.highcharts-data-table tr:hover {
+  }
+  .highcharts-data-table tr:hover {
     background: #f1f7ff;
-}
+  }
 </style>
+
+<svelte:head>
+  <script src="https://code.highcharts.com/highcharts.js">
+
+  </script>
+  <script src="https://code.highcharts.com/modules/series-label.js">
+
+  </script>
+  <script src="https://code.highcharts.com/modules/exporting.js">
+
+  </script>
+  <script src="https://code.highcharts.com/modules/export-data.js">
+
+  </script>
+  <script
+    src="https://code.highcharts.com/modules/accessibility.js"
+    on:load={loadGraph}>
+
+  </script>
+</svelte:head>
+
+<main>
+
+  <h2 style="text-align: center;">
+    <i class="fas fa-car" />
+  </h2>
+  <figure class="highcharts-figure">
+    <div id="container" />
+  </figure>
+  <p align="center">
+    <Button outarea color="secondary" on:click={pop}>Volver</Button>
+  </p>
+</main>
+
+	

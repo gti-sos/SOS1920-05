@@ -1,140 +1,187 @@
-	<script>
-	import {onMount}from "svelte";
-	import {pop} from "svelte-spa-router";
-	import Table from "sveltestrap/src/Table.svelte";
-    import Button from "sveltestrap/src/Button.svelte";
-    
-	
-	
-	async function loadGraph(){
-        let MyData = [];
-        let OtherData = [];
-        const url = "https://sos1920-04.herokuapp.com/api/v1/vehicles";
+<script>
+  import { onMount } from "svelte";
+  import { pop } from "svelte-spa-router";
+  import Table from "sveltestrap/src/Table.svelte";
+  import Button from "sveltestrap/src/Button.svelte";
 
-        const resData = await fetch("/api/v1/life_expectancies");
-        MyData = await resData.json();
+  let MyData = [];
+  let incomingData = [];
+  const url = "https://sos1920-04.herokuapp.com/api/v1/vehicles";
 
-        console.log("Fetching url...");	
-		const res = await fetch(url); 
-		if (res.ok) {
-			console.log("Ok");
-            OtherData = await res.json();
-		} else {
-			console.log("Error al cargar API externa");
+  async function loadGraph() {
+    const resData = await fetch("/api/v1/life_expectancies");
+    MyData = await resData.json();
+
+    const res = await fetch(url);
+    incomingData = await res.json();
+    let mixedData = [];
+    let data = {};
+
+    MyData.forEach(x => {
+      if (x.year) {
+        data = {
+          name: x.country + " " + x.year,
+          data: [parseInt(x.average_life_expectancy), 0]
+        };
+        mixedData.push(data);
+      }
+    });
+    incomingData.forEach(x => {
+      if (x.year) {
+        data = {
+          name: x.province + " " + x.year,
+          data: [0, parseInt(x.bus)]
+        };
+        mixedData.push(data);
+      }
+    });
+
+    // async function loadGraph(){
+    //     let MyData = [];
+    //     let OtherData = [];
+    //     const url = "https://sos1920-04.herokuapp.com/api/v1/vehicles";
+
+    //     const resData = await fetch("/api/v1/life_expectancies");
+    //     MyData = await resData.json();
+
+    //     console.log("Fetching url...");
+    // 	const res = await fetch(url);
+    // 	if (res.ok) {
+    // 		console.log("Ok");
+    //         OtherData = await res.json();
+    // 	} else {
+    // 		console.log("Error al cargar API externa");
+    //     }
+
+    //     let MyDataGraph = MyData.map((x) => {
+    // 		let res = {name: x.country + " " + x.year==2016, value: x["average_life_expectancy"]};
+    // 		return res;
+    //     });
+    //     let incomingData = OtherData.map((x) => {
+    // 		let res = {name: x.province + " " + x.year==2016, value: x["bus"]};
+    // 		return res;
+    //     });
+
+    //     let mixedData = [{name: "Esperanza de vida media",data: MyDataGraph},{name: "buses",data: incomingData}];
+
+    Highcharts.chart("container", {
+      chart: {
+        type: "line"
+      },
+      title: {
+        text: "Esperanza de vida media y buses por provincia"
+      },
+
+      xAxis: {
+        categories: ["Esperanza de vida media", "Buses por provincia"]
+      },
+      yAxis: {
+        min: 0
+      },
+
+      plotOptions: {
+        line: {
+          dataLabels: {
+            enabled: true
+          }
         }
+      },
 
-        let MyDataGraph = MyData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["average_life_expectancy"]};
-			return res;
-        });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["bus"]};
-			return res;
-        });
-        
-        let datosConjuntos = [{name: "Esperanza de vida media",data: MyDataGraph},{name: "buses",data: OtherDataGraph}];
-        
-  Highcharts.chart('container', {
-			chart: {
-				type: 'packedbubble',
-				height: '100%'
-			},
-			tooltip: {
-				useHTML: true,
-				pointFormat: '<b>{point.name}:</b> {point.value}'
-			},
-			plotOptions: {
-				packedbubble: {
-					minSize: '5%',
-					maxSize: '90%',
-					zMin: 0,
-					zMax: 100,
-					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: true,
-                        seriesInteraction: false,
-                        dragBetweenSeries: true,
-                        parentNodeLimit: true
-					},
-					dataLabels: {
-						enabled: true,
-						format: '{point.name}',
-						filter: {
-							property: 'y',
-							operator: '>',
-							value: 300
-						},
-						style: {
-							color: 'black',
-							textOutline: 'none',
-							fontWeight: 'normal'
-						}
-					}
-				}
-			},
-			series: datosConjuntos
-		});
-    }
+      credits: {
+        enabled: false
+      },
+      series: mixedData,
+      responsive: {
+        rules: [
+          {
+            condition: {
+              maxWidth: 500
+            },
+            chartOptions: {
+              legend: [
+                {
+                  layout: "horizontal",
+                  align: "center",
+                  verticalAlign: "bottom"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    });
+  }
 </script>
 
-<svelte:head>
-    <script src="https://code.highcharts.com/highcharts.js" on:load={loadGraph}></script>>
-    <script src="https://code.highcharts.com/highcharts-more.js" on:load={loadGraph}></script>>
-    <script src="https://code.highcharts.com/modules/exporting.js" on:load={loadGraph}></script>>
-    <script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
-    
-</svelte:head>
-<main>
-    <h3> Grafica esperanza de vida media y buses</h3>
-	<figure class="highcharts-figure">
-		<div id="container"></div>
-	</figure>
-	
-	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
-
-</main>
-
 <style>
-	main {
-		text-align: center;
-	}
-    .highcharts-figure, .highcharts-data-table table {
-  min-width: 320px; 
-  max-width: 800px;
-  margin: 1em auto;
-}
-
-.highcharts-figure, .highcharts-data-table table {
-    min-width: 320px; 
+  .highcharts-figure,
+  .highcharts-data-table table {
+    min-width: 360px;
     max-width: 800px;
     margin: 1em auto;
-}
+  }
 
-.highcharts-data-table table {
-	font-family: Verdana, sans-serif;
-	border-collapse: collapse;
-	border: 1px solid #EBEBEB;
-	margin: 10px auto;
-	text-align: center;
-	width: 100%;
-	max-width: 500px;
-}
-.highcharts-data-table caption {
+  .highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+  }
+  .highcharts-data-table caption {
     padding: 1em 0;
     font-size: 1.2em;
     color: #555;
-}
-.highcharts-data-table th {
-	font-weight: 600;
+  }
+  .highcharts-data-table th {
+    font-weight: 600;
     padding: 0.5em;
-}
-.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+  }
+  .highcharts-data-table td,
+  .highcharts-data-table th,
+  .highcharts-data-table caption {
     padding: 0.5em;
-}
-.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+  }
+  .highcharts-data-table thead tr,
+  .highcharts-data-table tr:nth-child(even) {
     background: #f8f8f8;
-}
-.highcharts-data-table tr:hover {
+  }
+  .highcharts-data-table tr:hover {
     background: #f1f7ff;
-}
+  }
 </style>
+
+<svelte:head>
+  <script src="https://code.highcharts.com/highcharts.js">
+
+  </script>
+  <script src="https://code.highcharts.com/modules/series-label.js">
+
+  </script>
+  <script src="https://code.highcharts.com/modules/exporting.js">
+
+  </script>
+  <script src="https://code.highcharts.com/modules/export-data.js">
+
+  </script>
+  <script
+    src="https://code.highcharts.com/modules/accessibility.js"
+    on:load={loadGraph}>
+
+  </script>
+</svelte:head>
+
+<main>
+
+  <h2 style="text-align: center;">
+    <i class="fas fa-car" />
+  </h2>
+  <figure class="highcharts-figure">
+    <div id="container" />
+  </figure>
+  <p align="center">
+    <Button outline color="secondary" on:click={pop}>Volver</Button>
+  </p>
+</main>

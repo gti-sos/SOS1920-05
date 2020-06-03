@@ -4,56 +4,42 @@
   import Table from "sveltestrap/src/Table.svelte";
   import Button from "sveltestrap/src/Button.svelte";
 
-  async function loadGraph() {
-    let MyData = [];
-    let OtherData = [];
+
+     let MyData = [];
+  let incomingData = [];
     const url = "https://coronavirus-tracker-api.herokuapp.com/v2/locations";
 
+  async function loadGraph() {
     const resData = await fetch("/api/v1/life_expectancies");
     MyData = await resData.json();
 
-    console.log("Fetching url...");
     const res = await fetch(url);
-    if (res.ok) {
-      console.log("Ok");
-      OtherData = await res.json();
-    } else {
-      console.log("Error al cargar API externa");
-    }
+    incomingData = await res.json();
+    let mixedData = [];
+    let data = {};
 
-    let MyDataGraph = MyData.map(x => {
-      let res = {
-        name: x.country + " " + x.year,
-        value: x["average_life_expectancy"]
-      };
-      return res;
+    MyData.forEach(x => {
+      if (x.year) {
+        data = {
+          name: x.country + " " + x.year,
+          data: [parseInt(x.average_life_expectancy), 0]
+        };
+        mixedData.push(data);
+      }
     });
-    // 		let reformattedArray = OtherData;
-    // 		 reformattedArray.forEach((obj)=>{
-    //   			 let rObj = {name: obj.country + " " + obj.id, value: obj["deaths"]};
-    //    					//rObj[obj.country] = obj.deaths;
-    //    				return rObj;
-    //    });
-    //         let OtherDataGraph = OtherData.(x => {
-    // 			let res = {name: x.country + " " + x.id, value: x["deaths"]};
-    // 			return res;
-    //         });
-    //         let utilData = OtherData.data;
-    let OtherDataGraph = OtherData.filter(y => {
-      return y.position == "G";
-    }).map(x => {
-      let res = { name: x.country + " " + x.id, value: x.deaths };
-      return res;
+    incomingData.forEach(x => {
+      if (x.year==2017) {
+        data = {
+          name: x.country + " " + x.year,
+          data: [0, parseInt(x.poverty_prp)]
+        };
+        mixedData.push(data);
+      }
     });
-
-    let datosConjuntos = [
-      { name: "Esperanza de vida media", data: MyDataGraph },
-      { name: "Casos de muertes por COVID 19", data: reformattedArray }
-    ];
 
     anychart.onDocumentReady(function() {
       // create data
-      var data = [reformattedArray];
+      var data = [datosJuntos];
 
       // create a chart
       var chart = anychart.polar();
@@ -79,7 +65,7 @@
       // initiate drawing the chart
       chart.draw();
     });
-    series: datosConjuntos;
+  
   }
 </script>
 

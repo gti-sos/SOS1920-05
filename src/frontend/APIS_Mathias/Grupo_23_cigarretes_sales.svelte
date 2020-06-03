@@ -27,114 +27,123 @@
 			let res = {name: x.country + " " + x.year, value: x["women_life_expectancy"]};
 			return res;
         });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["cigarrete_sale"]};
+        let incomingData = OtherData.map((x) => {
+			let res = {name: x.community + " " + x.year, value: x["cigarrete_sale"]};
 			return res;
         });
         
-        let datosConjuntos = [{name: "Esperanza de vida en mujeres",data: MyDataGraph},{name: "Ventas de cigaros",data: OtherDataGraph}];
+        let mixedData = [{name: "Esperanza de vida en mujeres",data: MyDataGraph},{name: "Ventas de cigarros",data: incomingData}];
         
-  Highcharts.chart('container', {
-			chart: {
-				type: 'packedbubble',
-				height: '100%'
-			},
-			tooltip: {
-				useHTML: true,
-				pointFormat: '<b>{point.name}:</b> {point.value}'
-			},
-			plotOptions: {
-				packedbubble: {
-					minSize: '35%',
-					maxSize: '85%',
-					zMin: 0,
-					zMax: 100,
-					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: true,
-                        seriesInteraction: false,
-                        dragBetweenSeries: true,
-                        parentNodeLimit: true
-					},
-					dataLabels: {
-						enabled: true,
-						format: '{point.name}',
-						filter: {
-							property: 'y',
-							operator: '>',
-							value: 250
-						},
-						style: {
-							color: 'black',
-							textOutline: 'none',
-							fontWeight: 'normal'
-						}
-					}
-				}
-			},
-			series: datosConjuntos
-		});
-    }
+ Highcharts.chart("container", {
+      chart: {
+        type: "packedbubble"
+      },
+      title: {
+        text: "Esperanza de vida de mujeres y la ventas de cigarros"
+      },
+      tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat:
+          '<tr><td style="color:{series.color};padding:50"> </td>' +
+          '<td style="padding:0"><b>{point.y}</b></td></tr>',
+        footerFormat: "</table>"
+      },
+      plotOptions: {
+        packedbubble: {
+          dataLabels: {
+            enabled: true,
+
+            style: {
+              color: "black",
+              textOutline: "none",
+              fontWeight: "normal"
+            }
+          }
+        }
+      },
+      series: mixedData
+    });
+  }
 </script>
 
-<svelte:head>
-    <script src="https://code.highcharts.com/highcharts.js" on:load={loadGraph}></script>>
-    <script src="https://code.highcharts.com/highcharts-more.js" on:load={loadGraph}></script>>
-    <script src="https://code.highcharts.com/modules/exporting.js" on:load={loadGraph}></script>>
-    <script src="https://code.highcharts.com/modules/accessibility.js" on:load={loadGraph}></script>
-    
-</svelte:head>
-<main>
-    <h3> Grafica esperanza de vida en mujeres y Ventas de cigaros</h3>
-	<figure class="highcharts-figure">
-		<div id="container"></div>
-	</figure>
-	
-	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
-
-</main>
-
 <style>
-	main {
-		text-align: center;
-	}
-    .highcharts-figure, .highcharts-data-table table {
-  min-width: 320px; 
-  max-width: 800px;
-  margin: 1em auto;
-}
-
-.highcharts-figure, .highcharts-data-table table {
-    min-width: 320px; 
+  main {
+    text-align: center;
+  }
+  .highcharts-figure,
+  .highcharts-data-table table {
+    min-width: 320px;
     max-width: 800px;
     margin: 1em auto;
-}
+  }
 
-.highcharts-data-table table {
-	font-family: Verdana, sans-serif;
-	border-collapse: collapse;
-	border: 1px solid #EBEBEB;
-	margin: 10px auto;
-	text-align: center;
-	width: 100%;
-	max-width: 500px;
-}
-.highcharts-data-table caption {
+  .highcharts-figure,
+  .highcharts-data-table table {
+    min-width: 320px;
+    max-width: 800px;
+    margin: 1em auto;
+  }
+
+  .highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+  }
+  .highcharts-data-table caption {
     padding: 1em 0;
     font-size: 1.2em;
     color: #555;
-}
-.highcharts-data-table th {
-	font-weight: 600;
+  }
+  .highcharts-data-table th {
+    font-weight: 600;
     padding: 0.5em;
-}
-.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+  }
+  .highcharts-data-table td,
+  .highcharts-data-table th,
+  .highcharts-data-table caption {
     padding: 0.5em;
-}
-.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+  }
+  .highcharts-data-table thead tr,
+  .highcharts-data-table tr:nth-child(even) {
     background: #f8f8f8;
-}
-.highcharts-data-table tr:hover {
+  }
+  .highcharts-data-table tr:hover {
     background: #f1f7ff;
-}
+  }
 </style>
+
+<svelte:head>
+  <script src="https://code.highcharts.com/highcharts.js" on:load={loadGraph}>
+
+  </script>
+  >
+  <script
+    src="https://code.highcharts.com/highcharts-more.js"
+    on:load={loadGraph}>
+
+  </script>
+  >
+  <script
+    src="https://code.highcharts.com/modules/exporting.js"
+    on:load={loadGraph}>
+
+  </script>
+  >
+  <script
+    src="https://code.highcharts.com/modules/accessibility.js"
+    on:load={loadGraph}>
+
+  </script>
+</svelte:head>
+<main>
+  <figure class="highcharts-figure">
+    <div id="container" />
+  </figure>
+
+  <Button outline color="secondary" on:click={pop}>Volver</Button>
+
+</main>

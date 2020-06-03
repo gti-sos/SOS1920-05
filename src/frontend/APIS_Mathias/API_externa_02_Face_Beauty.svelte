@@ -4,29 +4,21 @@
   import Table from "sveltestrap/src/Table.svelte";
   import Button from "sveltestrap/src/Button.svelte";
 
-  async function loadGraph() {
-    let MyData = [];
-    let OtherData = [];
-    const url = "https://cdn.anychart.com/charts-data/data_json.json";
-
-    anychart.onDocumentReady(function() {
-      // To work with the data adapter you need to reference the data adapter script file from AnyChart CDN
-      // https://cdn.anychart.com/releases/8.7.1/js/anychart-data-adapter.min.js
-
-      // Load JSON data and create a chart by JSON data.
-      anychart.data.loadJsonFile(
-        "https://cdn.anychart.com/charts-data/data_json.json",
-        function(data) {
-          // create a chart and set loaded data
-          var chart = anychart.pie3d(data);
-          // configure and display
-          chart.title("Load JSON data and create a chart");
-          chart.container("container");
-          chart.draw();
-        }
-      );
-    });
-  }
+ anychart.onDocumentReady(function() {
+    anychart.data.loadJsonFile(
+      "https://cdn.anychart.com/charts-data/data_json.json",
+      function(data) {
+        // create a chart and set loaded data
+        var chart = anychart.bar(data);
+        // configure and display 
+        //chart.innerRadius(10);
+        chart.title("Productos de belleza facial");
+        chart.container("container");
+        chart.draw();
+      }
+    );
+  });
+ 
 </script>
 
 <style>
@@ -41,10 +33,7 @@
 </style>
 
 <svelte:head>
-  <script>
-    src =
-      "https://cdn.anychart.com/releases/8.7.1/js/anychart-data-adapter.min.js"on:load={loadGraph}
-  </script>
+  <script>{}</script>
   <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js">
 
   </script>
@@ -56,8 +45,7 @@
   </script>
 </svelte:head>
 <main>
-  <h3>Grafica esperanza de vida en media con casos de muertes por COVID 19</h3>
-
+  
   <div id="container" />
 
   <Button outline color="secondary" on:click={pop}>Volver</Button>
