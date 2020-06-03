@@ -15,8 +15,61 @@
         MyData = await resData.json();
 
 		const res = await fetch(url); 
-        OtherData = await res.json();
-
+		OtherData = await res.json();
+		let datosConjuntos = [];
+		let data = {};
+		
+		MyData.forEach((x) => {
+			if(x.country == "polonia"){
+				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_graphic_sector),0]
+				}
+				datosConjuntos.push(data);
+			}
+        });
+		OtherData.forEach((x) => {
+			if(x.place == "Polonia"){	
+			data={name: x.place  +" "+ x.year,	data: [0,parseInt(x.altura)]
+				}
+				datosConjuntos.push(data);
+			}
+		});
+		Highcharts.chart('container', {
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Monthly Average Rainfall'
+			},
+			subtitle: {
+				text: 'Source: WorldClimate.com'
+			},
+			xAxis: {
+				categories: ["Exportaciones Libros"," Bodas"],
+				crosshair: true
+			},
+			yAxis: {
+				min: 0,
+				title: {
+				text: 'Rainfall (mm)'
+				}
+			},
+			tooltip: {
+				headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+				pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+				'<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+				footerFormat: '</table>',
+				shared: false,
+				useHTML: false
+			},
+			plotOptions: {
+				column: {
+				pointPadding: 0.2,
+				borderWidth: 0
+				}
+			},
+			series: datosConjuntos
+			});
+		/*
         let MyDataGraph = MyData.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
@@ -45,7 +98,7 @@
 					zMax: 1000,
 					layoutAlgorithm: {
 						gravitationalConstant: 0.05,
-                        splitSeries: false,
+                        splitSeries: true,
                         seriesInteraction: false,
                         dragBetweenSeries: false,
                         parentNodeLimit: true
@@ -67,7 +120,7 @@
 				}
 			},
 			series: datosConjuntos
-		});
+		});*/
     }
 </script>
 
