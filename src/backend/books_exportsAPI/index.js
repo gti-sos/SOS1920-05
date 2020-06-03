@@ -12,9 +12,7 @@ module.exports =function (app) {
 		autoload: true
 		});
 
-
 	//----------API DIEGO-------//
-
 	
 	var books_exports = [] ;
 	

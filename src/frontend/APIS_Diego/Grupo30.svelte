@@ -45,7 +45,7 @@
 					zMax: 1000,
 					layoutAlgorithm: {
 						gravitationalConstant: 0.05,
-                        splitSeries: true,
+                        splitSeries: false,
                         seriesInteraction: false,
                         dragBetweenSeries: false,
                         parentNodeLimit: true
