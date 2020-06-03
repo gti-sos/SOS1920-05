@@ -3,9 +3,10 @@
     import Button from "sveltestrap/src/Button.svelte";
 
 	async function loadGraph(){
+
         let MyData = [];
         let OtherData = [];
-        const url = "https://sos1920-28.herokuapp.com/api/v1/ppas";
+        const url = "https://www.balldontlie.io/api/v1/players";
 
         const resData = await fetch("/api/v1/health_public");
         MyData = await resData.json();
@@ -20,24 +21,39 @@
         }
 
         let MyDataGraph = MyData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["public_spending"]};
+			let res = {name: x.country + " " + x.year, value: x["total_spending"]};
 			return res;
-        });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["aas_net"]};
+		});
+		
+		let utilData = OtherData.data;
+
+        let OtherDataGraph = utilData.filter((y) => {
+			return y.position == "G";
+			}).map((x) => {
+				let res = {name: x.first_name + " " + x.last_name, value: x.id};
 			return res;
-        });
-        
-        let datosConjuntos = [{name: "Gasto público", data: MyDataGraph}, {name: "Salario neto",data: OtherDataGraph}];
+		});
+		
+		let datosJuntos = 
+        [
+            {
+                name: "Gasto Total",
+                data: MyDataGraph
+            },
+            {
+                name: "Jugadores NBA",
+                data: OtherDataGraph
+            }
+        ];
         
         Highcharts.chart('container', {
 			chart: {
 				type: 'packedbubble',
-				height: '60%'
-            },
-            title: {
-                text: 'Gráfica que representa el gasto público y el salario neto de PPA'
-            },
+				height: '100%'
+			},
+			title: {
+				text: 'Gráfica que representa el gasto total y el ID de los jugadores de la NBA de posición "G".'
+			},
 			tooltip: {
 				useHTML: true,
 				pointFormat: '<b>{point.name}:</b> {point.value}'
@@ -49,8 +65,8 @@
 					zMin: 0,
 					zMax: 1000,
 					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: true,
+						splitSeries: true,
+						gravitationalConstant: 0.02
 					},
 					dataLabels: {
 						enabled: true,
@@ -68,9 +84,11 @@
 					}
 				}
 			},
-			series: datosConjuntos
+			series: datosJuntos
 		});
     }
+
+
 </script>
 
 <svelte:head>
@@ -85,7 +103,10 @@
 		<div id="container"></div>
 	</figure>
 	
+	<h4><a href="https://www.balldontlie.io/api/v1/players">Fuente</a></h4>
+	<p></p>
 	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
+	<p></p>
 
 </main>
 

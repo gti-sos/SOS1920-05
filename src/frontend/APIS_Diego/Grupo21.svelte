@@ -8,7 +8,9 @@
 
 	async function loadGraph(){
         let MyData = [];
-        let OtherData = [];
+		let OtherData = [];
+		let data = {};
+		let datosConjuntos = [];
         const url = "https://sos1920-21.herokuapp.com/api/v2/traffic-injuries";
 
         const resData = await fetch("/api/v1/books-exports");
@@ -16,13 +18,64 @@
 
 		const res = await fetch(url); 
 		OtherData = await res.json();
-		
-        let MyDataGraph = MyData.map((x) => {
+		MyData.forEach((x) => {
+			if(x.year==2016){
+				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_editorial),0]
+				}
+				datosConjuntos.push(data);
+			}
+        });
+		OtherData.forEach((x) => {
+			if(x.year==2016){
+				data={name: x.auto_com +" "+ x.year,	data: [0,parseInt(x.accident)]
+				}
+				datosConjuntos.push(data);
+			}
+		});
+		Highcharts.chart('container', {
+			chart: {
+				type: 'column'
+			},
+			title: {
+				text: 'Monthly Average Rainfall'
+			},
+			subtitle: {
+				text: 'Source: WorldClimate.com'
+			},
+			xAxis: {
+				categories: ["Exportaciones Libros"," Bodas"],
+				crosshair: true
+			},
+			yAxis: {
+				min: 0,
+				title: {
+				text: 'Rainfall (mm)'
+				}
+			},
+			tooltip: {
+				headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+				pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+				'<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+				footerFormat: '</table>',
+				shared: false,
+				useHTML: false
+			},
+			plotOptions: {
+				column: {
+				pointPadding: 0.2,
+				borderWidth: 0
+				}
+			},
+			series: datosConjuntos
+			});
+
+		/*
+        let MyDataGraph = MyData.filter((x)=>{return x.year==2016}).map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
         });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["accident"]};
+        let OtherDataGraph = OtherData.filter((x)=>{return x.year==2016}).map((x) => {
+			let res = {name: x.auto_com + " " + x.year, value: x["accident"]};
 			return res;
         });
         
@@ -45,10 +98,7 @@
 					zMax: 1000,
 					layoutAlgorithm: {
 						gravitationalConstant: 0.05,
-                        splitSeries: true,
-                        seriesInteraction: false,
-                        dragBetweenSeries: false,
-                        parentNodeLimit: true
+                        splitSeries: false,
 					},
 					dataLabels: {
 						enabled: true,
@@ -67,7 +117,7 @@
 				}
 			},
 			series: datosConjuntos
-		});
+		});*/
     }
 </script>
 

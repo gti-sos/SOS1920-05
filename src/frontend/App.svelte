@@ -42,7 +42,8 @@
 	import MarioG09 from './APIS_Mario/G09.svelte';
 	import MarioG22 from './APIS_Mario/G22.svelte';
 	import MarioG24 from './APIS_Mario/G24.svelte';
-	import MarioG28 from './APIS_Mario/G28.svelte';
+	import MarioGE1 from './APIS_Mario/GE1.svelte';
+	import MarioGE2 from './APIS_Mario/GE2.svelte';
 
 	//APIs Mathias
 	import Grupo_01_poverty_stats from './APIS_Mathias/Grupo_01_poverty_stats.svelte';
@@ -115,7 +116,8 @@
 		"/Integrations/APIS_Mario/G09": MarioG09,
 		"/Integrations/APIS_Mario/G22": MarioG22,
 		"/Integrations/APIS_Mario/G24": MarioG24,
-		"/Integrations/APIS_Mario/G28": MarioG28,
+		"/Integrations/APIS_Mario/GE1": MarioGE1,
+		"/Integrations/APIS_Mario/GE2": MarioGE2,
 
 		//Ruta Mathias
 		"/integrations/APIS_Mathias": Integrations_Mathias,

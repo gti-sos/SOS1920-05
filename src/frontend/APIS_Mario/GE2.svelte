@@ -3,9 +3,10 @@
     import Button from "sveltestrap/src/Button.svelte";
 
 	async function loadGraph(){
+
         let MyData = [];
         let OtherData = [];
-        const url = "https://sos1920-02.herokuapp.com/api/v2/evolution-of-cycling-routes";
+        const url = "https://api.covid19api.com/country/spain";
 
         const resData = await fetch("/api/v1/health_public");
         MyData = await resData.json();
@@ -22,22 +23,35 @@
         let MyDataGraph = MyData.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["total_spending"]};
 			return res;
-        });
-        let OtherDataGraph = OtherData.map((x) => {
-			let res = {name: x.province + " " + x.year, value: x["urban"]};
+		});
+
+        let OtherDataGraph = OtherData.filter((y) => {
+			return (y.Deaths >=100 && y.Deaths <=1000);
+			}).map((x) => {
+				let res = {name: x.Date, value: x.Deaths};
 			return res;
-        });
-        
-        let datosConjuntos = [{name: "Gasto total", data: MyDataGraph}, {name: "Evolución ciclismo urbano",data: OtherDataGraph}];
+		});
+		
+		let datosJuntos = 
+        [
+            {
+                name: "Gasto Total",
+                data: MyDataGraph
+            },
+            {
+                name: "Fecha en las que se registraron el número de fallecidos",
+                data: OtherDataGraph
+            }
+        ];
         
         Highcharts.chart('container', {
 			chart: {
 				type: 'packedbubble',
-				height: '60%'
-            },
-            title: {
-                text: 'Gráfica que representa el gasto total y la evolución del ciclismo urbano'
-            },
+				height: '100%'
+			},
+			title: {
+				text: 'Gráfica que representa el gasto total y las fechas en las que fallecieron entre las 100 y 1000 primeras personas en España a causa del Covid-19.'
+			},
 			tooltip: {
 				useHTML: true,
 				pointFormat: '<b>{point.name}:</b> {point.value}'
@@ -49,8 +63,8 @@
 					zMin: 0,
 					zMax: 1000,
 					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: false,
+						splitSeries: false,
+						gravitationalConstant: 0.02
 					},
 					dataLabels: {
 						enabled: true,
@@ -68,9 +82,11 @@
 					}
 				}
 			},
-			series: datosConjuntos
+			series: datosJuntos
 		});
     }
+
+
 </script>
 
 <svelte:head>
@@ -85,7 +101,11 @@
 		<div id="container"></div>
 	</figure>
 	
+	<h4><a href="https://api.covid19api.com/country/spain">Fuente</a></h4>
+	<p></p>
 	<Button outline color="secondary" on:click="{pop}"> Volver</Button>
+	<p></p>
+	
 
 </main>
 

@@ -51,13 +51,10 @@
         <td><a href="/#/integrations/APIS_Mario/G24">Grupo 24</a></td>
       </tr>
       <tr>
-        <td><a href="/#/integrations/APIS_Mario/G28">Grupo 28</a></td>
+        <td><a href="/#/integrations/APIS_Mario/GE1">API Externa 1</a></td>
       </tr>
       <tr>
-        <td><a href="/#/integrations/APIS_Mario/GExt1">API Externa 1</a></td>
-      </tr>
-      <tr>
-        <td><a href="/#/integrations/APIS_Mario/GExt2">API Externa 2</a></td>
+        <td><a href="/#/integrations/APIS_Mario/GE2">API Externa 2</a></td>
       </tr>
 
     </tbody>

@@ -6,15 +6,12 @@ module.exports =function (app) {
 	const BASE_API_URL = "/api/v1";
 	const dbFileName = path.join(__dirname,"books_exports.db");
 	
-
 	const db = new dataStore({
 		filename: dbFileName,
 		autoload: true
 		});
 
-
 	//----------API DIEGO-------//
-
 	
 	var books_exports = [] ;
 	
@@ -54,6 +51,48 @@ module.exports =function (app) {
 			exp_book: 61382,
 			exp_editorial: 59956,
 			exp_graphic_sector:1427
+		},
+		{ 
+			country: "uruguay",
+			year: 2015,
+			exp_book: 52278,
+			exp_editorial: 72827,
+			exp_graphic_sector:27278
+		},
+		{ 
+			country: "paraguay",
+			year: 2016,
+			exp_book: 8787,
+			exp_editorial: 866,
+			exp_graphic_sector:644
+		},
+		{ 
+			country: "chile",
+			year: 2015,
+			exp_book: 7887,
+			exp_editorial: 78778,
+			exp_graphic_sector:7878
+		},
+		{ 
+			country: "argentina",
+			year: 2015,
+			exp_book: 21552,
+			exp_editorial: 2542,
+			exp_graphic_sector:2542
+		},
+		{ 
+			country: "polonia",
+			year: 2016,
+			exp_book: 2282,
+			exp_editorial: 282,
+			exp_graphic_sector:282
+		},
+		{ 
+			country: "brasil",
+			year: 2017,
+			exp_book: 28882,
+			exp_editorial: 2828,
+			exp_graphic_sector:2822
 		}
 	];
 

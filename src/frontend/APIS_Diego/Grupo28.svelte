@@ -16,7 +16,87 @@
 		
 		const res = await fetch(url);
 		OtherData = await res.json();
+		let datosConjuntos = [];
+		let data = {};
 		
+		MyData.forEach((x) => {
+			if(x.year==2017){
+				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_editorial),0]
+				}
+				datosConjuntos.push(data);
+			}
+        });
+		OtherData.forEach((x) => {
+			if(x.year==2017){
+				data={name: x.country +" "+ x.year,	data: [0,parseInt(x.ppa_per_capita)]
+				}
+				datosConjuntos.push(data);
+			}
+		});
+		Highcharts.chart('container', {
+              chart: {
+                type: 'bar'
+              },
+              title: {
+                text: 'Exportaciones'
+              },
+              subtitle: {
+                text: 'Gráfica que refleja el número de exportaciones de libros,editoriales y del sector grafico'
+                },
+              xAxis: {
+                  
+                categories:  [
+                    'Libros',
+                    'Renta Per Capita',],
+                crosshair: true
+              },
+              yAxis: {
+                min: 0,
+                title: {
+                  text: 'Numeros',
+                  align: 'high'
+                },
+                labels: {
+                  overflow: 'justify'
+                }
+              },
+              tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: false,
+                useHTML: false
+              },
+              plotOptions: {
+                bar: {
+                  dataLabels: {
+                    enabled: false
+                  }
+                }
+              },
+              legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                shadow: true
+              },
+              credits: {
+                enabled: false
+              },
+              series:datosConjuntos,
+              responsive: {
+                condition: {
+                    maxWidth: 500
+                    }
+                }
+            });
+		/*
         let MyDataGraph = MyData.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
@@ -67,7 +147,7 @@
 				}
 			},
 			series: datosConjuntos
-		});
+		});*/
     }
 </script>
 
