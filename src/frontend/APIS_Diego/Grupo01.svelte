@@ -3,9 +3,6 @@
 	import {pop} from "svelte-spa-router";
     import Button from "sveltestrap/src/Button.svelte";
     
-    
-
-
 	async function loadGraph(){
         let jsonDiego = [];
         let jsonG01 = [];
@@ -20,7 +17,8 @@
         let datosDiego = jsonDiego.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
-        });
+		});
+		
         let datosG01 = jsonG01.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["em_totals"]};
 			return res;
@@ -28,7 +26,7 @@
         
         let datosConjuntos = [{name: "Exportaciones Libros",data: datosDiego},{name: "Emigrantes totales",data: datosG01}];
         
-                Highcharts.chart('container', {
+        Highcharts.chart('container', {
 			chart: {
 				type: 'packedbubble',
 				height: '60%'
@@ -89,10 +87,10 @@
 </main>
 
 <style>
-	main {
-		text-align: center;
+main {
+	text-align: center;
 	}
-    .highcharts-figure, .highcharts-data-table table {
+.highcharts-figure, .highcharts-data-table table {
   min-width: 320px; 
   max-width: 800px;
   margin: 1em auto;

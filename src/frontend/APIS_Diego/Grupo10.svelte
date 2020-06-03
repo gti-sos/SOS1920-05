@@ -2,10 +2,8 @@
 	import  {onMount} from "svelte";
 	import {pop} from "svelte-spa-router";
     import Button from "sveltestrap/src/Button.svelte";
-    
-    
-
-
+	
+	
 	async function loadGraph(){
         let jsonDiego = [];
         let jsonG10 = [];
@@ -21,12 +19,12 @@
 		jsonDiego.filter((x) => {return x.year==2015;}).forEach((x) => {
 				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_editorial),0]
 				}
-				datosConjuntos.push(data);
+			datosConjuntos.push(data);
         });
 		jsonG10.filter((x) => {return x.year==2018;}).forEach((x) => {
 				data={name: x.country +" "+ x.year,	data: [0,parseInt(x.marriages)]
 				}
-				datosConjuntos.push(data);
+			datosConjuntos.push(data);
 		});
 		Highcharts.chart('container', {
 			chart: {
@@ -80,10 +78,10 @@
 </main>
 
 <style>
-	main {
-		text-align: center;
+main {
+	text-align: center;
 	}
-    .highcharts-figure, .highcharts-data-table table {
+.highcharts-figure, .highcharts-data-table table {
   min-width: 320px; 
   max-width: 800px;
   margin: 1em auto;

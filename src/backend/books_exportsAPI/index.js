@@ -14,7 +14,6 @@ module.exports =function (app) {
 	//----------API DIEGO-------//
 	
 	var books_exports = [] ;
-	
 
 	var Initialbooks_exports = [
 		{ 
@@ -96,7 +95,6 @@ module.exports =function (app) {
 		}
 	];
 
-
 	//LOAD INITIAL DATA de GET /books_exports
 	app.get(BASE_API_URL+"/books-exports/loadInitialData", (req,res) =>{
 		db.remove({}, { multi: true }, function (err, deleteBooks_exports) {});
@@ -106,7 +104,6 @@ module.exports =function (app) {
 	});
 
 	// GET BOOKS EXPORTS
-
 	app.get(BASE_API_URL+"/books-exports", (req,res) =>{
 		var limit = parseInt(req.query.limit);
         var offset = parseInt(req.query.offset);
@@ -120,7 +117,6 @@ module.exports =function (app) {
         var exp_editorial = parseFloat(req.query.exp_editorial);
         var exp_graphic_sector = parseFloat(req.query.exp_graphic_sector);
         
-    
         if(from && to) {
             db.find({ year: {$gte: from, $lte: to}}).skip(offset).limit(limit).exec((err, books_exports)=>{
                 if(books_exports.length == 0) {
@@ -130,12 +126,12 @@ module.exports =function (app) {
 						delete c._id;
 					});
 					res.send(JSON.stringify(books_exports,null,2));
-                	}    
+                }    
 			});
 			
         } else if(country || year || exp_book || exp_editorial || exp_graphic_sector) {
-              if(!year && !exp_book && !exp_editorial && !exp_graphic_sector ) {
-                   db.find({"country":country}).skip(offset).limit(limit).exec((err, books_exports)=>{
+            if(!year && !exp_book && !exp_editorial && !exp_graphic_sector ) {
+                db.find({"country":country}).skip(offset).limit(limit).exec((err, books_exports)=>{
                     if(books_exports.length == 0) {
                     	res.sendStatus(404,"NOT FOUND");
                 	} else { 
@@ -146,9 +142,9 @@ module.exports =function (app) {
                 		}  
                 	});
                   
-              }  else if(!country && !exp_book && !exp_editorial && !exp_graphic_sector ) {
-				  db.find({"year":year}).skip(offset).limit(limit).exec((err, books_exports)=>{
-					   if(books_exports.length == 0) {
+            }else if(!country && !exp_book && !exp_editorial && !exp_graphic_sector ) {
+				db.find({"year":year}).skip(offset).limit(limit).exec((err, books_exports)=>{
+					if(books_exports.length == 0) {
 						res.sendStatus(404,"NOT FOUND");
                 	} else { 
                     	books_exports.forEach((c) => {
@@ -158,8 +154,8 @@ module.exports =function (app) {
                 	} 
                 });
 				  
-        } else if(!country && !year && !exp_editorial && !exp_graphic_sector) {
-                   db.find({"exp_book":exp_book}).skip(offset).limit(limit).exec((err, books_exports)=>{
+        	} else if(!country && !year && !exp_editorial && !exp_graphic_sector) {
+                db.find({"exp_book":exp_book}).skip(offset).limit(limit).exec((err, books_exports)=>{
                     if(books_exports.length == 0) {
                     	res.sendStatus(404,"NOT FOUND");
                	 	} else { 
@@ -167,64 +163,63 @@ module.exports =function (app) {
 							delete c._id;
 						});
 						res.send(JSON.stringify(books_exports,null,2));
-                		} 
-                	}); 
+                	} 
+                }); 
 			
-        }  else if(!country && !year && !exp_book && !exp_graphic_sector ) {
-                   db.find({"exp_editorial":exp_editorial}).skip(offset).limit(limit).exec((err, books_exports)=>{
+        	}  else if(!country && !year && !exp_book && !exp_graphic_sector ) {
+                db.find({"exp_editorial":exp_editorial}).skip(offset).limit(limit).exec((err, books_exports)=>{
+                	if(books_exports.length == 0) {
+                    	res.sendStatus(404,"NOT FOUND");
+               		} else { 
+						books_exports.forEach((c) => {
+							delete c._id;
+						});
+						res.send(JSON.stringify(books_exports,null,2));
+                	} 
+                });
+			
+        	} else if(!country && !year && !exp_editorial && !exp_book ) {
+                db.find({"exp_graphic_sector":exp_graphic_sector}).skip(offset).limit(limit).exec((err, books_exports)=>{   
+					if(books_exports.length == 0) {
+                    	res.sendStatus(404,"NOT FOUND");
+					} else { 
+						books_exports.forEach((c) => {
+							delete c._id;
+						});
+						res.send(JSON.stringify(books_exports,null,2));
+					} 
+                });
+        	} else if(!exp_book && !exp_editorial && !exp_graphic_sector ) {
+            	db.find({"country":country, "year": year}).skip(offset).limit(limit).exec((err, books_exports)=>{
                     if(books_exports.length == 0) {
-                    res.sendStatus(404,"NOT FOUND");
-                } else { 
-                    books_exports.forEach((c) => {
-						delete c._id;
-					});
-					res.send(JSON.stringify(books_exports,null,2));
+                   		res.sendStatus(404,"NOT FOUND");
+                	} else { 
+						books_exports.forEach((c) => {
+							delete c._id;
+						});
+						res.send(JSON.stringify(books_exports,null,2));
                 	} 
                 });
-			
-        } else if(!country && !year && !exp_editorial && !exp_book ) {
-                   db.find({"exp_graphic_sector":exp_graphic_sector}).skip(offset).limit(limit).exec((err, books_exports)=>{   
-				if(books_exports.length == 0) {
-                    res.sendStatus(404,"NOT FOUND");
-                } else { 
-                    books_exports.forEach((c) => {
-						delete c._id;
-					});
-					res.send(JSON.stringify(books_exports,null,2));
+        	}else {
+            	db.find({"country":country, "year": year, "exp_editorial":exp_editorial, "exp_graphic_sector":exp_graphic_sector}).skip(offset).limit(limit).exec((err, books_exports)=>{
+                    if(books_exports.length == 0) {
+                    	res.sendStatus(404,"NOT FOUND");
+                	} else { 
+						books_exports.forEach((c) => {
+							delete c._id;
+						});
+						res.send(JSON.stringify(books_exports,null,2));
                 	} 
                 });
-        }  else if(!exp_book && !exp_editorial && !exp_graphic_sector ) {
-            db.find({"country":country, "year": year}).skip(offset).limit(limit).exec((err, books_exports)=>{
-                        if(books_exports.length == 0) {
-                    res.sendStatus(404,"NOT FOUND");
-                } else { 
-                    books_exports.forEach((c) => {
-						delete c._id;
-					});
-					res.send(JSON.stringify(books_exports,null,2));
-                	} 
-                });
-        }	else  {
-            db.find({"country":country, "year": year, "exp_editorial":exp_editorial, "exp_graphic_sector":exp_graphic_sector}).skip(offset).limit(limit).exec((err, books_exports)=>{
-                        if(books_exports.length == 0) {
-                    res.sendStatus(404,"NOT FOUND");
-                } else { 
-                    books_exports.forEach((c) => {
-						delete c._id;
-					});
-					res.send(JSON.stringify(books_exports,null,2));
-                	} 
-                });
-        }
+        	}
         } else {
-			
             db.find({}).skip(offset).limit(limit).exec((err, books_exports)=>{
-                    books_exports.forEach((c) => {
-						delete c._id;
-					});
-					res.send(JSON.stringify(books_exports,null,2));
-				});      
-            };
+                books_exports.forEach((c) => {
+					delete c._id;
+				});
+				res.send(JSON.stringify(books_exports,null,2));
+			});      
+        };
     
 	});
 
@@ -271,7 +266,7 @@ module.exports =function (app) {
 				res.send(filteredBooks_exports.map((c)=>{
 						delete c._id;
 						return c;
-					})[0]);
+				})[0]);
 			}else{
 				res.sendStatus(404,"BOOKS EXPORTS NOT FOUND");
 			}
@@ -308,10 +303,10 @@ module.exports =function (app) {
 
 		db.remove({"country" : country, "year" : year},  {}, function(err, filteredBooks_exports){	
 			if(filteredBooks_exports == 1) {
-					res.sendStatus(200);
-				}else {
-					res.sendStatus(404,"BOOKS EXPORTS NOT FOUND");
-				}
+				res.sendStatus(200);
+			}else {
+				res.sendStatus(404,"BOOKS EXPORTS NOT FOUND");
+			}
 		});
 	});
 

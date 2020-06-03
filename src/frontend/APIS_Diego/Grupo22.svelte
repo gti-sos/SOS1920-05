@@ -3,9 +3,6 @@
 	import {pop} from "svelte-spa-router";
     import Button from "sveltestrap/src/Button.svelte";
     
-    
-
-
 	async function loadGraph(){
         let jsonDiego = [];
         let jsonG22 = [];
@@ -89,10 +86,10 @@
 </main>
 
 <style>
-	main {
-		text-align: center;
-	}
-    .highcharts-figure, .highcharts-data-table table {
+main {
+	text-align: center;
+}
+.highcharts-figure, .highcharts-data-table table {
   min-width: 320px; 
   max-width: 800px;
   margin: 1em auto;

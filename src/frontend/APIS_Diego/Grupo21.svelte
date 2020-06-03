@@ -3,9 +3,6 @@
 	import {pop} from "svelte-spa-router";
     import Button from "sveltestrap/src/Button.svelte";
     
-    
-
-
 	async function loadGraph(){
         let jsonDiego = [];
         let jsonG21 = [];
@@ -21,12 +18,12 @@
 		jsonDiego.filter((x) => {return x.year==2016;}).forEach((x) => {
 				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_editorial),0]
 				}
-				datosConjuntos.push(data);
+			datosConjuntos.push(data);
         });
 		jsonG21.filter((x) => {return x.year==2016;}).forEach((x) => {
 				data={name: x.auto_com +" "+ x.year,	data: [0,parseInt(x.accident)]
 				}
-				datosConjuntos.push(data);
+			datosConjuntos.push(data);
 		});
 		Highcharts.chart('container', {
 			chart: {
@@ -80,10 +77,10 @@
 </main>
 
 <style>
-	main {
-		text-align: center;
-	}
-    .highcharts-figure, .highcharts-data-table table {
+main {
+	text-align: center;
+}
+.highcharts-figure, .highcharts-data-table table {
   min-width: 320px; 
   max-width: 800px;
   margin: 1em auto;

@@ -1,96 +1,93 @@
 <script>
-	import  {onMount} from "svelte";
-	import {pop} from "svelte-spa-router";
+    import  {onMount} from "svelte";
+    import {pop} from "svelte-spa-router";
     import Button from "sveltestrap/src/Button.svelte";
-    
-    
+      
+    async function loadGraph(){
+      let jsonDiego = [];
+      let jsonG23 = [];
+      let datosConjuntos = [];
+      let data = {};
 
+      const url = "https://sos1920-23.herokuapp.com/api/v2/fires-stats/";
 
-	async function loadGraph(){
-        let jsonDiego = [];
-		let jsonG23 = [];
-		let datosConjuntos = [];
-		let data = {};
+      const resData = await fetch("/api/v1/books-exports");
+      jsonDiego = await resData.json();
+      
+      const res = await fetch(url);
+      jsonG23 = await res.json();
+      
+      jsonDiego.filter((x) => {return x.year==2016 && x.country != "uk";}).forEach((x) => {
+          data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_graphic_sector),0]
+            }
+          datosConjuntos.push(data);
+      });
+      
+      jsonG23.filter((x) => {return x.year==2008;}).forEach((x) => {
+          data={name: x.community  +" "+ x.year,	data: [0,parseInt(x.total_fire)]
+            }
+          datosConjuntos.push(data);
+      });
 
-        const url = "https://sos1920-23.herokuapp.com/api/v2/fires-stats/";
-
-        const resData = await fetch("/api/v1/books-exports");
-        jsonDiego = await resData.json();
-		
-		const res = await fetch(url);
-		jsonG23 = await res.json();
-		
-		jsonDiego.filter((x) => {return x.year==2016 && x.country != "uk";}).forEach((x) => {
-				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_graphic_sector),0]
-				}
-				datosConjuntos.push(data);
-		});
-		
-		jsonG23.filter((x) => {return x.year==2008;}).forEach((x) => {
-				data={name: x.community  +" "+ x.year,	data: [0,parseInt(x.total_fire)]
-				}
-				datosConjuntos.push(data);
-		});
-
-		Highcharts.chart('container', {
-              chart: {
-                type: 'bar'
-              },
-              xAxis: {
-                  
-                categories:  [
-                    'Exportaciones Sector Grafico',
-                    'Fuegos Totales',],
-                crosshair: true
-              },
-              yAxis: {
-                min: 0,
-                title: {
-                  text: 'Numeros',
-                  align: 'high'
+      Highcharts.chart('container', {
+                chart: {
+                  type: 'bar'
                 },
-                labels: {
-                  overflow: 'justify'
-                }
-              },
-              tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
-                footerFormat: '</table>',
-                shared: false,
-                useHTML: false
-              },
-              plotOptions: {
-                bar: {
-                  dataLabels: {
-                    enabled: false
+                xAxis: {
+                    
+                  categories:  [
+                      'Exportaciones Sector Grafico',
+                      'Fuegos Totales',],
+                  crosshair: true
+                },
+                yAxis: {
+                  min: 0,
+                  title: {
+                    text: 'Numeros',
+                    align: 'high'
+                  },
+                  labels: {
+                    overflow: 'justify'
                   }
-                }
-              },
-              legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -40,
-                y: 80,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-                shadow: true
-              },
-              credits: {
-                enabled: false
-              },
-              series:datosConjuntos,
-              responsive: {
-                condition: {
-                    maxWidth: 500
+                },
+                tooltip: {
+                  headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                  pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                      '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                  footerFormat: '</table>',
+                  shared: false,
+                  useHTML: false
+                },
+                plotOptions: {
+                  bar: {
+                    dataLabels: {
+                      enabled: false
                     }
-                }
-			});
-		}
-		
+                  }
+                },
+                legend: {
+                  layout: 'vertical',
+                  align: 'right',
+                  verticalAlign: 'top',
+                  x: -40,
+                  y: 80,
+                  floating: true,
+                  borderWidth: 1,
+                  backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                  shadow: true
+                },
+                credits: {
+                  enabled: false
+                },
+                series:datosConjuntos,
+                responsive: {
+                  condition: {
+                      maxWidth: 500
+                      }
+                  }
+        });
+      }
+      
 </script>
 
 <svelte:head>
