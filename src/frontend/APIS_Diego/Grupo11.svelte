@@ -7,26 +7,26 @@
 
 
 	async function loadGraph(){
-        let MyData = [];
-        let OtherData = [];
+        let jsonDiego = [];
+        let jsonG11 = [];
         const url = "https://sos1920-11.herokuapp.com/api/v2/crime-rate-stats";
 
         const resData = await fetch("/api/v1/books-exports");
-        MyData = await resData.json();
+        jsonDiego = await resData.json();
 
 		const res = await fetch(url);
-        OtherData = await res.json();
+        jsonG11 = await res.json();
 
-        let MyDataGraph = MyData.map((x) => {
+        let datosDiego = jsonDiego.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
         });
-        let OtherDataGraph = OtherData.map((x) => {
+        let datosG11 = jsonG11.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["cr_rate"]};
 			return res;
         });
         
-        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Indice crimen",data: OtherDataGraph}];
+        let datosConjuntos = [{name: "Exportaciones Libros",data: datosDiego},{name: "Indice crimen",data: datosG11}];
         
                 Highcharts.chart('container', {
 			chart: {

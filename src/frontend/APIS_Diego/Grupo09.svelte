@@ -7,26 +7,26 @@
 
 
 	async function loadGraph(){
-        let MyData = [];
-        let OtherData = [];
+        let jsonDiego = [];
+        let jsonG09 = [];
         const url = "https://sos1920-09.herokuapp.com/api/v4/renewable-sources-stats/";
 
         const resData = await fetch("/api/v1/books-exports");
-        MyData = await resData.json();
+        jsonDiego = await resData.json();
 
 		const res = await fetch(url);
-        OtherData = await res.json();
+        jsonG09 = await res.json();
 
-        let MyDataGraph = MyData.filter((x)=>{return x.year==2015}).map((x) => {
+        let datosDiego = jsonDiego.filter((x)=>{return x.year==2015}).map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
         });
-        let OtherDataGraph = OtherData.filter((x)=>{return x.year==2015}).map((x) => {
+        let datosG09 = jsonG09.filter((x)=>{return x.year==2015}).map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["percentage-re-total"]};
 			return res;
         });
         
-        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Porcentaje Energias Renovables",data: OtherDataGraph}];
+        let datosConjuntos = [{name: "Exportaciones Libros",data: datosDiego},{name: "Porcentaje Energias Renovables",data: datosG09}];
         
                 Highcharts.chart('container', {
 			chart: {
@@ -76,7 +76,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones de libros y porcentaje energias renovables en el mundo</h3>
+    <h3> Grafica exportaciones de libros y porcentaje de energias renovables en el mundo</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>

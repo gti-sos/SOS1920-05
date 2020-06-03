@@ -7,32 +7,26 @@
 
 
 	async function loadGraph(){
-        let MyData = [];
-        let OtherData = [];
+        let jsonDiego = [];
+        let jsonG01 = [];
         const url = "https://sos1920-01.herokuapp.com/api/v1/emigrants-stats";
 
         const resData = await fetch("/api/v1/books-exports");
-        MyData = await resData.json();
+        jsonDiego = await resData.json();
 
-        console.log("Fetching url...");	
-		const res = await fetch(url); 
-		if (res.ok) {
-			console.log("Ok");
-            OtherData = await res.json();
-		} else {
-			console.log("Error al cargar API externa");
-        }
+		const res = await fetch(url);
+        jsonG01 = await res.json();
 
-        let MyDataGraph = MyData.map((x) => {
+        let datosDiego = jsonDiego.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
         });
-        let OtherDataGraph = OtherData.map((x) => {
+        let datosG01 = jsonG01.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["em_totals"]};
 			return res;
         });
         
-        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Emigrantes totales",data: OtherDataGraph}];
+        let datosConjuntos = [{name: "Exportaciones Libros",data: datosDiego},{name: "Emigrantes totales",data: datosG01}];
         
                 Highcharts.chart('container', {
 			chart: {

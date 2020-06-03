@@ -19,8 +19,6 @@
 			return res;
 		});
 	
-	//let utilUtilMario = mario.networks;
-	//let utilMario= utilUtilMario.location;
     let datos_mario = mario.filter((d) => {return parseInt(d.minimal_amount) > 10.0;}).map((x) => {
 			let res = {name: x.code,value: parseInt(x.minimal_amount)};
 			console.log(x);

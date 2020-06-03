@@ -7,26 +7,26 @@
 
 
 	async function loadGraph(){
-        let MyData = [];
-        let OtherData = [];
+        let jsonDiego = [];
+		let jsonG26 = [];
         const url = "https://sos1920-26.herokuapp.com/api/v2/global-coef";
 
         const resData = await fetch("/api/v1/books-exports");
-        MyData = await resData.json();
+        jsonDiego = await resData.json();
 
 		const res = await fetch(url); 
-        OtherData = await res.json();
+        jsonG26 = await res.json();
 
-        let MyDataGraph = MyData.map((x) => {
+        let datosDiego = jsonDiego.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
 			return res;
         });
-        let OtherDataGraph = OtherData.map((x) => {
+        let datosG26 = jsonG26.map((x) => {
 			let res = {name: x.country + " " + x.year, value: x["coefficient"]};
 			return res;
         });
         
-        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Coeficiente",data: OtherDataGraph}];
+        let datosConjuntos = [{name: "Exportaciones Libros",data: datosDiego},{name: "Coeficiente",data: datosG26}];
         
                 Highcharts.chart('container', {
 			chart: {
@@ -79,7 +79,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones de libros y coeficiente mundial</h3>
+    <h3> Grafica exportaciones de libros y coeficiente UEFA en el mundo</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>

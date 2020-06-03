@@ -7,49 +7,39 @@
 
 
 	async function loadGraph(){
-        let MyData = [];
-		let OtherData = [];
+        let jsonDiego = [];
+        let jsonG21 = [];
 		let data = {};
 		let datosConjuntos = [];
         const url = "https://sos1920-21.herokuapp.com/api/v2/traffic-injuries";
 
         const resData = await fetch("/api/v1/books-exports");
-        MyData = await resData.json();
+        jsonDiego = await resData.json();
 
 		const res = await fetch(url); 
-		OtherData = await res.json();
-		MyData.forEach((x) => {
-			if(x.year==2016){
+		jsonG21 = await res.json();
+		jsonDiego.filter((x) => {return x.year==2016;}).forEach((x) => {
 				data={name: x.country +" "+ x.year,	data: [parseInt(x.exp_editorial),0]
 				}
 				datosConjuntos.push(data);
-			}
         });
-		OtherData.forEach((x) => {
-			if(x.year==2016){
+		jsonG21.filter((x) => {return x.year==2016;}).forEach((x) => {
 				data={name: x.auto_com +" "+ x.year,	data: [0,parseInt(x.accident)]
 				}
 				datosConjuntos.push(data);
-			}
 		});
 		Highcharts.chart('container', {
 			chart: {
 				type: 'column'
 			},
-			title: {
-				text: 'Monthly Average Rainfall'
-			},
-			subtitle: {
-				text: 'Source: WorldClimate.com'
-			},
 			xAxis: {
-				categories: ["Exportaciones Libros"," Bodas"],
+				categories: ["Exportaciones Editoriales"," Accidentes"],
 				crosshair: true
 			},
 			yAxis: {
 				min: 0,
 				title: {
-				text: 'Rainfall (mm)'
+				text: 'Numeros'
 				}
 			},
 			tooltip: {
@@ -69,55 +59,6 @@
 			series: datosConjuntos
 			});
 
-		/*
-        let MyDataGraph = MyData.filter((x)=>{return x.year==2016}).map((x) => {
-			let res = {name: x.country + " " + x.year, value: x["exp_book"]};
-			return res;
-        });
-        let OtherDataGraph = OtherData.filter((x)=>{return x.year==2016}).map((x) => {
-			let res = {name: x.auto_com + " " + x.year, value: x["accident"]};
-			return res;
-        });
-        
-        let datosConjuntos = [{name: "Exportaciones Libros",data: MyDataGraph},{name: "Accidentes",data: OtherDataGraph}];
-        
-                Highcharts.chart('container', {
-			chart: {
-				type: 'packedbubble',
-				height: '60%'
-			},
-			tooltip: {
-				useHTML: true,
-				pointFormat: '<b>{point.name}:</b> {point.value}'
-			},
-			plotOptions: {
-				packedbubble: {
-					minSize: '10%',
-					maxSize: '100%',
-					zMin: 0,
-					zMax: 1000,
-					layoutAlgorithm: {
-						gravitationalConstant: 0.05,
-                        splitSeries: false,
-					},
-					dataLabels: {
-						enabled: true,
-						format: '{point.name}',
-						filter: {
-							property: 'y',
-							operator: '>',
-							value: 250
-						},
-						style: {
-							color: 'black',
-							textOutline: 'none',
-							fontWeight: 'normal'
-						}
-					}
-				}
-			},
-			series: datosConjuntos
-		});*/
     }
 </script>
 
@@ -129,7 +70,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones de libros y accidentes en el mundo</h3>
+    <h3> Grafica exportaciones de editoriales y accidentes en el mundo (2016)</h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>
