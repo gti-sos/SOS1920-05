@@ -4,10 +4,9 @@
   import Table from "sveltestrap/src/Table.svelte";
   import Button from "sveltestrap/src/Button.svelte";
 
-
-     let MyData = [];
+  let MyData = [];
   let incomingData = [];
-    const url = "https://coronavirus-tracker-api.herokuapp.com/v2/locations";
+  const url = "https://coronavirus-tracker-api.herokuapp.com/v2/locations";
 
   async function loadGraph() {
     const resData = await fetch("/api/v1/life_expectancies");
@@ -28,77 +27,129 @@
       }
     });
     incomingData.forEach(x => {
-      if (x.year==2017) {
+      if (x.id) {
         data = {
-          name: x.country + " " + x.year,
-          data: [0, parseInt(x.poverty_prp)]
+          name: x.country + " " + x.country_code,
+          data: [0, parseInt(x.deaths)]
         };
         mixedData.push(data);
       }
     });
+    Highcharts.chart("container", {
+      chart: {
+        type: "area"
+      },
+      title: {
+        text: "Esperanza de vida media con nivel de pobreza"
+      },
 
-    anychart.onDocumentReady(function() {
-      // create data
-      var data = [datosJuntos];
+      xAxis: {
+        categories: ["Esperanza de vida media", "Nivel de pobreza"]
+      },
 
-      // create a chart
-      var chart = anychart.polar();
+      plotOptions: {
+        area: {
+          dataLabels: {
+            enabled: true
+          }
+        }
+      },
 
-      // create a polygon series and set the data
-      var series = chart.polygon(data);
-
-      // set the type of the x-scale
-      chart.xScale("ordinal");
-
-      // enable sorting points by x
-      chart.sortPointsByX(true);
-
-      // set the inner radius
-      chart.innerRadius(50);
-
-      // set the chart title
-      chart.title("Polygon Chart: Basic Sample");
-
-      // set the container id
-      chart.container("container");
-
-      // initiate drawing the chart
-      chart.draw();
+      credits: {
+        enabled: false
+      },
+      series: mixedData,
+      responsive: {
+        rules: [
+          {
+            condition: {
+              maxWidth: 500
+            },
+            chartOptions: {
+              legend: [
+                {
+                  layout: "horizontal",
+                  align: "center",
+                  verticalAlign: "bottom"
+                }
+              ]
+            }
+          }
+        ]
+      }
     });
-  
   }
 </script>
 
 <style>
-  html,
-  body,
-  #container {
+  .highcharts-figure,
+  .highcharts-data-table table {
+    min-width: 360px;
+    max-width: 800px;
+    margin: 1em auto;
+  }
+
+  .highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
     width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
+    max-width: 500px;
+  }
+  .highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+  }
+  .highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+  }
+  .highcharts-data-table td,
+  .highcharts-data-table th,
+  .highcharts-data-table caption {
+    padding: 0.5em;
+  }
+  .highcharts-data-table thead tr,
+  .highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+  }
+  .highcharts-data-table tr:hover {
+    background: #f1f7ff;
   }
 </style>
 
 <svelte:head>
-  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js">
+  <script src="https://code.highcharts.com/highcharts.js">
 
   </script>
-  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js">
+  <script src="https://code.highcharts.com/modules/series-label.js">
+
+  </script>
+  <script src="https://code.highcharts.com/modules/exporting.js">
+
+  </script>
+  <script src="https://code.highcharts.com/modules/export-data.js">
 
   </script>
   <script
-    src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"
+    src="https://code.highcharts.com/modules/accessibility.js"
     on:load={loadGraph}>
 
   </script>
-
 </svelte:head>
+
 <main>
-  <h3>Grafica esperanza de vida en media con casos de muertes por COVID 19</h3>
 
-  <div id="container" />
-
-  <Button outline color="secondary" on:click={pop}>Volver</Button>
-
+  <h2 style="text-align: center;">
+    <i class="fas fa-car" />
+  </h2>
+  <figure class="highcharts-figure">
+    <div id="container" />
+  </figure>
+  <p align="center">
+    <Button outarea color="secondary" on:click={pop}>Volver</Button>
+  </p>
 </main>

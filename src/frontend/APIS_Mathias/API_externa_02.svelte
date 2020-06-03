@@ -5,17 +5,24 @@
   import Button from "sveltestrap/src/Button.svelte";
 
   async function loadGraph() {
-    let diego = [];
-    let drinks = [];
-
+    let MyData = [];
+    let OtherData = [];
     const url =
       "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
-    const MyData = await fetch("/api/v1/life_expectancies");
-    diego = await MyData.json();
-    const dataIncoming = await fetch(url);
-    drinks = await dataIncoming.json();
 
-    let datos_diego = diego.map(x => {
+    const resData = await fetch("api/v1/life_expectancies");
+    MyData = await resData.json();
+
+    console.log("Fetching url...");
+    const res = await fetch(url);
+    if (res.ok) {
+      console.log("Ok");
+      OtherData = await res.json();
+    } else {
+      console.log("Error al cargar API externa");
+    }
+
+    let MyDataGraph = MyData.map(x => {
       let res = {
         name: x.country + " " + x.year,
         value: x["average_life_expectancy"]
@@ -23,79 +30,46 @@
       return res;
     });
 
-    let drinksData = drinks.map(x => {
-      let res = { name: x.strDrink, value: parseInt(x.idDrink) };
-      return res;
-    });
+    let utilData = OtherData.data;
+
+    let OtherDataGraph = utilData
+      .filter(y => {
+        return y.position == "G";
+      })
+      .map(x => {
+        let res = { name: x.strDrink + " ", value: x.idDrink.parseInt };
+        return res;
+      });
 
     let mixedData = [
-      { name: "Exportaciones de editoriales", data: datos_diego },
-      { name: "Tipo de bebida", data: drinksData }
+      {
+        name: "Gasto Total",
+        data: MyDataGraph
+      },
+      {
+        name: "Jugadores NBA",
+        data: OtherDataGraph
+      }
     ];
-
-    // async function loadGraph(){
-    //     let MyData = [];
-    //     let OtherData = [];
-    // 	const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita";
-
-    //     const resData = await fetch("/api/v1/life_expectancies");
-    //     MyData = await resData.json();
-
-    //     console.log("Fetching url...");
-    // 	const res = await fetch(url);
-    // 	if (res.ok) {
-    // 		console.log("Ok");
-    //         OtherData = await res.json();
-    // 	} else {
-    // 		console.log("Error al cargar API externa");
-    //     }
-
-    //     let MyDataGraph = MyData.map((x) => {
-    // 		let res = {name: x.country + " " + x.year, value: x["average_life_expectancy"]};
-    // 		return res;
-    //     });
-    //     let OtherDataGraph = OtherData.map((x) => {
-    // 		let res = {name: x.strDrink + " ", value: x["idDrink"]};
-    // 		return res;
-    //     });
-
-    //     let mixedData = [{name: "Esperanza de vida media",data: MyDataGraph},{name: "Alcohol",data: OtherDataGraph}];
-
     Highcharts.chart("container", {
       chart: {
-        type: "packedbubble",
-        height: "100%"
+        type: "packedbubble"
+      },
+      title: {
+        text: "Esperanza de vida de hombre con alcohol"
       },
       tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
         pointFormat:
-          '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+          '<tr><td style="color:{series.color};padding:50"> </td>' +
           '<td style="padding:0"><b>{point.y}</b></td></tr>',
-        footerFormat: "</table>",
-        shared: true,
-        useHTML: true
+        footerFormat: "</table>"
       },
       plotOptions: {
         packedbubble: {
-          minSize: "5%",
-          maxSize: "90%",
-          zMin: 0,
-          zMax: 100,
-          layoutAlgorithm: {
-            gravitationalConstant: 0.05,
-            splitSeries: true,
-            seriesInteraction: false,
-            dragBetweenSeries: true,
-            parentNodeLimit: true
-          },
           dataLabels: {
             enabled: true,
-            format: "{point.name}",
-            filter: {
-              property: "y",
-              operator: ">",
-              value: 300
-            },
+
             style: {
               color: "black",
               textOutline: "none",
@@ -183,9 +157,6 @@
   </script>
 </svelte:head>
 <main>
-  <h3>
-    Grafica esperanza de vida en media con las nacionalidades de pilotos f1 2004
-  </h3>
   <figure class="highcharts-figure">
     <div id="container" />
   </figure>
