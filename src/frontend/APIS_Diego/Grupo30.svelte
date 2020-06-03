@@ -73,7 +73,7 @@
     
 </svelte:head>
 <main>
-    <h3> Grafica exportaciones del sector grafico en Mexico y la altura en Polonia</h3>
+    <h3> Grafica exportaciones del sector grafico en Mexico y la altura en Polonia </h3>
 	<figure class="highcharts-figure">
 		<div id="container"></div>
 	</figure>
