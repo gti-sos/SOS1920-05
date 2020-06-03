@@ -48,11 +48,6 @@
 		<h3><p><a href="https://sos1920-05.herokuapp.com/#/integrations">Integraciones</a></p></h3>
 		<p></p>
 		<h3><p><a href="https://sos1920-05.herokuapp.com/#/about">About</a></p></h3>
-		<ul>
-			<p><a href="enlace">Enlace video Diego</a></p>
-			<p><a href="enlace">Enlace video Mario</a></p>
-			<p><a href="enlace">Enlace video Mathias</a></p>
-		</ul>
 		
 	</body>
 </main>
