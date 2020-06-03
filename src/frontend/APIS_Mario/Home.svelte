@@ -48,7 +48,7 @@
         <td><a href="/#/integrations/APIS_Mario/G22">Grupo 22</a></td>
       </tr>
       <tr>
-        <td><a href="/#/integrations/APIS_Mario/G24">Grupo 24</a></td>
+        <td><a href="/#/integrations/APIS_Mario/G24">Grupo 24 (proxy)</a></td>
       </tr>
       <tr>
         <td><a href="/#/integrations/APIS_Mario/GE1">API Externa 1</a></td>
