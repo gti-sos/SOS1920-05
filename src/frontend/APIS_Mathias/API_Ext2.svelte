@@ -6,7 +6,7 @@
 
         let MyData = [];
         let OtherData = [];
-        const url = "http://jsonplaceholder.typicode.com/users";
+        const url = "https://jsonplaceholder.typicode.com/users";
 
         const resData = await fetch("/api/v1/life_expectancies");
         MyData = await resData.json();
